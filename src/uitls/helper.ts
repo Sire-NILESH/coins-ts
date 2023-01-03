@@ -1,0 +1,13 @@
+export const colorCode = (value: number) => {
+  const code = {
+    positive: "bg-green-600",
+    neutral: "bg-yellow-600",
+    negative: "bg-red-600",
+    fallback: "bg-blue-600",
+  };
+
+  if (+value.toFixed(3) === 0.0) return code["neutral"];
+  else if (+value.toFixed(3) > 0.0) return code["positive"];
+  else if (+value.toFixed(3) < 0.0) return code["negative"];
+  else return code["fallback"];
+};
