@@ -46,6 +46,18 @@ const options = {
       radius: 1,
     },
   },
+  scale: {
+    xAxes: [
+      {
+        display: false,
+      },
+    ],
+    yAxes: [
+      {
+        display: false,
+      },
+    ],
+  },
 };
 
 const colorCode = {
@@ -91,7 +103,7 @@ const getYearChartLabels = () => {
   const yAxisData: number[] = [];
 
   chartOnlyData.prices
-    .filter((_data, i) => i % 28 === 0)
+    .filter((_data, i) => i % 31 === 0)
     .forEach((data) => {
       xAxisData.push(
         new Date(data[0]).toLocaleString("default", { month: "long" })
@@ -138,5 +150,5 @@ export default function ChartMd(props: IProps): JSX.Element {
       },
     ],
   };
-  return <Line options={options} data={data} />;
+  return <Line options={options} data={data} className="cursor-pointer" />;
 }

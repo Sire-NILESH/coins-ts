@@ -6,7 +6,13 @@ interface IProps {
 }
 
 const CoinImage: React.FC<IProps> = (props) => {
-  return <img className="h-6" src={`${props.image}`} alt={`${props.name}`} />;
+  return (
+    <img
+      className="h-6 rounded-full"
+      src={`${props.image}`}
+      alt={`${props.name}`}
+    />
+  );
 };
 
 export default CoinImage;

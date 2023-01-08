@@ -3,9 +3,10 @@ import { BiMedal } from "react-icons/bi";
 import { RxTriangleDown, RxTriangleUp } from "react-icons/rx";
 import TableRowData from "../ui/TableRowData";
 import HeaderButton from "../ui/HeaderButton";
-import { Coin } from "../../../typing";
+import { Coin, Exchange } from "../../../typing";
 import { allCoins } from "../../data/all-coins/all-coin-markets";
 import CoinImage from "./CoinImage";
+import { exchangesData } from "../../data/exchanges/exchangesData";
 
 const CoinReportRow: React.FC<{ coin: Coin }> = ({ coin }) => {
   return (
@@ -15,9 +16,11 @@ const CoinReportRow: React.FC<{ coin: Coin }> = ({ coin }) => {
         {coin.market_cap_rank}
       </span>
       <CoinImage image={coin.image} name={coin.name} />
+
       <TableRowData title={coin.name} value={coin.current_price} />
+
       <div className="flex items-center ml-6">
-        {+allCoins[0].market_cap_change_percentage_24h.toFixed(3) >= 0 ? (
+        {+coin.market_cap_change_percentage_24h.toFixed(3) >= 0 ? (
           <RxTriangleUp className="text-green-600" />
         ) : (
           <RxTriangleDown className="text-red-600" />
@@ -31,10 +34,36 @@ const CoinReportRow: React.FC<{ coin: Coin }> = ({ coin }) => {
   );
 };
 
+const ExchangesReportRow: React.FC<{ coin: Exchange }> = ({ coin }) => {
+  return (
+    // {/* ROW */}
+    <div className="flex gap-2 items-center">
+      <span className="text-xs font-bold text-slate-500 px-2 py-1 inline rounded-full border">
+        {coin.trust_score_rank}
+      </span>
+      <CoinImage image={coin.image} name={coin.name} />
+      <span className="text-xs font-normal text-slate-500 px-2 py-1">{`${coin.name}`}</span>
+
+      <div className="flex items-center ml-auto">
+        <span className="text-xs font-bold text-slate-500 px-2 py-1">
+          {`${+coin.trade_volume_24h_btc.toFixed(3)}`}
+          <span className="ml-2 text-xs font-normal text-slate-500">
+            BTC
+          </span>{" "}
+        </span>
+
+        {/* <span className="text-xs font-bold text-slate-500 px-2 py-1">{`${+coin.trade_volume_24h_btc_normalized.toFixed(
+          3
+        )} btc`}</span> */}
+      </div>
+    </div>
+  );
+};
+
 // space-y-4 p-6 shadow-2xl border-t-2 border-white rounded-3xl shadow-blue-100
 const CoinsReport = (props: { title: string }): JSX.Element => {
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       <header className="flex items-center justify-between">
         <div className="space-x-2 flex py-1 items-center">
           <BiMedal className="h-6 w-6 inline text-yellow-500 " />
@@ -53,9 +82,9 @@ const CoinsReport = (props: { title: string }): JSX.Element => {
           ? allCoins
               .slice(0, 4)
               .map((coin, index) => <CoinReportRow coin={coin} />)
-          : allCoins
+          : exchangesData
               .slice(0, 10)
-              .map((coin, index) => <CoinReportRow coin={coin} />)}
+              .map((coin, index) => <ExchangesReportRow coin={coin} />)}
       </div>
     </div>
   );

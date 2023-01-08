@@ -1,8 +1,6 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import SideBar from "../components/SideBar";
-import { allCoins } from "../data/all-coins/all-coin-markets";
-import CoinCard from "../components/coins/CoinCard";
 
 // bg-neumorphic
 const MainPage = () => {

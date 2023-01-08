@@ -6,6 +6,9 @@ import TableRowData from "../components/ui/TableRowData";
 import Pagination from "../components/ui/Pagination";
 import { BsCalendar4Week, BsClock } from "react-icons/bs";
 import { colorCode } from "./../uitls/helper";
+import { CiCalendarDate } from "react-icons/ci";
+import HeaderButton from "./../components/ui/HeaderButton";
+import LineChart from "../components/graph/nivo/LineChart";
 
 // const colorCode = (value: number) => {
 //   const code = {
@@ -28,13 +31,37 @@ const Divider = () => {
 const WatchList = () => {
   return (
     <div className="space-y-6">
-      <header>
+      {/* <header>
         <h1 className="font-semibold uppercase tracking-[6px] text-slate-500 text-2xl">
           All Currencies
         </h1>
+      </header> */}
+      <header className="flex items-center justify-between mb-5">
+        <h1 className="font-semibold uppercase tracking-[6px] text-slate-500 text-2xl">
+          Watchlist Coins
+        </h1>
+        <div className="">
+          <ul className="flex items-center gap-8 uppercase text-xs font-semibold text-slate-400">
+            <li className="font-bold text-slate-600">D</li>
+            <li className="cursor-pointer">W</li>
+            <li className="cursor-pointer">M</li>
+            <li className="cursor-pointer">Y</li>
+            <li className="cursor-pointer">ALL</li>
+            <li>
+              <CiCalendarDate className="h-5 w-5 text-slate-600" />
+            </li>
+            <li>
+              <HeaderButton title="View all" />
+            </li>
+          </ul>
+        </div>
       </header>
       <main>
         <>
+          <div className="h-[25rem] mb-10">
+            {/* <ChartMd color="green" type="year" /> */}
+            <LineChart />
+          </div>
           <div className="space-y-7 h-full overflow-y-scroll bg-blue-100/60 p-4 rounded-2xl">
             {allCoins.map((coin, i) => {
               return (
