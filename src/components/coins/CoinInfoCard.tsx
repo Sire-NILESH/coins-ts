@@ -45,7 +45,7 @@ const CoinInfoCard: React.FC<IProps> = (props) => {
 
       {/* GRAPH */}
       <div className="flex-[2] my-2">
-        <ChartMd color={props.graphColor} type="day" />
+        <ChartMd color={props.graphColor} type="day" size="sm" />
         {/* <SparkLine sparkLineData={props.data["sparkline_in_7d"].price} /> */}
       </div>
 

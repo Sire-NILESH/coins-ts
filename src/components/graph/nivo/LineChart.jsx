@@ -3,6 +3,63 @@ import React from "react";
 
 import { ResponsiveLine } from "@nivo/line";
 
+const singleData = [
+  {
+    id: "japan",
+    color: "hsl(93, 70%, 50%)",
+    data: [
+      {
+        x: "plane",
+        y: 138,
+      },
+      {
+        x: "helicopter",
+        y: 268,
+      },
+      {
+        x: "boat",
+        y: 244,
+      },
+      {
+        x: "train",
+        y: 28,
+      },
+      {
+        x: "subway",
+        y: 293,
+      },
+      {
+        x: "bus",
+        y: 191,
+      },
+      {
+        x: "car",
+        y: 226,
+      },
+      {
+        x: "moto",
+        y: 266,
+      },
+      {
+        x: "bicycle",
+        y: 131,
+      },
+      {
+        x: "horse",
+        y: 299,
+      },
+      {
+        x: "skateboard",
+        y: 269,
+      },
+      {
+        x: "others",
+        y: 273,
+      },
+    ],
+  },
+];
+
 const data = [
   {
     id: "japan",
@@ -276,14 +333,18 @@ const data = [
   },
 ];
 
-const LineChart = () => {
+// interface IProps {
+//   single? : boolean;
+// }
+
+const LineChart = (props) => {
   // LineChart.propTypes = {
   //   data: PropTypes.object.isRequired,
   // };
 
   return (
     <ResponsiveLine
-      data={data}
+      data={props.single ? singleData : data}
       margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
       xScale={{ type: "point" }}
       yScale={{

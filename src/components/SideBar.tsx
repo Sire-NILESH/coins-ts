@@ -1,24 +1,32 @@
 import React, { useState } from "react";
 import Brand from "./ui/Brand";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
+// const ids = [
+//   { id: "sdfke78ey", name: "Dashboard", pathName: "dashboard" },
+//   { id: "n4wr8343", name: "All Coins", pathName: "all_coins" },
+//   { id: "se3kj767u", name: "Watchlist", pathName: "watchlist" },
+//   { id: "kj88yf3dd", name: "Coin", pathName: "coin" },
+//   { id: "cbrg8r7wet", name: "Not Found", pathName: "not_found" },
+// ];
 const ids = [
-  { id: "sdfke78ey", name: "Dashboard" },
-  { id: "n4wr8343", name: "All Coins" },
-  { id: "se3kj767u", name: "WatchList" },
-  { id: "kj88yf3dd", name: "Coin" },
-  { id: "cbrg8r7wet", name: "Place holder" },
+  { id: "/dashboard", name: "Dashboard", pathName: "dashboard" },
+  { id: "/all_coins", name: "All Coins", pathName: "all_coins" },
+  { id: "/watchlist", name: "Watchlist", pathName: "watchlist" },
+  { id: "/coin", name: "Coin", pathName: "coin" },
+  { id: "/not_found", name: "Not Found", pathName: "not_found" },
 ];
 
 const SideBar = function () {
-  const [selected, setSelected] = useState("sdfke78ey");
-
+  const location = useLocation();
+  const [selected, setSelected] = useState(location.pathname || "dashboard");
+  console.log(location.pathname);
   // function selectNavItemHandler(navItem) {
   //   setSelected(navItem);
   // }
 
   return (
-    <div className="hidden md:flex font-poppins flex-grow-0 flex-col w-64 h-[95vh] py-8 text-slate-200 text-center">
+    <div className="hidden md:flex font-poppins flex-grow-0 flex-col lg:w-64 h-[95vh] py-8 text-slate-200 text-center">
       {/* BRANDING */}
       <Brand />
       {/* PROFILE */}
@@ -45,7 +53,7 @@ const SideBar = function () {
                 ? "bg-gray-100"
                 : "bg-transparent hover:bg-gray-300/60"
             }`}
-            to={"/dashboard"}
+            to={ids[0].pathName}
             onClick={function (e) {
               setSelected(ids[0].id);
             }}
@@ -65,7 +73,7 @@ const SideBar = function () {
               />
             </svg>
 
-            <span className="mx-4 font-medium">Dashboard</span>
+            <span className="mx-4 font-medium">{ids[0].name}</span>
           </Link>
 
           <Link
@@ -75,7 +83,7 @@ const SideBar = function () {
                 ? "bg-gray-100"
                 : "bg-transparent hover:bg-gray-300/60"
             }`}
-            to={"/all-coins"}
+            to={ids[1].pathName}
             onClick={function (e) {
               setSelected(ids[1].id);
             }}
@@ -95,7 +103,7 @@ const SideBar = function () {
               />
             </svg>
 
-            <span className="mx-4 font-medium">All coins</span>
+            <span className="mx-4 font-medium">{ids[1].name}</span>
           </Link>
 
           <Link
@@ -105,7 +113,7 @@ const SideBar = function () {
                 ? "bg-gray-100"
                 : "bg-transparent hover:bg-gray-300/60"
             }`}
-            to={"/watchlist"}
+            to={ids[2].pathName}
             onClick={function (e) {
               setSelected(ids[2].id);
             }}
@@ -132,7 +140,7 @@ const SideBar = function () {
               />
             </svg>
 
-            <span className="mx-4 font-medium">WatchList</span>
+            <span className="mx-4 font-medium">{ids[2].name}</span>
           </Link>
 
           <Link
@@ -145,7 +153,7 @@ const SideBar = function () {
             onClick={function (e) {
               setSelected(ids[3].id);
             }}
-            to={"/coin"}
+            to={ids[3].pathName}
           >
             <svg
               className="w-5 h-5"
@@ -162,11 +170,10 @@ const SideBar = function () {
               />
             </svg>
 
-            <span className="mx-4 font-medium">Coin</span>
+            <span className="mx-4 font-medium">{ids[3].name}</span>
           </Link>
 
           <Link
-            to={"/coin"}
             id={ids[4].id}
             className={`flex items-center px-4 py-2 text-sm mt-5 rounded-2xl text-slate-700  transition-colors duration-200 transform dark:text-gray-200  dark:hover:bg-gray-700 dark:hover:text-gray-200 ${
               selected === ids[4].id
@@ -176,6 +183,7 @@ const SideBar = function () {
             onClick={function (e) {
               setSelected(ids[4].id);
             }}
+            to={ids[4].pathName}
           >
             <svg
               className="w-5 h-5"
@@ -199,7 +207,7 @@ const SideBar = function () {
               />
             </svg>
 
-            <span className="mx-4 font-medium">All Coins</span>
+            <span className="mx-4 font-medium">{ids[4].name}</span>
           </Link>
         </nav>
       </div>

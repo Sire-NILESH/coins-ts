@@ -11,6 +11,7 @@ import { Sparklines } from "react-sparklines";
 import { SparklinesLine } from "react-sparklines";
 import { SparklinesSpots } from "react-sparklines";
 import { BsCalendar4Week } from "react-icons/bs";
+import ChartMd from "../components/graph/ChartMd";
 
 // ONE YEAR AGO TIMESTAMP
 // new Date().setFullYear(new Date().getFullYear() - 1)
@@ -87,15 +88,16 @@ const Coin = () => {
 
       <main>
         {/* CHART */}
-        <div className="h-[25rem] mb-10">
+        <div className="h-[25rem] mb-10 w-full">
           {/* <ChartMd color="green" type="year" /> */}
-          <LineChart />
+          <LineChart single={true} />
+          {/* <ChartMd color="green" type="day" size="lg" /> */}
         </div>
         <div className="bg-blue-100/60 p-8 rounded-3xl">
           {/* ATH AND ATL ROW */}
-          <div className="flex justify-between">
+          <div className="flex flex-wrap justify-between">
             {/* HIGH/LOW TODAY */}
-            <div className="w-[15rem] rounded-3xl bg-white p-6">
+            <div className="w-[13rem] rounded-3xl bg-white p-6">
               <header className="mb-3 font-bold text-slate-600 py-1">
                 <p className="uppercase text-sm tracking-widest text-blue-500">
                   Today{" "}
@@ -109,7 +111,7 @@ const Coin = () => {
             </div>
 
             {/* ATH CARD */}
-            <div className="w-[24rem] rounded-3xl bg-white p-6">
+            <div className="min-w-[20rem] rounded-3xl bg-white p-6">
               <header className="mb-2 font-bold text-slate-600 py-1">
                 <p className="text-sm tracking-widest text-blue-500">
                   ATH{" "}
@@ -149,7 +151,7 @@ const Coin = () => {
             </div>
 
             {/* ATL CARD */}
-            <div className="w-[24rem] rounded-3xl bg-white p-6">
+            <div className="min-w-[20rem] rounded-3xl bg-white p-6">
               <header className="mb-2 font-bold text-slate-600 py-1">
                 <p className="text-sm tracking-widest text-blue-500">
                   {" "}
@@ -192,9 +194,9 @@ const Coin = () => {
         </div>
 
         {/* ROW 2 */}
-        <div className="p-8 flex justify-between">
+        <div className="py-8 flex justify-between">
           {/* MARKET CAP */}
-          <div className="w-[24rem] rounded-3xl shadow bg-white p-6">
+          <div className="min-w-[24rem] rounded-3xl shadow bg-white p-6">
             <header className="mb-3 font-bold text-slate-600 py-1">
               <p className="uppercase text-sm tracking-widest text-blue-500">
                 Market cap{" "}
@@ -258,7 +260,7 @@ const Coin = () => {
               </p> */}
               <footer className="!mt-4">
                 <Row
-                  title="Total Market cap of"
+                  title="Total Market cap"
                   value={coin.market_cap}
                   prepend="$"
                 />

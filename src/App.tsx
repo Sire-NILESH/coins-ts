@@ -76,7 +76,7 @@ function App() {
         <Route path="/" element={<MainPage />}>
           <Route path="dashboard" element={<DashBoard />} />
           <Route path="watchlist" element={<CoinsTable />} />
-          <Route path="all-coins" element={<AllCoinsTable />} />
+          <Route path="all_coins" element={<AllCoinsTable />} />
           <Route path="coin" element={<Coin />}>
             <Route path=":coinId" />
           </Route>

@@ -16,6 +16,7 @@ import { chartOnlyData } from "../../data/chart/bitcoinChartOnly";
 interface IProps {
   type: "day" | "year" | "week";
   color: "blue" | "green" | "red";
+  size: "sm" | "lg";
 }
 
 ChartJS.register(
@@ -36,28 +37,18 @@ ChartJS.register(
 //    Legend
 //  );
 
-const options = {
-  responsive: true,
-  elements: {
-    line: {
-      borderWidth: 1,
-    },
-    point: {
-      radius: 1,
-    },
-  },
-  scale: {
-    xAxes: [
-      {
-        display: false,
+const options = (size: "sm" | "lg"): Object => {
+  return {
+    responsive: true,
+    elements: {
+      line: {
+        borderWidth: Number(size === "sm" ? 2 : 3),
       },
-    ],
-    yAxes: [
-      {
-        display: false,
+      point: {
+        radius: Number(size === "sm" ? 1 : 3),
       },
-    ],
-  },
+    },
+  };
 };
 
 const colorCode = {
@@ -150,5 +141,11 @@ export default function ChartMd(props: IProps): JSX.Element {
       },
     ],
   };
-  return <Line options={options} data={data} className="cursor-pointer" />;
+  return (
+    <Line
+      options={options(props.size)}
+      data={data}
+      className="cursor-pointer"
+    />
+  );
 }

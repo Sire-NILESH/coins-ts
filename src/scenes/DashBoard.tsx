@@ -75,7 +75,7 @@ const DashBoard = () => {
         </div>
       </header>
 
-      <div className=" flex justify-between items-center h-full">
+      <div className="flex justify-between items-center h-full">
         <div className="w-full h-full flex flex-col items-center overflow-y-auto pb-20 space-y-20 px-4">
           <div className="p-2 grid md:grid-cols-2 xl:grid-cols-3 md:gap-8 xl:gap-20">
             <CoinInfoCard graphColor={"blue"} data={allCoins[0]} />
@@ -84,14 +84,14 @@ const DashBoard = () => {
           </div>
 
           {/* coins reports */}
-          <div className="w-full grid grid-cols-2 grid-rows-2 gap-x-32 px-4">
-            <div className="col-span-1">
+          <div className="w-full flex flex-col flex-wrap md:grid md:grid-cols-2 md:grid-rows-2 gap-x-32 px-4">
+            <div className="lg:col-span-1">
               <CoinsReport title="Winners" />
             </div>
-            <div className="col-span-1 row-span-2">
+            <div className="lg:col-span-1 lg:row-span-2">
               <CoinsReport title="Exchanges" />
             </div>
-            <div className="col-span-1 mt-auto ">
+            <div className="lg:col-span-1 mt-auto ">
               <CoinsReport title="Losers" />
             </div>
             {/* <CoinsReport title="Losers" /> */}
