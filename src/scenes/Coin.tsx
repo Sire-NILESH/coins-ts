@@ -86,12 +86,12 @@ const Coin = () => {
         </div>
       </header>
 
-      <main>
-        {/* CHART */}
-        <div className="h-[25rem] mb-10 w-full">
+      <main className="w-full">
+        {/* CHART  h-[25rem] h-[36rem]*/}
+        <div className=" mb-10 w-full">
           {/* <ChartMd color="green" type="year" /> */}
-          <LineChart single={true} />
-          {/* <ChartMd color="green" type="day" size="lg" /> */}
+          {/* <LineChart single={true} /> */}
+          <ChartMd color="green" type="day" size="lg" />
         </div>
         <div className="bg-blue-100/60 p-8 rounded-3xl">
           {/* ATH AND ATL ROW */}

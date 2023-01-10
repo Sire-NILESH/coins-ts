@@ -48,6 +48,22 @@ const options = (size: "sm" | "lg"): Object => {
         radius: Number(size === "sm" ? 1 : 3),
       },
     },
+    scales: {
+      x: [
+        {
+          gridLines: {
+            display: false,
+          },
+        },
+      ],
+      y: [
+        {
+          gridLines: {
+            display: false,
+          },
+        },
+      ],
+    },
   };
 };
 
@@ -63,7 +79,7 @@ const colorCode = {
   },
 };
 
-function formatAMPM(date: Date): string {
+export function formatAMPM(date: Date): string {
   let hours = date.getHours();
   // let minutes = date.getMinutes();
   let ampm = hours >= 12 ? "pm" : "am";
@@ -145,7 +161,7 @@ export default function ChartMd(props: IProps): JSX.Element {
     <Line
       options={options(props.size)}
       data={data}
-      className="cursor-pointer"
+      className="cursor-pointer w-full"
     />
   );
 }

@@ -21,9 +21,6 @@ const SideBar = function () {
   const location = useLocation();
   const [selected, setSelected] = useState(location.pathname || "dashboard");
   console.log(location.pathname);
-  // function selectNavItemHandler(navItem) {
-  //   setSelected(navItem);
-  // }
 
   return (
     <div className="hidden md:flex font-poppins flex-grow-0 flex-col lg:w-64 h-[95vh] py-8 text-slate-200 text-center">

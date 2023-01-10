@@ -2,6 +2,19 @@ import React from "react";
 // import PropTypes from "prop-types";
 
 import { ResponsiveLine } from "@nivo/line";
+// 24 HOURS
+// import { chartData } from "./../../../data/one-day-chart-data/bitcoin_market_chart";
+// import { formatAMPM } from "../ChartMd";
+
+// const bitcoinSingleData = {
+//   id: "japan",
+//   color: "hsl(93, 70%, 50%)",
+//   data: chartData.prices.map((obj) => {
+//     return { x: formatAMPM(new Date(obj[0])), y: obj[1] };
+//   }),
+// };
+
+// console.log(bitcoinSingleData);
 
 const singleData = [
   {
