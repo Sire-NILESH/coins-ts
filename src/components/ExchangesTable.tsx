@@ -86,7 +86,7 @@ const ExchangesTable: React.FC = () => {
                       <div className="font-semibold text-left">Country</div>
                     </th>
                     <th className="p-2 py-4 whitespace-nowrap bg-blue-100/60">
-                      <div className="font-semibold text-left">Year EST</div>
+                      <div className="font-semibold text-left">Year Est.</div>
                     </th>
                     <th className="p-2 py-4 whitespace-nowrap bg-blue-100/60">
                       <div className="font-semibold text-left">
