@@ -9,6 +9,7 @@ import { colorCode } from "./../uitls/helper";
 import { CiCalendarDate } from "react-icons/ci";
 import HeaderButton from "./../components/ui/HeaderButton";
 import LineChart from "../components/graph/nivo/LineChart";
+import HeaderTitle from "./../components/ui/HeaderTitle";
 
 // const colorCode = (value: number) => {
 //   const code = {
@@ -37,9 +38,8 @@ const WatchList = () => {
         </h1>
       </header> */}
       <header className="flex items-center justify-between mb-5">
-        <h1 className="font-semibold uppercase tracking-[6px] text-slate-500 text-2xl">
-          Watchlist Coins
-        </h1>
+        <HeaderTitle title="Watchlist Coins" />
+
         <div className="">
           <ul className="flex items-center gap-8 uppercase text-xs font-semibold text-slate-400">
             <li className="font-bold text-slate-600">D</li>

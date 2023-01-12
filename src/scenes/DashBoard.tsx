@@ -5,6 +5,7 @@ import { allCoins } from "../data/all-coins/all-coin-markets";
 import { CiCalendarDate } from "react-icons/ci";
 import CoinsReport from "../components/coins/CoinsReport";
 import HeaderButton from "../components/ui/HeaderButton";
+import HeaderTitle from "../components/ui/HeaderTitle";
 // import axios from "axios";
 
 const DashBoard = () => {
@@ -55,9 +56,7 @@ const DashBoard = () => {
   return (
     <div className="h-full w-full overflow-hidden">
       <header className="flex items-center justify-between mb-5">
-        <h1 className="font-semibold uppercase tracking-[6px] text-slate-500 text-2xl">
-          Top Currencies
-        </h1>
+        <HeaderTitle title="Top Currencies" />
         <div className="">
           <ul className="flex items-center gap-8 uppercase text-xs font-semibold text-slate-400">
             <li className="font-bold text-slate-600">D</li>
@@ -86,13 +85,13 @@ const DashBoard = () => {
           {/* coins reports */}
           <div className="w-full flex flex-col flex-wrap md:grid md:grid-cols-2 md:grid-rows-2 gap-x-32 px-4">
             <div className="lg:col-span-1">
-              <CoinsReport title="Winners" />
+              <CoinsReport title="Winners" subtitle="Mkt cap (24h)" />
             </div>
             <div className="lg:col-span-1 lg:row-span-2">
-              <CoinsReport title="Exchanges" />
+              <CoinsReport title="Exchanges" subtitle="(24h)" />
             </div>
             <div className="lg:col-span-1 mt-auto ">
-              <CoinsReport title="Losers" />
+              <CoinsReport title="Trending" subtitle="(24h)" />
             </div>
             {/* <CoinsReport title="Losers" /> */}
           </div>

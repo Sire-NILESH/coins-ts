@@ -48,22 +48,6 @@ const options = (size: "sm" | "lg"): Object => {
         radius: Number(size === "sm" ? 1 : 3),
       },
     },
-    scales: {
-      x: [
-        {
-          gridLines: {
-            display: false,
-          },
-        },
-      ],
-      y: [
-        {
-          gridLines: {
-            display: false,
-          },
-        },
-      ],
-    },
   };
 };
 

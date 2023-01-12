@@ -106,7 +106,7 @@ const NotFound = () => {
       </center>
       <center className="mt-6">
         <Link
-          to={"/"}
+          to={"dashboard"}
           className="text-gray-200 hover:bg-blue-500  text-xl bg-blue-600 p-3 rounded-md hover:shadow-md"
         >
           Go back{" "}

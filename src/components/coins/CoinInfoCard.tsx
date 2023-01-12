@@ -29,7 +29,7 @@ interface IProps {
 
 const CoinInfoCard: React.FC<IProps> = (props) => {
   return (
-    <figure className="max-w-[19rem] px-3 flex gap-1 flex-col py-4 ">
+    <figure className="min-w-[19rem] px-3 flex gap-1 flex-col py-4 ">
       {/* TITLE */}
       <div className="flex items-center justify-between">
         <div className="flex items-center font-semibold text-base gap-1 ">

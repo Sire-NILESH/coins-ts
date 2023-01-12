@@ -11,3 +11,9 @@ export const colorCode = (value: number) => {
   else if (+value.toFixed(3) < 0.0) return code["negative"];
   else return code["fallback"];
 };
+
+export const formatCurrency = (value: number, decimal = 4): string => {
+  return Number(value.toFixed(decimal)).toLocaleString();
+};
+
+// console.log(formatCurrency(5.545187594973338e-11, 12));

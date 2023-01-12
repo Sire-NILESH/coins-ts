@@ -6,6 +6,8 @@ import { allCoins } from "../data/all-coins/all-coin-markets";
 import { RiNumbersFill } from "react-icons/ri";
 import { Coin } from "../../typing";
 
+// https://tailwindcomponents.com/component/table-ui-with-tailwindcss-and-alpinejs
+
 const CoinItem: React.FC<{ coin: Coin }> = ({ coin }) => {
   return (
     <>
@@ -91,7 +93,7 @@ const AllCoinsTable = () => {
   // console.log(allCoins)
   return (
     <div>
-      <header className="flex flex-col md:flex-row justify-between pb-5 text-center md:text-right ">
+      {/* <header className="flex flex-col md:flex-row justify-between pb-5 text-center md:text-right ">
         <h1 className="text-2xl font-semibold mb-2 uppercase tracking-widest text-slate-500">
           All &nbsp;Cryptocurrencies
         </h1>
@@ -103,10 +105,20 @@ const AllCoinsTable = () => {
             placeholder="Search a coin"
           />
         </form>
-      </header>
+      </header> */}
 
-      <div className="w-full border-collapse text-center rounded-3xl space-y-6">
-        <header className="px-4 grid grid-cols-12 place-items-center rounded-xl bg-blue-100/80 py-4">
+      <div className="max-w-full text-center rounded-3xl space-y-6 mx-auto bg-blue-50  border border-gray-200 p-4">
+        <p className="px-5 py-4 border-b text-left border-gray-100">
+          <h2 className="font-semibold text-lg text-slate-600 mb-1">
+            Top 10 Cryptocurrencies
+          </h2>
+          <p className="text-xs text-slate-400 max-w-lg">
+            A top 10 list of all the cryptocurrencies in the last 24 hours{" "}
+            <br />
+            (Ordered by ranking)
+          </p>
+        </p>
+        <header className="px-4 grid grid-cols-12 place-items-center rounded-full bg-blue-100/80 py-4">
           {/* <div className="">⭐</div> */}
           <div className="px-4">⭐</div>
           <div className="px-4 text-slate-600 mr-auto">

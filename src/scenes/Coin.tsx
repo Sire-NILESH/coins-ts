@@ -12,6 +12,7 @@ import { SparklinesLine } from "react-sparklines";
 import { SparklinesSpots } from "react-sparklines";
 import { BsCalendar4Week } from "react-icons/bs";
 import ChartMd from "../components/graph/ChartMd";
+import HeaderTitle from "./../components/ui/HeaderTitle";
 
 // ONE YEAR AGO TIMESTAMP
 // new Date().setFullYear(new Date().getFullYear() - 1)
@@ -66,9 +67,8 @@ const Coin = () => {
   return (
     <div>
       <header className="flex items-center justify-between mb-5">
-        <h1 className="font-semibold uppercase tracking-[6px] text-slate-500 text-2xl">
-          Coin page
-        </h1>
+        <HeaderTitle title="Coin page" />
+
         <div className="">
           <ul className="flex items-center gap-8 uppercase text-xs font-semibold text-slate-400">
             <li className="font-bold text-slate-600">D</li>

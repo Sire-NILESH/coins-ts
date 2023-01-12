@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Brand from "./ui/Brand";
 import { Link, useLocation } from "react-router-dom";
 
@@ -19,8 +19,16 @@ const ids = [
 
 const SideBar = function () {
   const location = useLocation();
-  const [selected, setSelected] = useState(location.pathname || "dashboard");
-  console.log(location.pathname);
+  console.log(location.pathname.split("/")[1]);
+  const [selected, setSelected] = useState(
+    `/${location.pathname.split("/")[1]}` || "/dashboard"
+  );
+
+  useEffect(() => {
+    setSelected(`/${location.pathname.split("/")[1]}` || "/dashboard");
+
+    return () => {};
+  }, [location.pathname]);
 
   return (
     <div className="hidden md:flex font-poppins flex-grow-0 flex-col lg:w-64 h-[95vh] py-8 text-slate-200 text-center">

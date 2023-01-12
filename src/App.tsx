@@ -2,13 +2,15 @@ import { Route, Routes } from "react-router-dom";
 import MainPage from "./scenes/MainPage";
 import Login from "./scenes/Login";
 import NotFound from "./scenes/NotFound";
-import WatchList from "./scenes/WatchList2";
+import WatchList from "./scenes/WatchList";
 import { useEffect, useState } from "react";
-import AllCoinsTable from "./scenes/AllCoinsTable";
+import AllCoinsTable from "./components/AllCoinsTable";
 // import axios from "axios";
-import CoinsTable from "./scenes/WatchList";
 import Coin from "./scenes/Coin";
 import DashBoard from "./scenes/DashBoard";
+import CoinsTable from "./scenes/CoinsTable";
+import ExchangesTable from "./components/ExchangesTable";
+import TrendingCoinsTable from "./components/TrendingCoinsTable";
 
 function App() {
   // const [darkMode, setDarkMode] = useState("");
@@ -75,8 +77,12 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage />}>
           <Route path="dashboard" element={<DashBoard />} />
-          <Route path="watchlist" element={<CoinsTable />} />
-          <Route path="all_coins" element={<AllCoinsTable />} />
+          <Route path="watchlist" element={<WatchList />} />
+          <Route path="all_coins/" element={<CoinsTable />}>
+            <Route path="top_coins" element={<AllCoinsTable />} />
+            <Route path="trending" element={<TrendingCoinsTable />} />
+            <Route path="exchanges" element={<ExchangesTable />} />
+          </Route>
           <Route path="coin" element={<Coin />}>
             <Route path=":coinId" />
           </Route>

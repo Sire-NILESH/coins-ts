@@ -52,3 +52,24 @@ export interface Exchange {
 }
 
 export type Exchanges = Exchange[];
+
+export type TrendingCoin = {
+  id: string;
+  coin_id: number;
+  name: string;
+  symbol: string;
+  market_cap_rank: number;
+  thumb: string;
+  small: string;
+  large: string;
+  slug: string;
+  price_btc: number;
+  score: number;
+};
+
+export interface Trending {
+  coins: {
+    item: TrendingCoin;
+  }[];
+  exchanges: never[];
+}
