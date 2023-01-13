@@ -22,7 +22,7 @@ const MainPage: React.FC<IProps> = (props) => {
   return (
     <div className="flex gap-10">
       <SideBar />
-      <div className="w-[65vw] h-[95vh] overflow-y-scroll shadow border-t-white border-t-2 rounded-3xl border-l-2 border-l-gray-200/30 bg-blue-50 py-4 xl:py-10 px-6 md:px-10 xl:px-12">
+      <div className="w-[65vw] h-[95vh] overflow-y-scroll shadow border-t-white border-t-2 rounded-3xl border-l-2 border-l-gray-200/30 bg-primary dark:bg-stone-900 dark:border-t-emerald-800 dark:border-l-stone-500/30 py-4 xl:py-10 px-6 md:px-10 xl:px-12">
         {/* {props.children} */}
         <Outlet />
       </div>

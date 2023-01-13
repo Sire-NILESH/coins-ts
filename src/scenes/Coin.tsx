@@ -13,6 +13,7 @@ import { SparklinesSpots } from "react-sparklines";
 import { BsCalendar4Week } from "react-icons/bs";
 import ChartMd from "../components/graph/ChartMd";
 import HeaderTitle from "./../components/ui/HeaderTitle";
+import Header from "../components/ui/Header";
 
 // ONE YEAR AGO TIMESTAMP
 // new Date().setFullYear(new Date().getFullYear() - 1)
@@ -43,7 +44,7 @@ const Row: React.FC<IPropsRow> = (props) => {
       <span
         className={`${
           props.xs ? "text-xs" : "text-sm"
-        } font-normal text-slate-600 mr-10`}
+        } font-normal text-secondary mr-10`}
       >
         {props.title}
       </span>
@@ -66,25 +67,7 @@ const Coin = () => {
   const coin = allCoins[0];
   return (
     <div>
-      <header className="flex items-center justify-between mb-5">
-        <HeaderTitle title="Coin page" />
-
-        <div className="">
-          <ul className="flex items-center gap-8 uppercase text-xs font-semibold text-slate-400">
-            <li className="font-bold text-slate-600">D</li>
-            <li className="cursor-pointer">W</li>
-            <li className="cursor-pointer">M</li>
-            <li className="cursor-pointer">Y</li>
-            <li className="cursor-pointer">ALL</li>
-            <li>
-              <CiCalendarDate className="h-5 w-5 text-slate-600" />
-            </li>
-            <li>
-              <HeaderButton title="View all" />
-            </li>
-          </ul>
-        </div>
-      </header>
+      <Header title="Coin page" />
 
       <main className="w-full">
         {/* CHART  h-[25rem] h-[36rem]*/}
@@ -93,12 +76,12 @@ const Coin = () => {
           {/* <LineChart single={true} /> */}
           <ChartMd color="green" type="day" size="lg" />
         </div>
-        <div className="bg-blue-100/60 p-8 rounded-3xl">
+        <div className="bg-secondary p-8 rounded-3xl">
           {/* ATH AND ATL ROW */}
           <div className="flex flex-wrap justify-between">
             {/* HIGH/LOW TODAY */}
-            <div className="w-[13rem] rounded-3xl bg-white p-6">
-              <header className="mb-3 font-bold text-slate-600 py-1">
+            <div className="w-[13rem] dark:border dark:border-slate-700 rounded-3xl bg-primary p-6">
+              <header className="mb-3 font-bold text-secondary py-1">
                 <p className="uppercase text-sm tracking-widest text-blue-500">
                   Today{" "}
                 </p>
@@ -111,27 +94,27 @@ const Coin = () => {
             </div>
 
             {/* ATH CARD */}
-            <div className="min-w-[20rem] rounded-3xl bg-white p-6">
-              <header className="mb-2 font-bold text-slate-600 py-1">
+            <div className="min-w-[20rem] dark:border dark:border-slate-700 rounded-3xl bg-primary p-6">
+              <header className="mb-2 font-bold text-secondary py-1">
                 <p className="text-sm tracking-widest text-blue-500">
                   ATH{" "}
                   {/* <RxTriangleUp className="inline w-6 h-6 text-green-600" /> ATH{" "} */}
                 </p>
-                <span className="[word-spacing:1px] font-normal text-sm text-slate-500">
+                <span className="[word-spacing:1px] font-normal text-sm text-tertiary">
                   <span className=" font-normal">All time high was on </span>{" "}
                   <span className="font-semibold">{`${new Date(
                     coin.ath_date
                   ).toUTCString()}`}</span>
                 </span>
               </header>
-              <p className="mb-1 text-xs [word-spacing:1.2px] text-slate-600">
+              <p className="mb-1 text-xs [word-spacing:1.2px] text-secondary">
                 ATH stands at{" "}
                 <span className="text-green-600 font-semibold">
                   ${Number(coin.ath.toFixed(4)).toLocaleString()}
                 </span>
               </p>
 
-              <p className="text-xs [word-spacing:1.2px] text-slate-600">
+              <p className="text-xs [word-spacing:1.2px] text-secondary">
                 {coin.ath_change_percentage < 0
                   ? "Since then, down by "
                   : "Since then, up by"}{" "}
@@ -151,28 +134,28 @@ const Coin = () => {
             </div>
 
             {/* ATL CARD */}
-            <div className="min-w-[20rem] rounded-3xl bg-white p-6">
-              <header className="mb-2 font-bold text-slate-600 py-1">
+            <div className="min-w-[20rem] dark:border dark:border-slate-700 rounded-3xl bg-primary p-6">
+              <header className="mb-2 font-bold text-secondary py-1">
                 <p className="text-sm tracking-widest text-blue-500">
                   {" "}
                   ATL{" "}
                   {/* <RxTriangleDown className="inline w-6 h-6 text-red-600" /> ATL{" "} */}
                 </p>
-                <span className="[word-spacing:1px] font-normal text-sm text-slate-500">
+                <span className="[word-spacing:1px] font-normal text-sm text-tertiary">
                   <span className=" font-normal">All time low was on </span>{" "}
                   <span className="font-semibold">{`${new Date(
                     coin.atl_date
                   ).toUTCString()}`}</span>
                 </span>
               </header>
-              <p className="mb-1 text-xs [word-spacing:1.2px] text-slate-600">
+              <p className="mb-1 text-xs [word-spacing:1.2px] text-secondary">
                 ATL stood at{" "}
                 <span className="text-green-600 font-semibold">
                   ${Number(coin.atl.toFixed(4)).toLocaleString()}
                 </span>
               </p>
 
-              <p className="text-xs [word-spacing:1.2px] text-slate-600">
+              <p className="text-xs [word-spacing:1.2px] text-secondary">
                 {coin.atl_change_percentage < 0
                   ? "Since then, down by "
                   : "Since then, up by "}{" "}
@@ -196,12 +179,12 @@ const Coin = () => {
         {/* ROW 2 */}
         <div className="py-8 flex justify-between">
           {/* MARKET CAP */}
-          <div className="min-w-[24rem] rounded-3xl shadow bg-white p-6">
-            <header className="mb-3 font-bold text-slate-600 py-1">
+          <div className="min-w-[24rem] rounded-3xl shadow bg-primary p-6">
+            <header className="mb-3 font-bold text-secondary py-1">
               <p className="uppercase text-sm tracking-widest text-blue-500">
                 Market cap{" "}
               </p>
-              <span className="[word-spacing:2px] font-normal text-sm text-slate-500">
+              <span className="[word-spacing:2px] font-normal text-sm text-tertiary">
                 <span className=" font-normal">
                   Fully diluted market capitalisation stands at{" "}
                 </span>{" "}
@@ -213,7 +196,7 @@ const Coin = () => {
               </span>
             </header>
             <div className="space-y-1">
-              <p className="mb-1 text-xs [word-spacing:1.2px] text-slate-600">
+              <p className="mb-1 text-xs [word-spacing:1.2px] text-secondary">
                 Ranks at spot{" "}
                 <span className="text-green-600 font-semibold">
                   {coin.market_cap_rank}
@@ -227,7 +210,7 @@ const Coin = () => {
                 xs={true}
               /> */}
               {/* <Row title="Total" value={coin.market_cap} prepend="$" /> */}
-              <p className=" text-xs [word-spacing:1.2px] text-slate-600">
+              <p className=" text-xs [word-spacing:1.2px] text-secondary">
                 Past 24HR change{" "}
                 <span className="text-green-600 font-semibold">
                   $
@@ -237,7 +220,7 @@ const Coin = () => {
                 </span>
               </p>
 
-              <p className="text-xs [word-spacing:1.2px] text-slate-600">
+              <p className="text-xs [word-spacing:1.2px] text-secondary">
                 Since yesterday,{" "}
                 <span
                   className={` ${
@@ -252,7 +235,7 @@ const Coin = () => {
                   %
                 </span>
               </p>
-              {/* <p className="mb-3 block text-sm [word-spacing:1.2px] text-slate-600">
+              {/* <p className="mb-3 block text-sm [word-spacing:1.2px] text-secondary">
                 With market cap of{" "}
                 <span className="text-green-600 font-semibold">
                   ${Number(coin.market_cap.toFixed(4)).toLocaleString()}
@@ -269,13 +252,13 @@ const Coin = () => {
           </div>
 
           {/* PAST WEEK */}
-          <div className="w-[18rem] flex-shrink-1 shadow rounded-3xl bg-white px-6 pt-6">
-            <header className=" font-bold text-slate-600 py-1">
+          <div className="w-[18rem] flex-shrink-1 shadow rounded-3xl bg-primary px-6 pt-6">
+            <header className=" font-bold text-secondary py-1">
               <p className="uppercase text-sm tracking-widest text-blue-500">
                 Past week{" "}
               </p>
             </header>
-            <span className="[word-spacing:1px] font-normal text-sm text-slate-500">
+            <span className="[word-spacing:1px] font-normal text-sm text-tertiary">
               <span className=" font-normal">
                 A look into last week's price performance
               </span>{" "}
@@ -299,22 +282,22 @@ const Coin = () => {
                   }}
                 />
               </Sparklines>
-              {/* <p className="text-xs text-center text-slate-600 flex items-center gap-2 justify-center">
-                <BsCalendar4Week className="inline h-3 w-3 text-slate-500" />
+              {/* <p className="text-xs text-center text-secondary flex items-center gap-2 justify-center">
+                <BsCalendar4Week className="inline h-3 w-3 text-tertiary" />
                 In past 7 days
               </p> */}
             </div>
           </div>
 
           {/* SUPPLY */}
-          <div className="w-[18rem] shadow rounded-3xl bg-white p-6">
-            <header className="font-bold text-slate-600 py-1">
+          <div className="w-[18rem] shadow rounded-3xl bg-primary p-6">
+            <header className="font-bold text-secondary py-1">
               <p className="uppercase text-sm tracking-widest text-blue-500">
                 {/* <AiOutlinePieChart className="inline h-5 w-5 mr-1" /> */}
                 supply{" "}
               </p>
             </header>
-            <span className="[word-spacing:1px] font-normal text-sm text-slate-500">
+            <span className="[word-spacing:1px] font-normal text-sm text-tertiary">
               <span className=" font-normal">
                 Amount of coins that have been created or mined
               </span>{" "}

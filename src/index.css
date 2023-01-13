@@ -69,7 +69,7 @@ code {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f2f2ff;
+  background: transparent;
 }
 
 /* Handle */
@@ -83,3 +83,45 @@ code {
   background: rgb(27, 200, 253);
 }
 /* ----------------/Scrollbar-------------------- */
+
+/*----------------Colors-------------------- */
+
+.dark-bg {
+  @apply dark:bg-gradient-to-tr dark:from-gray-900 dark:to-emerald-800;
+}
+
+.dark {
+  /* --color-bg-primary: #2d3748; */
+  --color-bg-primary: rgb(41 37 36);
+  --color-bg-secondary: rgb(59 130 246 / 0.1);
+  --color-text-primary: rgb(226 232 240);
+  --color-text-secondary: rgb(203 213 225);
+  --color-bg-accent: 243 232 255; /*purple-100*/
+  --color-text-tertiary: rgb(148 163 184);
+  --color-text-quaternary: rgb(100 116 139);
+  --color-text-textLighter: rgb(71 85 105);
+  --color-text-textLightest: rgb(51 65 85);
+  --color-text-accent: rgb(59 130 246);
+  --color-bg-input: #4a5361;
+  --color-bg-button: rgb(219 234 254 / 0.1);
+  --color-bg-button-hover: rgb(219 234 254 / 0.2);
+  --color-borderColor: rgb(41 37 36);
+}
+
+.light {
+  --color-bg-primary: rgb(239, 246, 255); /**/
+  --color-bg-secondary: rgb(219, 234, 254);
+  --color-bg-accent: 243 232 255; /*purple-100*/
+  --color-text-primary: rgb(51 65 85);
+  --color-text-secondary: rgb(71 85 105);
+  --color-text-tertiary: rgb(100 116 139);
+  --color-text-quaternary: rgb(148 163 184);
+  --color-text-textLighter: rgb(226 232 240);
+  --color-text-textLightest: rgb(248 250 252);
+  --color-text-accent: rgb(59 130 246);
+  --color-bg-input: #edf2f7;
+  --color-bg-button: rgb(219, 234, 254);
+  --color-bg-button-hover: rgb(191 219 254);
+  --color-borderColor: rgb(203 213 225);
+}
+/*----------------/Colors--------------------*/

@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import CoinInfoCard from "../components/coins/CoinInfoCard";
-import { CoinState } from "../uitls/CoinContext";
+import { CoinState } from "../uitls/contexts/CoinContext";
 import { allCoins } from "../data/all-coins/all-coin-markets";
 import { CiCalendarDate } from "react-icons/ci";
 import CoinsReport from "../components/coins/CoinsReport";
 import HeaderButton from "../components/ui/HeaderButton";
 import HeaderTitle from "../components/ui/HeaderTitle";
+import Header from "../components/ui/Header";
 // import axios from "axios";
 
 const DashBoard = () => {
@@ -55,24 +56,7 @@ const DashBoard = () => {
 
   return (
     <div className="h-full w-full overflow-hidden">
-      <header className="flex items-center justify-between mb-5">
-        <HeaderTitle title="Top Currencies" />
-        <div className="">
-          <ul className="flex items-center gap-8 uppercase text-xs font-semibold text-slate-400">
-            <li className="font-bold text-slate-600">D</li>
-            <li className="cursor-pointer">W</li>
-            <li className="cursor-pointer">M</li>
-            <li className="cursor-pointer">Y</li>
-            <li className="cursor-pointer">ALL</li>
-            <li>
-              <CiCalendarDate className="h-5 w-5 text-slate-600" />
-            </li>
-            <li>
-              <HeaderButton title="View all" />
-            </li>
-          </ul>
-        </div>
-      </header>
+      <Header title="Top Currencies" />
 
       <div className="flex justify-between items-center h-full">
         <div className="w-full h-full flex flex-col items-center overflow-y-auto pb-20 space-y-20 px-4">

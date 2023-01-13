@@ -1,11 +1,19 @@
 import React from "react";
 import { exchangesData } from "./../data/exchanges/exchangesData";
-import { Exchange } from "./../../typing.d";
+import { Coin, Exchange } from "./../../typing.d";
 import { formatCurrency } from "../uitls/helper";
+import { allCoins } from "../data/all-coins/all-coin-markets";
+import { Sparklines, SparklinesLine, SparklinesSpots } from "react-sparklines";
+import { AiOutlineStar } from "react-icons/ai";
 
-const TableRow: React.FC<{ data: Exchange }> = ({ data }) => {
+const TableRow: React.FC<{ data: Coin }> = ({ data }) => {
   return (
     <tr>
+      <td className="p-2 whitespace-nowrap">
+        <div className="text-center font-bold text-tertiary">
+          <AiOutlineStar className="mx-auto h-4 w-4 text-tertiary" />
+        </div>
+      </td>
       <td className="p-2 whitespace-nowrap">
         <div className="flex items-center">
           <div className="max-w-10 h-10 flex-shrink-0 mr-2 sm:mr-3">
@@ -17,61 +25,74 @@ const TableRow: React.FC<{ data: Exchange }> = ({ data }) => {
               alt={data.name}
             />
           </div>
-          <div className="font-medium text-tertiary sm:text-xs">
-            {data.name}
-          </div>
+          <div className="font-medium text-tertiary">{data.name}</div>
         </div>
       </td>
       <td className="p-2 whitespace-nowrap">
-        <div className="text-left font-bold text-tertiary">{data.country}</div>
-      </td>
-      <td className="p-2 whitespace-nowrap">
-        <div className="text-left">{data.year_established}</div>
+        <div className="text-left text-green-500">
+          {`$${data.current_price}`}
+        </div>
       </td>
       <td className="p-2 whitespace-nowrap">
         <div
-          className={`text-center font-medium ${
-            data.has_trading_incentive ? "text-green-500" : "text-red-500"
+          className={`text-left font-medium ${
+            data.price_change_24h > 0 ? "text-green-500" : "text-red-500"
           }`}
         >
-          {`${data.has_trading_incentive}`}
+          {`${formatCurrency(data.price_change_24h, 3)}%`}
+        </div>
+      </td>
+
+      <td className="p-2 whitespace-nowrap">
+        <div className=" text-left text-tertiary">
+          {`$${formatCurrency(data.total_volume, 1)}`}
         </div>
       </td>
       <td className="p-2 whitespace-nowrap">
-        <div className=" text-center text-green-500">
-          {formatCurrency(data.trade_volume_24h_btc, 1)} BTC
+        <div className=" text-left text-tertiary">
+          {`$${formatCurrency(data.market_cap, 1)}`}
         </div>
       </td>
-      <td className="p-2 whitespace-nowrap">
-        <div className=" text-center text-tertiary">
-          {formatCurrency(data.trade_volume_24h_btc_normalized, 1)} BTC
-        </div>
-      </td>
-      <td className="p-2 whitespace-nowrap">
-        <div className=" text-center text-tertiary">{data.trust_score}</div>
-      </td>
-      <td className="p-2 whitespace-nowrap">
-        <div className=" text-center text-tertiary">
-          {data.trust_score_rank}
+      <td className="p-2 min-w-[6rem] whitespace-nowrap">
+        {/* <div className="text-left">{data.circulating_supply}</div> */}
+        <div className="">
+          <Sparklines data={data.sparkline_in_7d.price} margin={6}>
+            <SparklinesLine
+              style={{
+                strokeWidth: 1,
+                stroke: "#336aff",
+                fill: "#336aff",
+              }}
+            />
+            <SparklinesSpots
+              size={1}
+              style={{
+                stroke: "#336aff",
+                strokeWidth: 1,
+                fill: "white",
+              }}
+            />
+          </Sparklines>
         </div>
       </td>
     </tr>
   );
 };
 
-const ExchangesTable: React.FC = () => {
+const AllCoinsTable2: React.FC = () => {
   return (
     <section className="antialiased w-full text-gray-600 h-screen px-4">
       <div className=" h-full">
         {/* <!-- Table --> */}
-        <div className="w-full rounded-3xl max-w-full mx-auto bg-primary border border-gray-200 dark:border-primary">
+        <div className="w-full rounded-3xl max-w-full mx-auto bg-primary border dark:border-primary">
           <header className="px-5 py-4">
-            <h2 className="font-semibold text-lg text-secondary">Exchanges</h2>
+            <h2 className="font-semibold text-lg text-secondary">
+              Top ten Coins
+            </h2>
             <p className="text-xs text-quaternary max-w-lg">
-              List of all exchanges, Active with trading volumes in the last 24
-              hours
+              A top 10 list of all the cryptocurrencies in the last 24 hours{" "}
               <br />
-              (Ordered by Trust score rank)
+              (Ordered by ranking)
             </p>
           </header>
           {/* <HeaderTitle title="Trending" /> */}
@@ -82,45 +103,33 @@ const ExchangesTable: React.FC = () => {
                 <thead className="text-xs font-semibold uppercase text-gray-400 mb-5 ">
                   <tr className="">
                     <th className="px-4 py-4 whitespace-nowrap rounded-l-3xl bg-secondary">
+                      <div className="font-semibold text-left">Star</div>
+                    </th>
+                    <th className="p-2 py-4 whitespace-nowrap bg-secondary">
                       <div className="font-semibold text-left">Name</div>
                     </th>
                     <th className="p-2 py-4 whitespace-nowrap bg-secondary">
-                      <div className="font-semibold text-left">Country</div>
+                      <div className="font-semibold text-left">Price</div>
                     </th>
                     <th className="p-2 py-4 whitespace-nowrap bg-secondary">
-                      <div className="font-semibold text-left">Year Est.</div>
-                    </th>
-                    <th className="p-2 py-4 whitespace-nowrap bg-secondary">
-                      <div className="font-semibold text-left">
-                        Trading Incentive
-                      </div>
+                      <div className="font-semibold text-left">24H</div>
                     </th>
                     <th className="p-2 py-4 whitespace-nowrap bg-secondary">
                       <div className="font-semibold text-left">
-                        Volume (24h)
+                        Volume (24H)
                       </div>
                     </th>
                     <th className="p-2 py-4 whitespace-nowrap bg-secondary">
-                      <div className="font-semibold text-left">
-                        Volume Norm. (24h)
-                      </div>
-                    </th>
-
-                    <th className="p-2 py-4 whitespace-nowrap bg-secondary">
-                      <div className="font-semibold text-center">
-                        Trust Score
-                      </div>
+                      <div className="font-semibold text-left">Market cap</div>
                     </th>
                     <th className="p-2 py-4 whitespace-nowrap rounded-r-3xl bg-secondary">
-                      <div className="font-semibold text-center">
-                        Trust Score Rank
-                      </div>
+                      <div className="font-semibold text-left">Week</div>
                     </th>
                   </tr>
                 </thead>
 
                 <tbody className="text-sm divide-y divide-gray-200 dark:divide-stone-700">
-                  {exchangesData.map((data) => (
+                  {allCoins.map((data) => (
                     <TableRow data={data} key={data.name} />
                   ))}
                 </tbody>
@@ -133,4 +142,4 @@ const ExchangesTable: React.FC = () => {
   );
 };
 
-export default ExchangesTable;
+export default AllCoinsTable2;

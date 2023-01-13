@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const NotFound = () => {
   return (
-    <div className="bg-blue-100 h-screen justify-center">
+    <div className="bg-secondary h-screen justify-center">
       <center className="mt-24 m-auto">
         <svg
           className="emoji-404 "
@@ -107,7 +107,7 @@ const NotFound = () => {
       <center className="mt-6">
         <Link
           to={"dashboard"}
-          className="text-gray-200 hover:bg-blue-500  text-xl bg-blue-600 p-3 rounded-md hover:shadow-md"
+          className="text-gray-200 hover:bg-primary0  text-xl bg-blue-600 p-3 rounded-md hover:shadow-md"
         >
           Go back{" "}
         </Link>

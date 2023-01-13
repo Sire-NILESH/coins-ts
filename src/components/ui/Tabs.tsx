@@ -11,8 +11,10 @@ const ListItem: React.FC<{
     <Link
       to={`${props.to}`}
       className={`${
-        props.selected ? "bg-blue-600 text-white " : ""
-      } flex border-blue-200 border items-center justify-center gap-2 max-w-[7rem] rounded-full cursor-pointer px-3 py-2 text-slate-600 hover:shadow hover:bg-blue-500 hover:text-white transition-all duration-300 ease-in-out`}
+        props.selected
+          ? "bg-blue-600 text-white border-blue-600"
+          : "border-blue-200"
+      } flex  border items-center justify-center gap-2 max-w-[7rem] rounded-full cursor-pointer px-3 py-2 text-secondary hover:bg-blue-500 hover:text-white dark:hover:border-blue-500 transition-all duration-300 ease-in-out`}
     >
       {props.title}
     </Link>
@@ -39,7 +41,7 @@ const Tabs = () => {
   );
   return (
     <div className="space-y-5 mb-10">
-      <div className="overflow-hidden rounded-xl border border-gray-100 bg-blue-50 p-1">
+      <div className="overflow-hidden rounded-xl ">
         <ul className="flex items-center gap-5 text-sm font-medium">
           {tabs.map((item, i) => (
             <li

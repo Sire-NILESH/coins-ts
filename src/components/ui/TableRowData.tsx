@@ -11,10 +11,10 @@ const TableRowData: React.FC<IProps> = (props) => {
 
   return (
     <div className="w-full grid grid-cols-2">
-      <p className="justify-items-start font-normal text-slate-500 text-xs">
+      <p className="justify-items-start font-normal text-tertiary text-xs">
         {props.title}
       </p>{" "}
-      <p className="justify-self-end text-xs font-bold text-slate-600">
+      <p className="justify-self-end text-xs font-bold text-secondary">
         <span>$</span>
         {`${value}`}
       </p>

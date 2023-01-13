@@ -10,63 +10,29 @@ import { CiCalendarDate } from "react-icons/ci";
 import HeaderButton from "./../components/ui/HeaderButton";
 import LineChart from "../components/graph/nivo/LineChart";
 import HeaderTitle from "./../components/ui/HeaderTitle";
-
-// const colorCode = (value: number) => {
-//   const code = {
-//     positive: "bg-green-600",
-//     neutral: "bg-yellow-600",
-//     negative: "bg-red-600",
-//     fallback: "bg-blue-600",
-//   };
-
-//   if (+value.toFixed(3) === 0.0) return code["neutral"];
-//   else if (+value.toFixed(3) > 0.0) return code["positive"];
-//   else if (+value.toFixed(3) < 0.0) return code["negative"];
-//   else return code["fallback"];
-// };
+import Header from "../components/ui/Header";
 
 const Divider = () => {
-  return <div className="h-20 border-r-2"></div>;
+  return (
+    <div className="h-20 border-r-2 border-primary dark:border-gray-700 "></div>
+  );
 };
 
 const WatchList = () => {
   return (
     <div className="space-y-6">
-      {/* <header>
-        <h1 className="font-semibold uppercase tracking-[6px] text-slate-500 text-2xl">
-          All Currencies
-        </h1>
-      </header> */}
-      <header className="flex items-center justify-between mb-5">
-        <HeaderTitle title="Watchlist Coins" />
-
-        <div className="">
-          <ul className="flex items-center gap-8 uppercase text-xs font-semibold text-slate-400">
-            <li className="font-bold text-slate-600">D</li>
-            <li className="cursor-pointer">W</li>
-            <li className="cursor-pointer">M</li>
-            <li className="cursor-pointer">Y</li>
-            <li className="cursor-pointer">ALL</li>
-            <li>
-              <CiCalendarDate className="h-5 w-5 text-slate-600" />
-            </li>
-            <li>
-              <HeaderButton title="View all" />
-            </li>
-          </ul>
-        </div>
-      </header>
+      <Header title="Watchlist Coins" />
       <main>
         <>
           <div className="h-[25rem] mb-10">
             {/* <ChartMd color="green" type="year" /> */}
             <LineChart />
           </div>
-          <div className="space-y-7 h-full overflow-y-scroll bg-blue-100/60 p-4 rounded-2xl">
+          <div className="space-y-7 h-full overflow-y-scroll bg-secondary p-4 rounded-2xl">
             {allCoins.map((coin, i) => {
               return (
                 // ROW, h-40
-                <div className="items-center border flex justify-around bg-blue-50 rounded-2xl py-2">
+                <div className="items-center flex justify-around bg-primary rounded-2xl py-2 dark:border dark:border-slate-700">
                   <CoinCard
                     data={{
                       name: allCoins[i].name,
@@ -102,8 +68,8 @@ const WatchList = () => {
                         }}
                       />
                     </Sparklines>
-                    <p className="text-xs text-center text-slate-600 flex items-center gap-2 justify-center">
-                      <BsCalendar4Week className="inline h-3 w-3 text-slate-500" />
+                    <p className="text-xs text-center text-secondary flex items-center gap-2 justify-center">
+                      <BsCalendar4Week className="inline h-3 w-3 text-tertiary" />
                       In past 7 days
                     </p>
                   </div>
@@ -114,9 +80,9 @@ const WatchList = () => {
                   {/* 24 HOURS */}
                   <div className="py-3 px-4 w-80">
                     <div className="flex items-center justify-between">
-                      <p className="text-slate-900 flex items-center gap-2">
+                      <p className="text-primary flex items-center gap-2">
                         {" "}
-                        <BsClock className="inline h-4 w-4 text-slate-500" />
+                        <BsClock className="inline h-4 w-4 text-tertiary" />
                         Past 24h
                       </p>
                       <div

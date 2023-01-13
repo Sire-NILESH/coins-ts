@@ -8,7 +8,7 @@ const Login = () => {
       <div className="m-auto xl:w-container px-12 sm:px-0 mx-auto">
         <div className="space-y-2 flex items-center justify-center flex-col">
           <Brand />
-          <p className="font-normal text-sm text-slate-500">
+          <p className="font-normal text-sm text-tertiary">
             Unlock your full potential by logging in to your account.
           </p>
         </div>
