@@ -1,10 +1,9 @@
 import { Route, Routes } from "react-router-dom";
-import MainPage from "./scenes/MainPage";
+import MainFrame from "./scenes/MainFrame";
 import Login from "./scenes/Login";
 import NotFound from "./scenes/NotFound";
 import WatchList from "./scenes/WatchList";
 import { useEffect, useState } from "react";
-import AllCoinsTable from "./components/AllCoinsTable";
 // import axios from "axios";
 import Coin from "./scenes/Coin";
 import DashBoard from "./scenes/DashBoard";
@@ -13,7 +12,6 @@ import ExchangesTable from "./components/ExchangesTable";
 import TrendingCoinsTable from "./components/TrendingCoinsTable";
 import AllCoinsTable2 from "./components/AllCoinsTable2";
 import { ThemeProvider } from "./uitls/contexts/ThemeContext";
-import ThemeToggle from "./components/ui/ThemeToggle";
 
 function App() {
   // const [darkMode, setDarkMode] = useState("");
@@ -73,15 +71,14 @@ function App() {
   // }, []);
 
   console.log("hello from app js");
-  // dark:bg-gradient-to-t dark:from-gray-900 dark:to-emerald-800
-  // dark:bg-gradient-to-t dark:from-gray-900 dark:via-gray-900 dark:to-emerald-800
+
   return (
     <ThemeProvider>
       <div className="bg-secondary text-slate-700 dark-bg flex items-center justify-center h-screen w-screen font-poppins">
         {/* <SideBar /> */}
 
         <Routes>
-          <Route path="/" element={<MainPage />}>
+          <Route path="/" element={<MainFrame />}>
             <Route path="dashboard" element={<DashBoard />} />
             <Route path="watchlist" element={<WatchList />} />
             <Route path="all_coins/" element={<CoinsTable />}>

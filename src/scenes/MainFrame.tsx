@@ -8,7 +8,7 @@ interface IProps {
 }
 
 // bg-neumorphic
-const MainPage: React.FC<IProps> = (props) => {
+const MainFrame: React.FC<IProps> = (props) => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -30,4 +30,4 @@ const MainPage: React.FC<IProps> = (props) => {
   );
 };
 
-export default MainPage;
+export default MainFrame;
