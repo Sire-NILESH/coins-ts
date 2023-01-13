@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const NotFound = () => {
   return (
-    <div className="bg-secondary h-screen justify-center">
+    <div className="h-screen justify-center">
       <center className="mt-24 m-auto">
         <svg
           className="emoji-404 "
@@ -14,7 +14,6 @@ const NotFound = () => {
           version="1.1"
           viewBox="0 0 226 249.135"
           width="226"
-          //  xml:space="preserve"
         >
           <circle cx="113" cy="113" fill="#FFE585" r="109" />
           <line
@@ -96,10 +95,10 @@ const NotFound = () => {
           />
         </svg>
         <div className=" tracking-widest mt-4">
-          <span className="text-gray-500 text-6xl block">
+          <span className="text-primary text-6xl block">
             <span>4 0 4</span>
           </span>
-          <span className="text-gray-500 text-xl">
+          <span className="text-tertiary text-xl">
             Sorry, We couldn't find what you are looking for!
           </span>
         </div>
@@ -107,7 +106,7 @@ const NotFound = () => {
       <center className="mt-6">
         <Link
           to={"dashboard"}
-          className="text-gray-200 hover:bg-primary0  text-xl bg-blue-600 p-3 rounded-md hover:shadow-md"
+          className="text-gray-200 dark:text-primary hover:bg-blue-500  text-xl bg-blue-600 p-3 rounded-md hover:shadow-md"
         >
           Go back{" "}
         </Link>
