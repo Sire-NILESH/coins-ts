@@ -12,6 +12,7 @@ import ExchangesTable from "./components/ExchangesTable";
 import TrendingCoinsTable from "./components/TrendingCoinsTable";
 import AllCoinsTable2 from "./components/AllCoinsTable2";
 import { ThemeProvider } from "./uitls/contexts/ThemeContext";
+import CoinContext from "./uitls/contexts/CoinContext";
 
 function App() {
   // const [darkMode, setDarkMode] = useState("");
@@ -74,27 +75,28 @@ function App() {
 
   return (
     <ThemeProvider>
-      <div className="bg-secondary text-slate-700 dark-bg flex items-center justify-center h-screen w-screen font-poppins">
-        {/* <SideBar /> */}
-
-        <Routes>
-          <Route path="/" element={<MainFrame />}>
-            <Route path="dashboard" element={<DashBoard />} />
-            <Route path="watchlist" element={<WatchList />} />
-            <Route path="all_coins/" element={<CoinsTable />}>
-              {/* <Route path="top_coins" element={<AllCoinsTable />} /> */}
-              <Route path="top_coins" element={<AllCoinsTable2 />} />
-              <Route path="trending" element={<TrendingCoinsTable />} />
-              <Route path="exchanges" element={<ExchangesTable />} />
+      <CoinContext>
+        <div className="bg-secondary text-slate-700 dark-bg flex items-center justify-center h-screen w-screen font-poppins">
+          {/* <SideBar /> */}
+          <Routes>
+            <Route path="/" element={<MainFrame />}>
+              <Route path="dashboard" element={<DashBoard />} />
+              <Route path="watchlist" element={<WatchList />} />
+              <Route path="all_coins/" element={<CoinsTable />}>
+                {/* <Route path="top_coins" element={<AllCoinsTable />} /> */}
+                <Route path="top_coins" element={<AllCoinsTable2 />} />
+                <Route path="trending" element={<TrendingCoinsTable />} />
+                <Route path="exchanges" element={<ExchangesTable />} />
+              </Route>
+              <Route path="coin" element={<Coin />}>
+                <Route path=":coinId" />
+              </Route>
             </Route>
-            <Route path="coin" element={<Coin />}>
-              <Route path=":coinId" />
-            </Route>
-          </Route>
-          <Route path="/login" element={<Login />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </div>
+            <Route path="/login" element={<Login />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
+      </CoinContext>
     </ThemeProvider>
   );
 }

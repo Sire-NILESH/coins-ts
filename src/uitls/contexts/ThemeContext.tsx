@@ -1,25 +1,26 @@
 import React, { useState, useEffect, createContext } from "react";
 
-type ThemeContextType = "light" | "dark";
+type TThemeContext = "light" | "dark";
 
 interface IProps {
-  initialTheme?: ThemeContextType;
+  initialTheme?: TThemeContext;
   children: React.ReactNode;
 }
 
 interface ThemeContextValue {
-  theme: ThemeContextType;
-  setTheme?: React.Dispatch<React.SetStateAction<ThemeContextType>>;
+  theme: TThemeContext;
+  setTheme: React.Dispatch<React.SetStateAction<TThemeContext>>;
 }
 
 export const ThemeContext = createContext<ThemeContextValue>({
   theme: "light",
+  setTheme: () => {},
 });
 
 export const ThemeProvider: React.FC<IProps> = ({ initialTheme, children }) => {
   const [theme, setTheme] = useState(getInitialTheme);
 
-  const rawSetTheme = (theme: ThemeContextType) => {
+  const rawSetTheme = (theme: TThemeContext) => {
     const root = window.document.documentElement;
     const isDark = theme === "dark";
 
@@ -46,11 +47,11 @@ export const ThemeProvider: React.FC<IProps> = ({ initialTheme, children }) => {
   );
 };
 
-function getInitialTheme(): ThemeContextType {
+function getInitialTheme(): TThemeContext {
   if (typeof window !== "undefined" && window.localStorage) {
     const storedPrefs = window.localStorage.getItem("color-theme");
     if (typeof storedPrefs === "string") {
-      return storedPrefs as ThemeContextType;
+      return storedPrefs as TThemeContext;
     }
 
     const userMedia = window.matchMedia("(prefers-color-scheme: dark)");

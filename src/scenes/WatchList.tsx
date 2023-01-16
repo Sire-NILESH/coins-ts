@@ -56,7 +56,7 @@ const WatchList = () => {
                         style={{
                           strokeWidth: 1,
                           stroke: "#336aff",
-                          fill: "none",
+                          fill: "#336aff",
                         }}
                       />
                       <SparklinesSpots

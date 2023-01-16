@@ -2,17 +2,15 @@ import React, { useEffect } from "react";
 import CoinInfoCard from "../components/coins/CoinInfoCard";
 import { CoinState } from "../uitls/contexts/CoinContext";
 import { allCoins } from "../data/all-coins/all-coin-markets";
-import { CiCalendarDate } from "react-icons/ci";
 import CoinsReport from "../components/coins/CoinsReport";
-import HeaderButton from "../components/ui/HeaderButton";
-import HeaderTitle from "../components/ui/HeaderTitle";
+
 import Header from "../components/ui/Header";
 // import axios from "axios";
 
 const DashBoard = () => {
   const currency = CoinState();
   useEffect(() => {
-    // console.log(currency);
+    console.log(currency);
   }, [currency]);
 
   // const [data, setData] = useState([]);

@@ -1,10 +1,11 @@
 import React from "react";
 import Brand from "../components/ui/Brand";
+import ThemeToggle from "../components/ui/ThemeToggle";
 // border bg-gray-50
 
 const Login = () => {
   return (
-    <div className="h-screen w-screen font-poppins flex items-center bg-bgLightMode">
+    <div className="h-screen w-screen font-poppins flex items-center">
       <div className="m-auto xl:w-container px-12 sm:px-0 mx-auto">
         <div className="space-y-2 flex items-center justify-center flex-col">
           <Brand />
@@ -13,9 +14,9 @@ const Login = () => {
           </p>
         </div>
         <div className="mx-auto h-full sm:w-max">
-          <div className="m-auto py-12">
-            <div className="mt-12 rounded-3xl border-t-2 border-l-2 border-white bg-neumorphic dark:border-gray-700 dark:bg-gray-800 -mx-6 sm:-mx-10 p-8 sm:p-10">
-              <h3 className="text-2xl font-semibold text-gray-700 dark:text-white">
+          <div className="mx-auto py-14">
+            <div className="mt-12 rounded-3xl border-t-2 border-b-8 border-b-gray-300 border-gray-100 shadow-xl dark:shadow-none dark:border dark:border-gray-700 dark:bg-primary -mx-6 sm:-mx-10 p-8 sm:p-10">
+              <h3 className="text-2xl font-semibold text-text-primary dark:text-white">
                 Login to your account
               </h3>
               <div className="mt-12 flex flex-wrap sm:grid gap-6 grid-cols-2">
@@ -86,7 +87,7 @@ const Login = () => {
                 </div>
               </form>
             </div>
-            <div className="border-t pt-12 text-gray-500 dark:border-gray-800">
+            <div className="border-t mt-12 text-gray-500 dark:border-gray-800">
               <div className="space-x-4 text-center">
                 <span>&copy; Sire</span>
                 <a
@@ -102,6 +103,7 @@ const Login = () => {
                   Privacy & Terms
                 </a>
               </div>
+              <ThemeToggle />
             </div>
           </div>
         </div>

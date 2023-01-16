@@ -71,7 +71,7 @@ const Coin = () => {
 
       <main className="w-full">
         {/* CHART  h-[25rem] h-[36rem]*/}
-        <div className=" mb-10 w-full">
+        <div className=" mb-10 w-full dark-bg p-14 rounded-3xl">
           {/* <ChartMd color="green" type="year" /> */}
           {/* <LineChart single={true} /> */}
           <ChartMd color="green" type="day" size="lg" />
