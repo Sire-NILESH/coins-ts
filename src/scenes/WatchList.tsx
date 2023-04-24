@@ -6,21 +6,18 @@ import TableRowData from "../components/ui/TableRowData";
 import Pagination from "../components/ui/Pagination";
 import { BsCalendar4Week, BsClock } from "react-icons/bs";
 import { colorCode } from "./../uitls/helper";
-import { CiCalendarDate } from "react-icons/ci";
-import HeaderButton from "./../components/ui/HeaderButton";
 import LineChart from "../components/graph/nivo/LineChart";
-import HeaderTitle from "./../components/ui/HeaderTitle";
 import Header from "../components/ui/Header";
-
+// { alignment }: { alignment: "horizontal" | "vertical" }
 const Divider = () => {
   return (
-    <div className="h-20 border-r-2 border-primary dark:border-gray-700 "></div>
+    <div className="hidden md:block h-20 border-r-2 border-primary dark:border-gray-700"></div>
   );
 };
 
 const WatchList = () => {
   return (
-    <div className="space-y-6">
+    <div className="h-full w-full overflow-scroll space-y-6">
       <Header title="Watchlist Coins" />
       <main>
         <>
@@ -28,11 +25,11 @@ const WatchList = () => {
             {/* <ChartMd color="green" type="year" /> */}
             <LineChart />
           </div>
-          <div className="space-y-7 h-full overflow-y-scroll bg-secondary p-4 rounded-2xl">
+          <div className="space-y-7 h-full overflow-y-scroll bg-secondary p-3 md:p-4 rounded-2xl">
             {allCoins.map((coin, i) => {
               return (
-                // ROW, h-40
-                <div className="items-center flex justify-around bg-primary rounded-2xl py-2 dark:border dark:border-slate-700">
+                // ROW, h-40 sm:w-80 md:w-full
+                <div className="w-full flex flex-col md:flex-row items-center justify-around bg-primary rounded-2xl py-2 dark:border dark:border-stone-700">
                   <CoinCard
                     data={{
                       name: allCoins[i].name,
@@ -50,7 +47,7 @@ const WatchList = () => {
                   <Divider />
 
                   {/* SPARKLINES */}
-                  <div className="py-4 px-4 w-80 h-28">
+                  <div className="py-4 px-4 w-80 h-28 border-y-[1px] dark:border-stone-700 md:border-0">
                     <Sparklines data={coin.sparkline_in_7d.price} margin={6}>
                       <SparklinesLine
                         style={{
@@ -112,9 +109,7 @@ const WatchList = () => {
             })}
 
             {/* PAGINATION */}
-            <div>
-              <Pagination className="w-80 mx-auto" />
-            </div>
+            <Pagination className="flex justify-center md:w-80 mx-auto" />
           </div>
         </>
       </main>
