@@ -108,7 +108,7 @@ const CoinsReport = (props: {
           <Button className="h-10">{props.title}</Button>
         </Link>
       </header>
-      <div className="space-y-6 px-8 w-full">
+      <div className="space-y-6 md:px-8 w-full">
         {props.title === "Exchanges"
           ? exchangesData
               .slice(0, 10)

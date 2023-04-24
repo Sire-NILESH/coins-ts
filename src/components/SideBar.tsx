@@ -75,7 +75,7 @@ const SideBar = function () {
   }, [location.pathname]);
 
   return (
-    <div className="hidden md:flex font-poppins flex-grow-0 flex-col lg:w-64 h-[95vh] py-8 text-textLighter text-center">
+    <div className="hidden lg:flex font-poppins flex-grow-0 flex-col w-40 2xl:w-64 h-[95vh] py-8 text-textLighter text-center">
       {/* BRANDING */}
       <Brand />
       {/* PROFILE */}
