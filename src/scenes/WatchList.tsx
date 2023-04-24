@@ -29,7 +29,7 @@ const WatchList = () => {
             {allCoins.map((coin, i) => {
               return (
                 // ROW, h-40 sm:w-80 md:w-full
-                <div className="w-full flex flex-col md:flex-row items-center justify-around bg-primary rounded-2xl py-2 dark:border dark:border-stone-700">
+                <div className="mx-auto w-full sm:w-80 md:w-full flex flex-col md:flex-row items-center justify-around bg-primary rounded-2xl py-2 dark:border dark:border-stone-700">
                   <CoinCard
                     data={{
                       name: allCoins[i].name,
