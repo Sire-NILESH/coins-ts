@@ -62,7 +62,7 @@ const Row: React.FC<IPropsRow> = (props) => {
 const Coin = () => {
   const coin = allCoins[0];
   return (
-    <div>
+    <div className="h-full w-full overflow-scroll">
       <Header title="Coin page" />
 
       <main className="w-full">
@@ -177,7 +177,7 @@ const Coin = () => {
         </div>
 
         {/* ROW 2 */}
-        <div className="py-8 flex flex-wrap gap-8 justify-between">
+        <div className="py-8 px-2 flex flex-wrap gap-8 justify-between">
           {/* PAST WEEK */}
           <div className="w-[18rem] flex-1 flex-shrink-1 shadow rounded-3xl bg-primary px-6 pt-6">
             <header className=" font-bold text-secondary py-1">
