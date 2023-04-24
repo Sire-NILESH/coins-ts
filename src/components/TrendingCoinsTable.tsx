@@ -7,7 +7,7 @@ const TableRow: React.FC<{ coin: TrendingCoin }> = ({ coin }) => {
     <tr>
       <td className="p-2 whitespace-nowrap">
         <div className="flex items-center">
-          <div className="max-w-10 h-10 flex-shrink-0 mr-2 sm:mr-3">
+          <div className="w-10 min-w-10 h-10 flex-shrink-0 mr-2 sm:mr-3">
             <img
               className="rounded-full"
               src={coin.small}
@@ -42,7 +42,7 @@ const TrendingCoinsTable: React.FC = () => {
     <section className="antialiased w-full text-tertiary h-screen px-4">
       <div className=" h-full">
         {/* <!-- Table --> */}
-        <div className="w-full rounded-3xl max-w-full mx-auto bg-primary border border-primary">
+        <div className="w-full rounded-3xl max-w-full mx-auto bg-primary border border-gray-200 dark:border-primary">
           <header className="px-5 py-4">
             <h2 className="font-semibold text-lg text-secondary">Trending</h2>
             <p className="text-xs text-quaternary max-w-lg">

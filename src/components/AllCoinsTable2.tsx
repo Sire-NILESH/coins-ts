@@ -1,6 +1,6 @@
 import React from "react";
 import { exchangesData } from "./../data/exchanges/exchangesData";
-import { Coin, Exchange } from "./../../typing.d";
+import { Coin } from "./../../typing.d";
 import { formatCurrency } from "../uitls/helper";
 import { allCoins } from "../data/all-coins/all-coin-markets";
 import { Sparklines, SparklinesLine, SparklinesSpots } from "react-sparklines";
@@ -16,7 +16,7 @@ const TableRow: React.FC<{ data: Coin }> = ({ data }) => {
       </td>
       <td className="p-2 whitespace-nowrap">
         <div className="flex items-center">
-          <div className="max-w-10 h-10 flex-shrink-0 mr-2 sm:mr-3">
+          <div className="w-10 min-w-10 h-10 flex-shrink-0 mr-2 sm:mr-3">
             <img
               className="rounded-full"
               src={data.image}
