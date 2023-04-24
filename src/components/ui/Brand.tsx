@@ -4,7 +4,7 @@ const Brand = () => {
   return (
     <a
       href="/login"
-      className=" font-bold text-3xl flex items-center text-primary dark:text-"
+      className=" font-bold text-lg 2xl:text-3xl flex items-center text-primary dark:text-"
     >
       <img
         src="images/logo.svg"

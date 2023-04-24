@@ -1,8 +1,6 @@
 import React from "react";
-import { CiCalendarDate } from "react-icons/ci";
-import HeaderButton from "./../components/ui/HeaderButton";
+
 // import ChartMd from "../components/graph/ChartMd";
-import LineChart from "../components/graph/nivo/LineChart";
 // import { CoinArray } from "../../typing";
 import { allCoins } from "../data/all-coins/all-coin-markets";
 // import { RxTriangleDown, RxTriangleUp } from "react-icons/rx";
@@ -10,9 +8,7 @@ import { allCoins } from "../data/all-coins/all-coin-markets";
 import { Sparklines } from "react-sparklines";
 import { SparklinesLine } from "react-sparklines";
 import { SparklinesSpots } from "react-sparklines";
-import { BsCalendar4Week } from "react-icons/bs";
 import ChartMd from "../components/graph/ChartMd";
-import HeaderTitle from "./../components/ui/HeaderTitle";
 import Header from "../components/ui/Header";
 
 // ONE YEAR AGO TIMESTAMP
@@ -71,16 +67,20 @@ const Coin = () => {
 
       <main className="w-full">
         {/* CHART  h-[25rem] h-[36rem]*/}
-        <div className=" mb-10 w-full dark-bg p-14 rounded-3xl">
+        <div className="flex justify-center mb-10 w-[100%] dark-bg lg:p-14 p-5 rounded-3xl">
           {/* <ChartMd color="green" type="year" /> */}
           {/* <LineChart single={true} /> */}
-          <ChartMd color="green" type="day" size="lg" />
+          <div className="w-full md:w-[80%]">
+            <ChartMd color="green" type="day" size="lg" />
+          </div>
         </div>
-        <div className="bg-secondary p-8 rounded-3xl">
+
+        {/* <div className="bg-secondary py-8 px-8 sm:px-2 sm:py-4 rounded-3xl"> */}
+        <div className="bg-secondary sm:p-8 p-2 rounded-3xl">
           {/* ATH AND ATL ROW */}
-          <div className="flex flex-wrap justify-between">
+          <div className="flex flex-wrap gap-5 justify-between">
             {/* HIGH/LOW TODAY */}
-            <div className="w-[13rem] dark:border dark:border-slate-700 rounded-3xl bg-primary p-6">
+            <div className="w-[20rem] flex-1 dark:border dark:border-stone-700/80 rounded-3xl bg-primary p-6">
               <header className="mb-3 font-bold text-secondary py-1">
                 <p className="uppercase text-sm tracking-widest text-blue-500">
                   Today{" "}
@@ -94,7 +94,7 @@ const Coin = () => {
             </div>
 
             {/* ATH CARD */}
-            <div className="min-w-[20rem] dark:border dark:border-slate-700 rounded-3xl bg-primary p-6">
+            <div className="min-w-[20rem] flex-1 dark:border dark:border-stone-700/80 rounded-3xl bg-primary p-6">
               <header className="mb-2 font-bold text-secondary py-1">
                 <p className="text-sm tracking-widest text-blue-500">
                   ATH{" "}
@@ -134,7 +134,7 @@ const Coin = () => {
             </div>
 
             {/* ATL CARD */}
-            <div className="min-w-[20rem] dark:border dark:border-slate-700 rounded-3xl bg-primary p-6">
+            <div className="min-w-[20rem] flex-1 dark:border dark:border-stone-700/80 rounded-3xl bg-primary p-6">
               <header className="mb-2 font-bold text-secondary py-1">
                 <p className="text-sm tracking-widest text-blue-500">
                   {" "}
@@ -177,9 +177,77 @@ const Coin = () => {
         </div>
 
         {/* ROW 2 */}
-        <div className="py-8 flex justify-between">
+        <div className="py-8 flex flex-wrap gap-8 justify-between">
+          {/* PAST WEEK */}
+          <div className="w-[18rem] flex-1 flex-shrink-1 shadow rounded-3xl bg-primary px-6 pt-6">
+            <header className=" font-bold text-secondary py-1">
+              <p className="uppercase text-sm tracking-widest text-blue-500">
+                Past week{" "}
+              </p>
+            </header>
+            <span className="[word-spacing:1px] font-normal text-sm text-tertiary">
+              <span className=" font-normal">
+                A look into last week's price performance
+              </span>{" "}
+            </span>
+            {/* SPARKLINES */}
+            <div className="pt-10 w-full h-28">
+              <Sparklines data={coin.sparkline_in_7d.price} margin={6}>
+                <SparklinesLine
+                  style={{
+                    strokeWidth: 1,
+                    stroke: "green",
+                    fill: "green",
+                  }}
+                />
+                <SparklinesSpots
+                  size={1}
+                  style={{
+                    stroke: "#336aff",
+                    strokeWidth: 1,
+                    fill: "white",
+                  }}
+                />
+              </Sparklines>
+              {/* <p className="text-xs text-center text-secondary flex items-center gap-2 justify-center">
+                <BsCalendar4Week className="inline h-3 w-3 text-tertiary" />
+                In past 7 days
+              </p> */}
+            </div>
+          </div>
+
+          {/* SUPPLY */}
+          <div className="w-[18rem] flex-1 shadow rounded-3xl bg-primary p-6">
+            <header className="font-bold text-secondary py-1">
+              <p className="uppercase text-sm tracking-widest text-blue-500">
+                {/* <AiOutlinePieChart className="inline h-5 w-5 mr-1" /> */}
+                supply{" "}
+              </p>
+            </header>
+            <span className="[word-spacing:1px] font-normal text-sm text-tertiary">
+              <span className=" font-normal">
+                Amount of coins that have been created or mined
+              </span>{" "}
+            </span>
+            <div className="mt-3 space-y-1">
+              <div className="">
+                {coin.total_supply && (
+                  <Row title="Total" value={coin.total_supply} prepend="$" />
+                )}
+                {coin.max_supply && (
+                  <Row title="Max" value={coin.max_supply} prepend="$" />
+                )}
+                <Row
+                  title="Circulating"
+                  value={coin.circulating_supply}
+                  prepend="$"
+                />
+              </div>
+            </div>
+          </div>
+
           {/* MARKET CAP */}
-          <div className="min-w-[24rem] rounded-3xl shadow bg-primary p-6">
+          <div className="min-w-[20rem] flex-1 rounded-3xl shadow bg-primary p-6">
             <header className="mb-3 font-bold text-secondary py-1">
               <p className="uppercase text-sm tracking-widest text-blue-500">
                 Market cap{" "}
@@ -248,74 +316,6 @@ const Coin = () => {
                   prepend="$"
                 />
               </footer>
-            </div>
-          </div>
-
-          {/* PAST WEEK */}
-          <div className="w-[18rem] flex-shrink-1 shadow rounded-3xl bg-primary px-6 pt-6">
-            <header className=" font-bold text-secondary py-1">
-              <p className="uppercase text-sm tracking-widest text-blue-500">
-                Past week{" "}
-              </p>
-            </header>
-            <span className="[word-spacing:1px] font-normal text-sm text-tertiary">
-              <span className=" font-normal">
-                A look into last week's price performance
-              </span>{" "}
-            </span>
-            {/* SPARKLINES */}
-            <div className="pt-10 w-full h-28">
-              <Sparklines data={coin.sparkline_in_7d.price} margin={6}>
-                <SparklinesLine
-                  style={{
-                    strokeWidth: 1,
-                    stroke: "green",
-                    fill: "green",
-                  }}
-                />
-                <SparklinesSpots
-                  size={1}
-                  style={{
-                    stroke: "#336aff",
-                    strokeWidth: 1,
-                    fill: "white",
-                  }}
-                />
-              </Sparklines>
-              {/* <p className="text-xs text-center text-secondary flex items-center gap-2 justify-center">
-                <BsCalendar4Week className="inline h-3 w-3 text-tertiary" />
-                In past 7 days
-              </p> */}
-            </div>
-          </div>
-
-          {/* SUPPLY */}
-          <div className="w-[18rem] shadow rounded-3xl bg-primary p-6">
-            <header className="font-bold text-secondary py-1">
-              <p className="uppercase text-sm tracking-widest text-blue-500">
-                {/* <AiOutlinePieChart className="inline h-5 w-5 mr-1" /> */}
-                supply{" "}
-              </p>
-            </header>
-            <span className="[word-spacing:1px] font-normal text-sm text-tertiary">
-              <span className=" font-normal">
-                Amount of coins that have been created or mined
-              </span>{" "}
-            </span>
-            <div className="mt-3 space-y-1">
-              <div className="">
-                {coin.total_supply && (
-                  <Row title="Total" value={coin.total_supply} prepend="$" />
-                )}
-                {coin.max_supply && (
-                  <Row title="Max" value={coin.max_supply} prepend="$" />
-                )}
-                <Row
-                  title="Circulating"
-                  value={coin.circulating_supply}
-                  prepend="$"
-                />
-              </div>
             </div>
           </div>
         </div>
