@@ -21,7 +21,7 @@ const WatchList = () => {
       <Header title="Watchlist Coins" />
       <main>
         <>
-          <div className="h-[25rem] mb-10">
+          <div className="h-[25rem] dark:bg-gray-800 mb-10 rounded-3xl">
             {/* <ChartMd color="green" type="year" /> */}
             <LineChart />
           </div>
@@ -29,7 +29,7 @@ const WatchList = () => {
             {allCoins.map((coin, i) => {
               return (
                 // ROW, h-40 sm:w-80 md:w-full
-                <div className="mx-auto w-full sm:w-80 md:w-full flex flex-col md:flex-row items-center justify-around bg-primary rounded-2xl py-2 dark:border dark:border-stone-700">
+                <div className="mx-auto w-full max-w-[20rem] sm:w-80 md:max-w-full md:w-full flex flex-col md:flex-row items-center justify-around bg-primary rounded-2xl py-2">
                   <CoinCard
                     data={{
                       name: allCoins[i].name,

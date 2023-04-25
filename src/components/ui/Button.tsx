@@ -9,7 +9,7 @@ interface IProps {
 const Button: React.FC<IProps> = (props) => {
   return (
     <button
-      className={`${props.className} cursor-pointer transition-colors duration-300 ease-in-out text-tertiary text-xs font-semibold rounded-full w-24  hover:bg-btnHover bg-button `}
+      className={`${props.className} cursor-pointer transition-colors duration-300 ease-in-out text-tertiary text-xs font-semibold rounded-full w-24 hover:bg-btnHover bg-button dark:bg-purple-500 dark:text-purple-50 hover:dark:bg-purple-400`}
     >
       {props.children}
     </button>

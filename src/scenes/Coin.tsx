@@ -67,20 +67,19 @@ const Coin = () => {
 
       <main className="w-full">
         {/* CHART  h-[25rem] h-[36rem]*/}
-        <div className="flex justify-center mb-10 w-[100%] dark-bg lg:p-14 p-5 rounded-3xl">
+        <div className="flex justify-center mb-10 w-[100%]">
           {/* <ChartMd color="green" type="year" /> */}
           {/* <LineChart single={true} /> */}
-          <div className="w-full md:w-[80%]">
+          <div className="w-full md:w-[80%] dark:bg-gray-800 p-4 rounded-3xl">
             <ChartMd color="green" type="day" size="lg" />
           </div>
         </div>
 
-        {/* <div className="bg-secondary py-8 px-8 sm:px-2 sm:py-4 rounded-3xl"> */}
         <div className="bg-secondary sm:p-8 p-2 rounded-3xl">
           {/* ATH AND ATL ROW */}
           <div className="flex flex-wrap gap-5 justify-between">
             {/* HIGH/LOW TODAY */}
-            <div className="w-[20rem] flex-1 dark:border dark:border-stone-700/80 rounded-3xl bg-primary p-6">
+            <div className="w-[20rem] flex-1 rounded-3xl bg-primary p-6">
               <header className="mb-3 font-bold text-secondary py-1">
                 <p className="uppercase text-sm tracking-widest text-blue-500">
                   Today{" "}
@@ -94,7 +93,7 @@ const Coin = () => {
             </div>
 
             {/* ATH CARD */}
-            <div className="min-w-[20rem] flex-1 dark:border dark:border-stone-700/80 rounded-3xl bg-primary p-6">
+            <div className="min-w-[20rem] flex-1 rounded-3xl bg-primary p-6">
               <header className="mb-2 font-bold text-secondary py-1">
                 <p className="text-sm tracking-widest text-blue-500">
                   ATH{" "}
@@ -134,7 +133,7 @@ const Coin = () => {
             </div>
 
             {/* ATL CARD */}
-            <div className="min-w-[20rem] flex-1 dark:border dark:border-stone-700/80 rounded-3xl bg-primary p-6">
+            <div className="min-w-[20rem] flex-1 rounded-3xl bg-primary p-6">
               <header className="mb-2 font-bold text-secondary py-1">
                 <p className="text-sm tracking-widest text-blue-500">
                   {" "}

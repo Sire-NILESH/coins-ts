@@ -27,7 +27,7 @@ const CoinCard: React.FC<IProps> = (props) => {
               {props.data.name}
             </p>
           </div>
-          <span className="border border-primary text-tertiary flex items-center justify-center rounded-full h-6 w-6 mr-1">
+          <span className="border border-primary dark:border-stone-600 text-tertiary flex items-center justify-center rounded-full h-6 w-6 mr-1">
             {props.data.rank}
           </span>{" "}
         </div>

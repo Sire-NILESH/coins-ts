@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
 const darkMode = {
-  color: "colr",
+  color: "color",
 };
 
 module.exports = {

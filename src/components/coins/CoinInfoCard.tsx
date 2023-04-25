@@ -66,7 +66,7 @@ const CoinInfoCard: React.FC<IProps> = (props) => {
       </div>
 
       {/* 24 Hrs stat bg-fuchsia-100 bg-gray-100 shadow-md border-t py-3 px-4*/}
-      <div className="mt-10 rounded-3xl bg-fuchsia-100 dark:bg-fuchsia-100/10 py-3 px-4">
+      <div className="mt-10 rounded-3xl bg-fuchsia-100 dark:bg-purple-500/20 py-3 px-4">
         <div className="flex items-center mb-2 gap-2">
           <div
             className={`w-3 rounded-full h-3 ${colorCode(
