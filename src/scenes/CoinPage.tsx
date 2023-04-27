@@ -12,7 +12,7 @@ import ChartMd from "../components/graph/ChartMd";
 import Header from "../components/ui/Header";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { Coin } from "../../typing";
+import { Coin, CoinInfo } from "../../typing";
 import { getSingleCoin } from "../uitls/api";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
 
@@ -68,7 +68,7 @@ const CoinPage = () => {
   // const coin = allCoins[0];
 
   const { coinId } = useParams();
-  const [coin, setCoin] = useState<Coin>();
+  const [coin, setCoin] = useState<CoinInfo>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<Error | null>(null);
 
@@ -76,7 +76,7 @@ const CoinPage = () => {
     try {
       const { data } = await axios.get(getSingleCoin(coinId));
       console.log("raw coin data", data);
-      setCoin(data);
+      setCoin(data as CoinInfo);
     } catch (err) {
       setIsError(err as Error);
     }
@@ -125,9 +125,21 @@ const CoinPage = () => {
                   </p>
                 </header>
                 <div className="space-y-1">
-                  <Row title="Current" value={coin.current_price} prepend="$" />
-                  <Row title="High" value={coin.high_24h} prepend="$" />
-                  <Row title="Low" value={coin.low_24h} prepend="$" />
+                  <Row
+                    title="Current"
+                    value={coin.market_data.current_price["usd"]}
+                    prepend="$"
+                  />
+                  <Row
+                    title="High"
+                    value={coin.market_data.high_24h["usd"]}
+                    prepend="$"
+                  />
+                  <Row
+                    title="Low"
+                    value={coin.market_data.low_24h["usd"]}
+                    prepend="$"
+                  />
                 </div>
               </div>
 
@@ -141,30 +153,33 @@ const CoinPage = () => {
                   <span className="[word-spacing:1px] font-normal text-sm text-tertiary">
                     <span className=" font-normal">All time high was on </span>{" "}
                     <span className="font-semibold">{`${new Date(
-                      coin.ath_date
+                      coin.market_data.ath_date["usd"]
                     ).toUTCString()}`}</span>
                   </span>
                 </header>
                 <p className="mb-1 text-xs [word-spacing:1.2px] text-secondary">
                   ATH stands at{" "}
                   <span className="text-green-600 font-semibold">
-                    ${Number(coin.ath.toFixed(4)).toLocaleString()}
+                    $
+                    {Number(
+                      coin.market_data.ath["usd"].toFixed(4)
+                    ).toLocaleString()}
                   </span>
                 </p>
 
                 <p className="text-xs [word-spacing:1.2px] text-secondary">
-                  {coin.ath_change_percentage < 0
+                  {coin.market_data.ath_change_percentage["usd"] < 0
                     ? "Since then, down by "
                     : "Since then, up by"}{" "}
                   <span
                     className={`${
-                      coin.ath_change_percentage < 0
+                      coin.market_data.ath_change_percentage["usd"] < 0
                         ? "text-red-600"
                         : "text-green-400"
                     }  font-semibold`}
                   >
                     {Number(
-                      coin.ath_change_percentage.toFixed(2)
+                      coin.market_data.ath_change_percentage["usd"].toFixed(2)
                     ).toLocaleString()}
                     %
                   </span>
@@ -182,30 +197,33 @@ const CoinPage = () => {
                   <span className="[word-spacing:1px] font-normal text-sm text-tertiary">
                     <span className=" font-normal">All time low was on </span>{" "}
                     <span className="font-semibold">{`${new Date(
-                      coin.atl_date
+                      coin.market_data.atl_date["usd"]
                     ).toUTCString()}`}</span>
                   </span>
                 </header>
                 <p className="mb-1 text-xs [word-spacing:1.2px] text-secondary">
                   ATL stood at{" "}
                   <span className="text-green-600 font-semibold">
-                    ${Number(coin.atl.toFixed(4)).toLocaleString()}
+                    $
+                    {Number(
+                      coin.market_data.atl["usd"].toFixed(4)
+                    ).toLocaleString()}
                   </span>
                 </p>
 
                 <p className="text-xs [word-spacing:1.2px] text-secondary">
-                  {coin.atl_change_percentage < 0
+                  {coin.market_data.atl_change_percentage["usd"] < 0
                     ? "Since then, down by "
                     : "Since then, up by "}{" "}
                   <span
                     className={`${
-                      coin.atl_change_percentage < 0
+                      coin.market_data.atl_change_percentage["usd"] < 0
                         ? "text-red-600"
                         : "text-green-600"
                     }  font-semibold`}
                   >
                     {Number(
-                      coin.atl_change_percentage.toFixed(2)
+                      coin.market_data.atl_change_percentage["usd"].toFixed(2)
                     ).toLocaleString()}
                     %
                   </span>
@@ -230,7 +248,10 @@ const CoinPage = () => {
               </span>
               {/* SPARKLINES */}
               <div className="pt-10 w-full h-28">
-                <Sparklines data={coin.sparkline_in_7d.price} margin={6}>
+                <Sparklines
+                  data={coin.market_data.sparkline_7d.price}
+                  margin={6}
+                >
                   <SparklinesLine
                     style={{
                       strokeWidth: 1,
@@ -269,15 +290,23 @@ const CoinPage = () => {
               </span>
               <div className="mt-3 space-y-1">
                 <div className="">
-                  {coin.total_supply && (
-                    <Row title="Total" value={coin.total_supply} prepend="$" />
+                  {coin.market_data.total_supply && (
+                    <Row
+                      title="Total"
+                      value={coin.market_data.total_supply}
+                      prepend="$"
+                    />
                   )}
-                  {coin.max_supply && (
-                    <Row title="Max" value={coin.max_supply} prepend="$" />
+                  {coin.market_data.max_supply && (
+                    <Row
+                      title="Max"
+                      value={coin.market_data.max_supply}
+                      prepend="$"
+                    />
                   )}
                   <Row
                     title="Circulating"
-                    value={coin.circulating_supply}
+                    value={coin.market_data.circulating_supply}
                     prepend="$"
                   />
                 </div>
@@ -294,9 +323,9 @@ const CoinPage = () => {
                   <span className=" font-normal">
                     Fully diluted market capitalisation stands at{" "}
                   </span>{" "}
-                  {coin.fully_diluted_valuation ? (
+                  {coin.market_data.fully_diluted_valuation ? (
                     <span className="font-semibold">{`$${Number(
-                      coin.fully_diluted_valuation.toFixed(2)
+                      coin.market_data.fully_diluted_valuation["usd"].toFixed(2)
                     ).toLocaleString()}`}</span>
                   ) : null}
                 </span>
@@ -321,7 +350,7 @@ const CoinPage = () => {
                   <span className="text-green-600 font-semibold">
                     $
                     {Number(
-                      Number(coin.market_cap_change_24h.toFixed(4))
+                      Number(coin.market_data.market_cap_change_24h.toFixed(4))
                     ).toLocaleString()}
                   </span>
                 </p>
@@ -330,13 +359,17 @@ const CoinPage = () => {
                   Since yesterday,{" "}
                   <span
                     className={` ${
-                      coin.market_cap_change_percentage_24h > 0
+                      coin.market_data.market_cap_change_percentage_24h > 0
                         ? "text-green-600"
                         : "text-red-600"
                     } font-semibold`}
                   >
                     {Number(
-                      Number(coin.market_cap_change_percentage_24h.toFixed(4))
+                      Number(
+                        coin.market_data.market_cap_change_percentage_24h.toFixed(
+                          4
+                        )
+                      )
                     ).toLocaleString()}
                     %
                   </span>
@@ -350,7 +383,7 @@ const CoinPage = () => {
                 <footer className="!mt-4">
                   <Row
                     title="Total Market cap"
-                    value={coin.market_cap}
+                    value={coin.market_data.market_cap["usd"]}
                     prepend="$"
                   />
                 </footer>
