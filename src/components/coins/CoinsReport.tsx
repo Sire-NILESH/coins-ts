@@ -10,6 +10,7 @@ import { formatCurrency } from "../../uitls/helper";
 import { trending } from "./../../data/trending/trendingCoins";
 import { Link } from "react-router-dom";
 import Button from "../ui/Button";
+import { useAppSelector } from "../../redux/store";
 
 const CoinReportRow: React.FC<{ coin: Coin }> = ({ coin }) => {
   return (
@@ -80,7 +81,6 @@ const TrendingReportRow: React.FC<{ coin: TrendingCoin }> = ({ coin }) => {
   );
 };
 
-// space-y-4 p-6 shadow-2xl border-t-2 border-white rounded-3xl shadow-blue-100
 const CoinsReport = (props: {
   title: "Trending" | "Winners" | "Exchanges";
   subtitle?: string;
@@ -90,6 +90,24 @@ const CoinsReport = (props: {
     Winners: "/all_coins/top_coins",
     Exchanges: "/all_coins/exchanges",
   };
+
+  const {
+    isLoading: istopCoinsLoading,
+    data: topCoins,
+    isError: isErrorTopCoins,
+  } = useAppSelector((state) => state.topCoins);
+
+  const {
+    isLoading: istrendingCoinsLoading,
+    data: allTrendingCoins,
+    isError: isErrorTrending,
+  } = useAppSelector((state) => state.allTrendingCoins);
+
+  const {
+    isLoading: isexchangesLoading,
+    data: allExchanges,
+    isError: isErrorExchanges,
+  } = useAppSelector((state) => state.allExchanges);
 
   return (
     <div className="space-y-6">
@@ -108,19 +126,21 @@ const CoinsReport = (props: {
           <Button className="h-10">{props.title}</Button>
         </Link>
       </header>
-      <div className="space-y-6 md:px-8 w-full">
-        {props.title === "Exchanges"
-          ? exchangesData
-              .slice(0, 10)
-              .map((coin, index) => <ExchangesReportRow coin={coin} />)
-          : props.title === "Winners"
-          ? allCoins
-              .slice(0, 4)
-              .map((coin, index) => <CoinReportRow coin={coin} />)
-          : trending.coins
-              .slice(0, 4)
-              .map((coin, index) => <TrendingReportRow coin={coin.item} />)}
-      </div>
+      {topCoins && allTrendingCoins && allExchanges && (
+        <div className="space-y-6 md:px-8 w-full">
+          {props.title === "Exchanges"
+            ? allExchanges
+                .slice(0, 10)
+                .map((coin, index) => <ExchangesReportRow coin={coin} />)
+            : props.title === "Winners"
+            ? topCoins
+                .slice(0, 4)
+                .map((coin, index) => <CoinReportRow coin={coin} />)
+            : allTrendingCoins.coins
+                .slice(0, 4)
+                .map((coin, index) => <TrendingReportRow coin={coin.item} />)}
+        </div>
+      )}
     </div>
   );
 };
