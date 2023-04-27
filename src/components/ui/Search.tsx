@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import { Coin } from "../../../typing";
 
 interface IProps {
   setSearch: React.Dispatch<React.SetStateAction<string>>;

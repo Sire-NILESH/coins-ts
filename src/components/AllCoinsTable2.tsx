@@ -7,13 +7,17 @@ import { useAppSelector } from "../redux/store";
 import LoadingSpinner from "./ui/LoadingSpinner";
 import PaginationV2 from "./ui/PaginationV2";
 import Search from "./ui/Search";
+import { useNavigate } from "react-router-dom";
 
 const totalPages = 10;
 const pageEnteries = 10;
 
-const TableRow: React.FC<{ data: Coin; index: number }> = ({ data, index }) => {
+const TableRow: React.FC<{ data: Coin; navigationHandler: () => void }> = ({
+  data,
+  navigationHandler,
+}) => {
   return (
-    <tr>
+    <tr onClick={navigationHandler} className="hover:cursor-pointer">
       <td className="p-2 whitespace-nowrap">
         <div className="text-center font-bold text-tertiary">
           <AiOutlineStar className="mx-auto h-4 w-4 text-tertiary" />
@@ -114,10 +118,6 @@ const AllCoinsTable2: React.FC = () => {
   const [page, setPage] = useState<number>(1);
   const [search, setSearch] = useState("");
 
-  const pageHandler = (page: number) => {
-    if (page <= totalPages && page >= 1) setPage(page);
-  };
-
   const finalData = useMemo(
     function () {
       if (search.trim().length > 0) {
@@ -137,6 +137,12 @@ const AllCoinsTable2: React.FC = () => {
     },
     [allCoins, search]
   );
+
+  const pageHandler = (page: number) => {
+    if (page <= Math.ceil(finalData.length / 10) && page >= 1) setPage(page);
+  };
+
+  const navigate = useNavigate();
 
   if (isLoading && !isError) {
     return (
@@ -159,10 +165,10 @@ const AllCoinsTable2: React.FC = () => {
               <header className="flex flex-col space-y-4 sm:flex-row items-center justify-between px-5 py-4">
                 <div className="w-full">
                   <h2 className="font-semibold text-lg text-secondary">
-                    Top Hundred Coins
+                    Top 250 Coins
                   </h2>
                   <p className="text-xs text-quaternary max-w-lg">
-                    A top 100 list of all the cryptocurrencies in the last 24
+                    A top 250 list of all the cryptocurrencies in the last 24
                     hours <br />
                     (Ordered by ranking)
                   </p>
@@ -214,7 +220,13 @@ const AllCoinsTable2: React.FC = () => {
                           (page - 1) * pageEnteries + pageEnteries
                         )
                         .map((data, index) => (
-                          <TableRow data={data} key={data.name} index={index} />
+                          <TableRow
+                            navigationHandler={() => {
+                              navigate(`/coin/${data.id}`);
+                            }}
+                            data={data}
+                            key={data.name}
+                          />
                         ))}
                     </tbody>
                   </table>

@@ -5,7 +5,6 @@ import NotFound from "./scenes/NotFound";
 import WatchList from "./scenes/WatchList";
 import { useEffect } from "react";
 // import axios from "axios";
-import Coin from "./scenes/Coin";
 import DashBoard from "./scenes/DashBoard";
 import CoinsTable from "./scenes/CoinsTable";
 import ExchangesTable from "./components/ExchangesTable";
@@ -17,6 +16,7 @@ import { fetchTopCoins } from "./redux/topCoinsSlice";
 import { useAppDispatch } from "./redux/store";
 import { fetchExchanges } from "./redux/exchangesSlice";
 import { fetchTrending } from "./redux/trendingCoinsSlice";
+import CoinPage from "./scenes/CoinPage";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -43,8 +43,8 @@ function App() {
                 <Route path="trending" element={<TrendingCoinsTable />} />
                 <Route path="exchanges" element={<ExchangesTable />} />
               </Route>
-              <Route path="coin" element={<Coin />}>
-                <Route path=":coinId" />
+              <Route path="coin">
+                <Route path=":coinId" element={<CoinPage />} />
               </Route>
             </Route>
             <Route path="/login" element={<Login />} />

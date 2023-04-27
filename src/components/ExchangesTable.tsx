@@ -80,14 +80,6 @@ const ExchangesTable: React.FC = () => {
   const [page, setPage] = useState<number>(1);
   const [search, setSearch] = useState("");
 
-  const searchHandler = (query: string) => {
-    setSearch(query);
-  };
-
-  const pageHandler = (page: number) => {
-    if (page <= totalPages && page >= 1) setPage(page);
-  };
-
   // const searchHandler = () => {
   //   if (search.trim().length > 0) {
   //     console.log("inside search handler", search);
@@ -119,6 +111,10 @@ const ExchangesTable: React.FC = () => {
     },
     [allExchanges, search]
   );
+
+  const pageHandler = (page: number) => {
+    if (page <= Math.ceil(finalData.length / 10) && page >= 1) setPage(page);
+  };
 
   if (isLoading && !isError) {
     return (
