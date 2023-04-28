@@ -74,6 +74,12 @@ export interface Trending {
   exchanges: never[];
 }
 
+export interface ChartData {
+  prices: number[][];
+  market_caps: number[][];
+  total_volumes: number[][];
+}
+
 export interface CoinInfo {
   id: string;
   symbol: string;

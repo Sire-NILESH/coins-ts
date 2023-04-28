@@ -29,6 +29,10 @@ export const getExchanges = () => {
   return "https://api.coingecko.com/api/v3/exchanges?per_page=250&page=1";
 };
 
+export const getHistoricalChart = (id, days = "1", currency = "usd") => {
+  return `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=${currency}&days=${days}`;
+};
+
 // 10exchanges
 // https://api.coingecko.com/api/v3/exchanges?per_page=10&page=1
 

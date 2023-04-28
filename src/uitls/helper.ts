@@ -17,4 +17,29 @@ export const formatCurrency = (value: number | null, decimal = 4): string => {
   return Number(value.toFixed(decimal)).toLocaleString("en-US");
 };
 
-// console.log(formatCurrency(5.545187594973338e-11, 12));
+export const chartIntervals = [
+  {
+    label: "24 H",
+    value: "1",
+  },
+  {
+    label: "W",
+    value: "7",
+  },
+  {
+    label: "M",
+    value: "30",
+  },
+  {
+    label: "3M",
+    value: "90",
+  },
+  {
+    label: "Y",
+    value: "365",
+  },
+  {
+    label: "ALL",
+    value: "max",
+  },
+];

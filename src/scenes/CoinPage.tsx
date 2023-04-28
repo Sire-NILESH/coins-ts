@@ -12,6 +12,7 @@ import LoadingSpinner from "../components/ui/LoadingSpinner";
 import ReactHtmlParser from "react-html-parser";
 import SocialButtons from "../components/ui/SocialButtons";
 import { formatCurrency } from "../uitls/helper";
+import LineChart from "../components/graph/LineChart";
 
 // ONE YEAR AGO TIMESTAMP
 // new Date().setFullYear(new Date().getFullYear() - 1)
@@ -148,10 +149,10 @@ const CoinPage = () => {
             />
           </div>
 
-          <div className="flex flex-col items-start  md:space-x-10 md:flex-row md:justify-center mb-10 w-[100%]">
+          <div className="flex flex-col-reverse items-start  md:space-x-10 md:flex-row md:justify-center mb-10 w-[100%]">
             {/* <ChartMd color="green" type="year" /> */}
             {/* <LineChart single={true} /> */}
-            <div className="space-y-4 w-full md:w-[30%] mb-4">
+            <div className="space-y-4 w-full md:w-[30%]">
               <div className="w-full shadow rounded-3xl bg-primary p-6">
                 <header className="font-bold text-secondary py-1">
                   <p className="uppercase text-sm tracking-widest text-blue-500">
@@ -165,15 +166,6 @@ const CoinPage = () => {
                   </span>{" "}
                 </span>
                 <div className="mt-3 space-y-2">
-                  {coin.market_data.total_supply && (
-                    <Row
-                      title="24 H"
-                      value={
-                        coin.market_data.price_change_24h_in_currency["usd"]
-                      }
-                      appendString="%"
-                    />
-                  )}
                   {coin.market_data.max_supply && (
                     <Row
                       title="1 H"
@@ -252,8 +244,9 @@ const CoinPage = () => {
               </div>
             </div>
 
-            <div className="w-full md:w-[60%] dark:bg-gray-800 p-4 rounded-3xl">
-              <ChartMd color="green" type="day" size="lg" />
+            <div className="w-full md:w-[60%] dark:bg-gray-800 p-4 rounded-3xl mb-4">
+              {/* <ChartMd color="green" type="day" size="lg" /> */}
+              <LineChart coin={coin} />
             </div>
           </div>
 
@@ -390,7 +383,7 @@ const CoinPage = () => {
                 </span>{" "}
               </span>
               {/* SPARKLINES */}
-              <div className="pt-10 w-full h-28">
+              <div className="pt-10 w-full md:h-28">
                 <Sparklines
                   data={coin.market_data.sparkline_7d.price}
                   margin={6}
@@ -419,7 +412,7 @@ const CoinPage = () => {
             </div>
 
             {/* SUPPLY */}
-            <div className="w-[18rem] flex-1 shadow rounded-3xl bg-primary p-6">
+            <div className="w-full md:w-[18rem] flex-1 shadow rounded-3xl bg-primary p-6">
               <header className="font-bold text-secondary py-1">
                 <p className="uppercase text-sm tracking-widest text-blue-500">
                   {/* <AiOutlinePieChart className="inline h-5 w-5 mr-1" /> */}
