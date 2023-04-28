@@ -12,12 +12,12 @@ const DataFetchTime: React.FC<IProps> = (props) => {
     props.time === "local" ? new Date(Date.now()) : new Date(time);
 
   return (
-    <div className="flex items-center justify-center space-x-8">
+    <div className="flex items-center justify-center space-x-2 md:space-x-8">
       <div className="flex space-x-2">
-        <p className="text-base font-normal text-tertiary">
+        <p className="text-sm md:text-base font-normal text-tertiary">
           As of {currentTime.toDateString()},{" "}
         </p>
-        <p className="font-semibold text-secondary">
+        <p className="text-sm md:text-base font-semibold text-secondary">
           {currentTime.toLocaleTimeString()}
         </p>
       </div>

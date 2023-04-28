@@ -6,7 +6,7 @@ import ChartMd from "../components/graph/ChartMd";
 import Header from "../components/ui/Header";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { Coin, CoinInfo } from "../../typing";
+import { CoinInfo } from "../../typing";
 import { getSingleCoin } from "../uitls/api";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
 import ReactHtmlParser from "react-html-parser";
@@ -101,7 +101,7 @@ const CoinPage = () => {
 
   return (
     <div className="h-full w-full overflow-scroll">
-      <Header title="Coin page" time="local" />
+      <Header title="Coin page" time="local" goBack={true} />
 
       {coin && (
         <main className="w-full">
