@@ -1,10 +1,10 @@
 import React from "react";
 import HeaderTitle from "./HeaderTitle";
-import { CiCalendarDate } from "react-icons/ci";
-import HeaderButton from "./HeaderButton";
+import DataFetchTime from "./DataFetchTime";
 
 interface IProps {
   title: string;
+  time: "local" | "state";
 }
 
 const Header: React.FC<IProps> = (props) => {
@@ -12,7 +12,7 @@ const Header: React.FC<IProps> = (props) => {
     <header className="flex flex-col gap-y-4 md:px-4 shadow-md py-2 md:shadow-none md:flex-row items-center justify-center md:justify-between mb-5">
       <HeaderTitle title={props.title} />
 
-      <div className="">
+      {/* <div className="">
         <ul className="flex items-center gap-6 sm:gap-8 uppercase text-xs font-semibold text-quaternary">
           <li className="font-bold text-secondary">D</li>
           <li className="cursor-pointer">W</li>
@@ -26,7 +26,9 @@ const Header: React.FC<IProps> = (props) => {
             <HeaderButton />
           </li>
         </ul>
-      </div>
+      </div> */}
+
+      <DataFetchTime time={props.time} />
     </header>
   );
 };

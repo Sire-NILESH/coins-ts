@@ -1,10 +1,4 @@
 import React, { useState, useEffect } from "react";
-
-// import ChartMd from "../components/graph/ChartMd";
-// import { CoinArray } from "../../typing";
-// import { allCoins } from "../data/all-coins/all-coin-markets";
-// import { RxTriangleDown, RxTriangleUp } from "react-icons/rx";
-// import { AiOutlinePieChart } from "react-icons/ai";
 import { Sparklines } from "react-sparklines";
 import { SparklinesLine } from "react-sparklines";
 import { SparklinesSpots } from "react-sparklines";
@@ -15,6 +9,9 @@ import { useParams } from "react-router-dom";
 import { Coin, CoinInfo } from "../../typing";
 import { getSingleCoin } from "../uitls/api";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
+import ReactHtmlParser from "react-html-parser";
+import SocialButtons from "../components/ui/SocialButtons";
+import { formatCurrency } from "../uitls/helper";
 
 // ONE YEAR AGO TIMESTAMP
 // new Date().setFullYear(new Date().getFullYear() - 1)
@@ -30,6 +27,7 @@ type IPropsRow = {
   title: string;
   value: number | string;
   prepend?: string;
+  appendString?: string;
   xs?: boolean;
 };
 
@@ -55,10 +53,12 @@ const Row: React.FC<IPropsRow> = (props) => {
         } font-semibold text-green-600`}
       >
         {typeof props.value === "number"
-          ? `${props.prepend ? props.prepend : ""}${Number(
-              props.value?.toFixed(4)
-            ).toLocaleString()}`
-          : props.value}
+          ? `${props.prepend ? props.prepend : ""}${formatCurrency(
+              props.value
+            )} ${props.appendString !== undefined ? props.appendString : ""}`
+          : props.value
+          ? props.value
+          : "--"}
       </span>
     </div>
   );
@@ -73,6 +73,7 @@ const CoinPage = () => {
   const [isError, setIsError] = useState<Error | null>(null);
 
   const fetchCoin = async () => {
+    setIsLoading(true);
     try {
       const { data } = await axios.get(getSingleCoin(coinId));
       console.log("raw coin data", data);
@@ -80,14 +81,13 @@ const CoinPage = () => {
     } catch (err) {
       setIsError(err as Error);
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
-    setIsLoading(true);
     fetchCoin();
-    setIsLoading(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
 
   console.log("Coin data", coin);
 
@@ -101,15 +101,158 @@ const CoinPage = () => {
 
   return (
     <div className="h-full w-full overflow-scroll">
-      <Header title="Coin page" />
+      <Header title="Coin page" time="local" />
 
       {coin && (
         <main className="w-full">
-          {/* CHART  h-[25rem] h-[36rem]*/}
-          <div className="flex justify-center mb-10 w-[100%]">
+          <div className="block w-full md:w-[95%] space-y-2 mb-6 p-6 mx-auto  rounded-2xl">
+            {/* <div className="block w-full md:w-[95%] space-y-2 mb-6 p-6 mx-auto bg-white border border-gray-200 rounded-2xl dark:bg-gray-800 dark:border-gray-700"> */}
+            {/* <h5 className="mb-2 text-2xl font-bold tracking-tight text-blue-500">
+                  {coin.name}
+                </h5> */}
+            <div className="flex items-center">
+              <div className="w-8 min-w-10 flex-shrink-0 mr-2 sm:mr-3">
+                <img
+                  className="rounded-full bg-white"
+                  src={coin.image.small}
+                  width="40"
+                  height="40"
+                  alt={coin.name}
+                />
+              </div>
+              <div className="flex space-x-3 items-center">
+                <p className="font-medium text-primary text-2xl">{coin.name}</p>
+                <p className="font-medium uppercase text-2xl text-tertiary">
+                  {" "}
+                  {coin.symbol}
+                </p>
+              </div>
+            </div>
+            <p className="font-normal text-gray-700 dark:text-gray-400 text-sm">
+              {ReactHtmlParser(coin?.description.en.split(". ")[0])}.{" "}
+              {ReactHtmlParser(coin?.description.en.split(". ")[1])}.
+              {ReactHtmlParser(coin?.description.en.split(". ")[2])}.
+              {ReactHtmlParser(coin?.description.en.split(". ")[3])}.
+              {/* {ReactHtmlParser(coin?.description.en)} */}
+            </p>
+
+            <SocialButtons
+              homePage={coin.links.homepage[0]}
+              blockchain_site_url={coin.links.blockchain_site[0]}
+              officialForum_url={coin.links.official_forum_url[0]}
+              facebook_username={coin.links.facebook_username}
+              twitter_username={coin.links.twitter_screen_name}
+              subreddit={coin.links.subreddit_url}
+              github_repo={coin.links.repos_url.github[0]}
+              bitbucket_repo={coin.links.repos_url.bitbucket[0]}
+            />
+          </div>
+
+          <div className="flex flex-col items-start  md:space-x-10 md:flex-row md:justify-center mb-10 w-[100%]">
             {/* <ChartMd color="green" type="year" /> */}
             {/* <LineChart single={true} /> */}
-            <div className="w-full md:w-[80%] dark:bg-gray-800 p-4 rounded-3xl">
+            <div className="space-y-4 w-full md:w-[30%] mb-4">
+              <div className="w-full shadow rounded-3xl bg-primary p-6">
+                <header className="font-bold text-secondary py-1">
+                  <p className="uppercase text-sm tracking-widest text-blue-500">
+                    {/* <AiOutlinePieChart className="inline h-5 w-5 mr-1" /> */}
+                    Price Changes{" "}
+                  </p>
+                </header>
+                <span className="[word-spacing:1px] font-normal text-sm text-tertiary">
+                  <span className="">
+                    Over time price changes in percentage.
+                  </span>{" "}
+                </span>
+                <div className="mt-3 space-y-2">
+                  {coin.market_data.total_supply && (
+                    <Row
+                      title="24 H"
+                      value={
+                        coin.market_data.price_change_24h_in_currency["usd"]
+                      }
+                      appendString="%"
+                    />
+                  )}
+                  {coin.market_data.max_supply && (
+                    <Row
+                      title="1 H"
+                      value={
+                        coin.market_data.price_change_percentage_1h_in_currency[
+                          "usd"
+                        ]
+                      }
+                      appendString="%"
+                    />
+                  )}
+                  <Row
+                    title="24 H"
+                    value={
+                      coin.market_data.price_change_percentage_24h_in_currency[
+                        "usd"
+                      ]
+                    }
+                    appendString="%"
+                  />
+                  <Row
+                    title="7 D"
+                    value={
+                      coin.market_data.price_change_percentage_7d_in_currency[
+                        "usd"
+                      ]
+                    }
+                    appendString="%"
+                  />
+                  <Row
+                    title="14 D"
+                    value={
+                      coin.market_data.price_change_percentage_14d_in_currency[
+                        "usd"
+                      ]
+                    }
+                    appendString="%"
+                  />
+                  <Row
+                    title="30 D"
+                    value={
+                      coin.market_data.price_change_percentage_30d_in_currency[
+                        "usd"
+                      ]
+                    }
+                    appendString="%"
+                  />
+                  <Row
+                    title="60 D"
+                    value={
+                      coin.market_data.price_change_percentage_60d_in_currency[
+                        "usd"
+                      ]
+                    }
+                    appendString="%"
+                  />
+                  <Row
+                    title="200 D"
+                    value={
+                      coin.market_data.price_change_percentage_200d_in_currency[
+                        "usd"
+                      ]
+                    }
+                    appendString="%"
+                  />
+                  <Row
+                    title="1 Y"
+                    value={
+                      coin.market_data.price_change_percentage_1y_in_currency[
+                        "usd"
+                      ]
+                    }
+                    appendString="%"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="w-full md:w-[60%] dark:bg-gray-800 p-4 rounded-3xl">
               <ChartMd color="green" type="day" size="lg" />
             </div>
           </div>
@@ -289,27 +432,25 @@ const CoinPage = () => {
                 </span>{" "}
               </span>
               <div className="mt-3 space-y-1">
-                <div className="">
-                  {coin.market_data.total_supply && (
-                    <Row
-                      title="Total"
-                      value={coin.market_data.total_supply}
-                      prepend="$"
-                    />
-                  )}
-                  {coin.market_data.max_supply && (
-                    <Row
-                      title="Max"
-                      value={coin.market_data.max_supply}
-                      prepend="$"
-                    />
-                  )}
+                {coin.market_data.total_supply && (
                   <Row
-                    title="Circulating"
-                    value={coin.market_data.circulating_supply}
+                    title="Total"
+                    value={coin.market_data.total_supply}
                     prepend="$"
                   />
-                </div>
+                )}
+                {coin.market_data.max_supply && (
+                  <Row
+                    title="Max"
+                    value={coin.market_data.max_supply}
+                    prepend="$"
+                  />
+                )}
+                <Row
+                  title="Circulating"
+                  value={coin.market_data.circulating_supply}
+                  prepend="$"
+                />
               </div>
             </div>
 
@@ -323,7 +464,7 @@ const CoinPage = () => {
                   <span className=" font-normal">
                     Fully diluted market capitalisation stands at{" "}
                   </span>{" "}
-                  {coin.market_data.fully_diluted_valuation ? (
+                  {coin.market_data?.fully_diluted_valuation["usd"] ? (
                     <span className="font-semibold">{`$${Number(
                       coin.market_data.fully_diluted_valuation["usd"].toFixed(2)
                     ).toLocaleString()}`}</span>

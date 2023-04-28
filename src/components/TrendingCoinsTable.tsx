@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import { TrendingCoin } from "../../typing";
-import { trending } from "../data/trending/trendingCoins";
+// import { trending } from "../data/trending/trendingCoins";
 import LoadingSpinner from "./ui/LoadingSpinner";
 import { useAppSelector } from "../redux/store";
-import PaginationV2 from "./ui/PaginationV2";
+// import PaginationV2 from "./ui/PaginationV2";
+import { useNavigate } from "react-router-dom";
 
-const totalPages = 1;
-const pageEnteries = 10;
-
-const TableRow: React.FC<{ coin: TrendingCoin }> = ({ coin }) => {
+const TableRow: React.FC<{
+  coin: TrendingCoin;
+  navigationHandler: () => void;
+}> = ({ coin, navigationHandler }) => {
   return (
-    <tr>
+    <tr onClick={navigationHandler} className="hover:cursor-pointer">
       <td className="p-2 whitespace-nowrap">
         <div className="flex items-center">
           <div className="w-8 min-w-10 h-10 flex-shrink-0 mr-2 sm:mr-3">
@@ -62,6 +63,8 @@ const TrendingCoinsTable: React.FC = () => {
   // const pageHandler = (page: number) => {
   //   if (page <= totalPages && page >= 1) setPage(page);
   // };
+
+  const navigate = useNavigate();
 
   if (isLoading && !isError) {
     return (
@@ -120,16 +123,14 @@ const TrendingCoinsTable: React.FC = () => {
 
                     <tbody className="text-sm divide-y divide-gray-200 dark:divide-stone-700">
                       {allTrendingCoins.coins.map((coin) => (
-                        <TableRow coin={coin.item} key={coin.item.coin_id} />
+                        <TableRow
+                          navigationHandler={() => {
+                            navigate(`/coin/${coin.item.id}`);
+                          }}
+                          coin={coin.item}
+                          key={coin.item.coin_id}
+                        />
                       ))}
-                      {/* {allTrendingCoins.coins
-                        .slice(
-                          page * pageEnteries + 1,
-                          page * pageEnteries + pageEnteries
-                        )
-                        .map((coin) => (
-                          <TableRow coin={coin.item} key={coin.item.coin_id} />
-                        ))} */}
                     </tbody>
                   </table>
                 </div>

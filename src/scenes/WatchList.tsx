@@ -18,7 +18,7 @@ const Divider = () => {
 const WatchList = () => {
   return (
     <div className="h-full w-full overflow-scroll space-y-6">
-      <Header title="Watchlist Coins" />
+      <Header title="Watchlist Coins" time="state" />
       <main>
         <>
           <div className="h-[25rem] dark:bg-gray-800 mb-10 rounded-3xl">

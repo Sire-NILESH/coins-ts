@@ -16,7 +16,7 @@ const ids = [
   { id: "/dashboard", name: "Dashboard", pathName: "dashboard" },
   { id: "/all_coins", name: "All Coins", pathName: "all_coins" },
   { id: "/watchlist", name: "Watchlist", pathName: "watchlist" },
-  { id: "/coin", name: "Coin", pathName: "coin" },
+  // { id: "/coin", name: "Coin", pathName: "coin" },
   { id: "/not_found", name: "Not Found", pathName: "not_found" },
 ];
 

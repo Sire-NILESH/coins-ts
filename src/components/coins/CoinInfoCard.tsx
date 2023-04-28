@@ -4,6 +4,7 @@ import ChartMd from "../graph/ChartMd";
 import TableRowData from "../ui/TableRowData";
 import CoinImage from "./CoinImage";
 import { Coin } from "../../../typing";
+import { formatCurrency } from "../../uitls/helper";
 
 const colorCode = (value: number): string => {
   const code = {
@@ -37,7 +38,11 @@ const CoinInfoCard: React.FC<IProps> = (props) => {
           <CoinImage image={props.data.image} name={props.data.name} />
           <p className="text-secondary">{props.data.name}</p>
         </div>
-        <p className="font-bold text-normal text-primary">{`$${props.data.current_price}`}</p>
+        <p className="font-bold text-normal text-primary">{`$${
+          props.data.current_price < 10
+            ? props.data.current_price
+            : formatCurrency(props.data.current_price)
+        }`}</p>
       </div>
 
       {/* GRAPH dark-bg */}

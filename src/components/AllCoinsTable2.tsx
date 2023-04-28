@@ -59,7 +59,11 @@ const TableRow: React.FC<{ data: Coin; navigationHandler: () => void }> = ({
       </td>
       <td className="p-2 whitespace-nowrap">
         <div className="text-left text-green-500">
-          {`$${data.current_price}`}
+          {`$${
+            data.current_price < 10
+              ? data.current_price
+              : formatCurrency(data.current_price, 3)
+          }`}
         </div>
       </td>
       <td className="p-2 whitespace-nowrap">

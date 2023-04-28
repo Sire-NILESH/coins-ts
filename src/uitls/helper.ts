@@ -14,7 +14,7 @@ export const colorCode = (value: number) => {
 
 export const formatCurrency = (value: number | null, decimal = 4): string => {
   if (value === null) return "--";
-  return Number(value.toFixed(decimal)).toLocaleString();
+  return Number(value.toFixed(decimal)).toLocaleString("en-US");
 };
 
 // console.log(formatCurrency(5.545187594973338e-11, 12));

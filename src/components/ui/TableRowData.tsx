@@ -1,4 +1,5 @@
 import React from "react";
+import { formatCurrency } from "../../uitls/helper";
 
 interface IProps {
   value: number;
@@ -6,7 +7,8 @@ interface IProps {
 }
 
 const TableRowData: React.FC<IProps> = (props) => {
-  const value = Number(props.value?.toFixed(4)).toLocaleString();
+  const value = formatCurrency(props.value);
+  // const value = Number(props.value?.toFixed(4)).toLocaleString();
   // const value = numberWithCommas(props.value);
 
   return (

@@ -17,6 +17,7 @@ import { useAppDispatch } from "./redux/store";
 import { fetchExchanges } from "./redux/exchangesSlice";
 import { fetchTrending } from "./redux/trendingCoinsSlice";
 import CoinPage from "./scenes/CoinPage";
+import { setDataFetchTime } from "./redux/dataFetchTimeSlice";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -26,6 +27,7 @@ function App() {
     dispatch(fetchTopCoins());
     dispatch(fetchExchanges());
     dispatch(fetchTrending());
+    dispatch(setDataFetchTime(Date.now()));
   }, [dispatch]);
 
   return (

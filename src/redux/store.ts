@@ -3,12 +3,14 @@ import topCoinsReducer from "./topCoinsSlice";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import exchangesReducer from "./exchangesSlice";
 import trendingCoinsReducer from "./trendingCoinsSlice";
+import dataFetchTimeSliceReducer from "./dataFetchTimeSlice";
 
 export const store = configureStore({
   reducer: {
     topCoins: topCoinsReducer,
     allTrendingCoins: trendingCoinsReducer,
     allExchanges: exchangesReducer,
+    dataFetchTime: dataFetchTimeSliceReducer,
   },
 });
 

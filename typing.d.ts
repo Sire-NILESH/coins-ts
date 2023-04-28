@@ -109,7 +109,7 @@ export interface CoinInfo {
     subreddit_url: string;
     repos_url: {
       github: string[];
-      bitbucket: never[];
+      bitbucket: string[];
     };
   };
   image: {

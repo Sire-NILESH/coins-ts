@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import Header from "./Header";
+import DataFetchTime from "./DataFetchTime";
 
 const ListItem: React.FC<{
   title: string;
@@ -41,7 +43,7 @@ const Tabs = () => {
   );
   return (
     <div className="space-y-5 mb-10">
-      <div className="overflow-hidden rounded-xl ">
+      <div className="flex flex-col md:flex-row space-y-3 md:space-y-0 md:px-4 py-2 justify-between overflow-hidden rounded-xl ">
         <ul className="flex items-center gap-5 text-sm font-medium">
           {tabs.map((item, i) => (
             <li
@@ -61,6 +63,8 @@ const Tabs = () => {
             </li>
           ))}
         </ul>
+
+        <DataFetchTime time="state" />
       </div>
     </div>
   );

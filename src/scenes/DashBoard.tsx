@@ -43,7 +43,7 @@ const DashBoard = () => {
 
   return (
     <div className="h-full w-full overflow-hidden">
-      <Header title="Top Currencies" />
+      <Header title="Top Currencies" time="state" />
 
       {topCoins && (
         <div className="flex justify-between items-center h-full">
