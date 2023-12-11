@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import Header from "./Header";
 import DataFetchTime from "./DataFetchTime";
+import { useAppDispatch } from "../../redux/store";
+import { fetchTopCoins } from "../../redux/topCoinsSlice";
+import { fetchExchanges } from "../../redux/exchangesSlice";
+import { fetchTrending } from "../../redux/trendingCoinsSlice";
+import { setDataFetchTime } from "../../redux/dataFetchTimeSlice";
 
 const ListItem: React.FC<{
   title: string;
@@ -31,7 +35,7 @@ const Tabs = () => {
     location.pathname.lastIndexOf("/") + 1
   );
   const tabs = [
-    { title: "Top Coins", to: "top_coins" },
+    { title: "Top Coins", to: "top-coins" },
     { title: "Trending", to: "trending" },
     { title: "Exchanges", to: "exchanges" },
   ];
@@ -41,12 +45,24 @@ const Tabs = () => {
       return currentPath === item.to;
     })[0]?.title as SelectType) || "Top Coins"
   );
+
+  const dispatch = useAppDispatch();
+
+  function reloadState() {
+    console.log("reloading state");
+    dispatch(fetchTopCoins());
+    dispatch(fetchExchanges());
+    dispatch(fetchTrending());
+    dispatch(setDataFetchTime(Date.now()));
+  }
+
   return (
-    <div className="space-y-5 mb-10">
-      <div className="flex flex-col md:flex-row space-y-3 md:space-y-0 md:px-4 py-2 justify-between overflow-hidden rounded-xl ">
+    <div className="space-y-5 mb-10 shadow-md md:shadow-none">
+      <div className="flex flex-col lg:flex-row lg:space-x-4 space-y-4 lg:space-y-0 lg:px-4 py-2 justify-between items-center overflow-hidden rounded-xl ">
         <ul className="flex items-center gap-5 text-sm font-medium">
           {tabs.map((item, i) => (
             <li
+              key={item.title}
               className=""
               onClick={() =>
                 setSelected(
@@ -64,7 +80,7 @@ const Tabs = () => {
           ))}
         </ul>
 
-        <DataFetchTime time="state" />
+        <DataFetchTime onRefreshHandler={reloadState} time="state" />
       </div>
     </div>
   );

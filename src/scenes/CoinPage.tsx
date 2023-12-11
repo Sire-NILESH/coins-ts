@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Sparklines } from "react-sparklines";
 import { SparklinesLine } from "react-sparklines";
 import { SparklinesSpots } from "react-sparklines";
-import ChartMd from "../components/graph/ChartMd";
+// import ChartMd from "../components/graph/ChartMd";
 import Header from "../components/ui/Header";
 import axios from "axios";
 import { useParams } from "react-router-dom";
@@ -49,9 +49,11 @@ const Row: React.FC<IPropsRow> = (props) => {
         {props.title}
       </span>
       <span
-        className={`${
-          props.xs ? "text-xs" : "text-sm"
-        } font-semibold text-green-600`}
+        className={`${props.xs ? "text-xs" : "text-sm"} font-semibold  ${
+          typeof props.value === "number" && props.value >= 0
+            ? "text-green-600"
+            : "text-red-500"
+        }`}
       >
         {typeof props.value === "number"
           ? `${props.prepend ? props.prepend : ""}${formatCurrency(
@@ -149,11 +151,11 @@ const CoinPage = () => {
             />
           </div>
 
-          <div className="flex flex-col-reverse items-start  md:space-x-10 md:flex-row md:justify-center mb-10 w-[100%]">
+          <div className="flex flex-col-reverse items-start xl:space-x-10 xl:flex-row xl:justify-center xl:items-stretch mb-10 w-[100%]">
             {/* <ChartMd color="green" type="year" /> */}
             {/* <LineChart single={true} /> */}
-            <div className="space-y-4 w-full md:w-[30%]">
-              <div className="w-full shadow rounded-3xl bg-primary p-6">
+            <div className="space-y-4 w-full xl:w-[30%]">
+              <div className="h-full w-full shadow rounded-3xl bg-primary p-6">
                 <header className="font-bold text-secondary py-1">
                   <p className="uppercase text-sm tracking-widest text-blue-500">
                     {/* <AiOutlinePieChart className="inline h-5 w-5 mr-1" /> */}
@@ -244,7 +246,7 @@ const CoinPage = () => {
               </div>
             </div>
 
-            <div className="w-full md:w-[60%] dark:bg-gray-800 p-4 rounded-3xl mb-4">
+            <div className="w-full xl:w-[60%] bg-slate-50 shadow-md dark:bg-gray-800 p-4 rounded-3xl mb-4 xl:mb-0">
               {/* <ChartMd color="green" type="day" size="lg" /> */}
               <LineChart coin={coin} />
             </div>
@@ -481,18 +483,25 @@ const CoinPage = () => {
                 {/* <Row title="Total" value={coin.market_cap} prepend="$" /> */}
                 <p className=" text-xs [word-spacing:1.2px] text-secondary">
                   Past 24HR change{" "}
-                  <span className="text-green-600 font-semibold">
+                  <span
+                    className={`${
+                      coin.market_data.market_cap_change_24h > 0
+                        ? "text-green-600"
+                        : "text-red-600"
+                    } font-semibold`}
+                  >
                     $
-                    {Number(
+                    {/* {Number(
                       Number(coin.market_data.market_cap_change_24h.toFixed(4))
-                    ).toLocaleString()}
+                    ).toLocaleString()} */}
+                    {formatCurrency(coin.market_data.market_cap_change_24h)}
                   </span>
                 </p>
 
                 <p className="text-xs [word-spacing:1.2px] text-secondary">
                   Since yesterday,{" "}
                   <span
-                    className={` ${
+                    className={`${
                       coin.market_data.market_cap_change_percentage_24h > 0
                         ? "text-green-600"
                         : "text-red-600"
@@ -526,6 +535,9 @@ const CoinPage = () => {
           </div>
         </main>
       )}
+
+      {/* spacer */}
+      <div className="xl:hidden h-28" />
     </div>
   );
 };

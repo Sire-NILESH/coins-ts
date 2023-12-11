@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { exchangesData } from "./../data/exchanges/exchangesData";
+// import { exchangesData } from "./../data/exchanges/exchangesData";
 import { Exchange } from "./../../typing.d";
 import { formatCurrency } from "../uitls/helper";
 import { useAppSelector } from "../redux/store";
@@ -7,7 +7,7 @@ import LoadingSpinner from "./ui/LoadingSpinner";
 import PaginationV2 from "./ui/PaginationV2";
 import Search from "./ui/Search";
 
-const totalPages = 10;
+// const totalPages = 10;
 const pageEnteries = 10;
 
 const TableRow: React.FC<{ data: Exchange }> = ({ data }) => {
@@ -131,11 +131,11 @@ const ExchangesTable: React.FC = () => {
   return (
     <>
       {allExchanges && allExchanges.length > 0 && (
-        <section className="antialiased w-full text-gray-600 h-screen px-4">
+        <section className="antialiased w-full text-gray-600 px-4">
           <div className="h-full space-y-10">
             {/*  Table */}
             <div className="w-full rounded-3xl max-w-full mx-auto bg-primary border border-gray-200 dark:border-primary">
-              <header className="flex flex-col space-y-4 sm:flex-row items-center justify-between px-5 py-4">
+              <header className="flex flex-col gap-4 sm:flex-row items-center justify-between px-5 py-4">
                 <div className="w-full">
                   <h2 className="font-semibold text-lg text-secondary">
                     Exchanges

@@ -23,11 +23,16 @@ const colorCode = (value: number): string => {
 interface IProps {
   graphColor: "blue" | "green" | "red";
   data: Coin;
+  navigationHandler: () => void;
 }
 
 const CoinInfoCard: React.FC<IProps> = (props) => {
+  console.log(props.data.market_cap_change_24h);
   return (
-    <figure className="min-w-[19rem] px-3 flex gap-1 flex-col py-4">
+    <figure
+      className="min-w-[19rem] px-3 flex gap-1 flex-col py-4 hover:cursor-pointer"
+      onClick={props.navigationHandler}
+    >
       {/* TITLE */}
       <div className="flex items-center justify-between">
         <div className="flex items-center font-semibold text-base gap-1 ">

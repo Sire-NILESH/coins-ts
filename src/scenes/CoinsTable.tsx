@@ -1,8 +1,5 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Tabs from "../components/ui/Tabs";
-// import AllCoinsTable from "../components/AllCoinsTable";
-// import TrendingCoinsTable from "./../components/TrendingCoinsTable";
-// import ExchangesTable from "./../components/ExchangesTable";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 const CoinsTable = () => {
@@ -10,17 +7,18 @@ const CoinsTable = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (location.pathname === "/all_coins") {
-      navigate("top_coins");
+    if (location.pathname === "/tables") {
+      navigate("top-coins");
     }
   }, [location.pathname, navigate]);
   return (
-    <div>
+    <div className="overflow-hidden">
       <Tabs />
-      {/* <AllCoinsTable /> */}
-      {/* <TrendingCoinsTable /> */}
-      {/* <ExchangesTable /> */}
+
       <Outlet />
+
+      {/* spacer */}
+      <div className="xl:hidden h-28" />
     </div>
   );
 };

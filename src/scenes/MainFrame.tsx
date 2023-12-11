@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import React, { memo, useEffect } from "react";
+import { Outlet } from "react-router-dom";
 import SideBar from "../components/SideBar";
 import { useNavigate, useLocation } from "react-router-dom";
+import BottomBar from "../components/BottomBar";
 
 interface IProps {
   children?: React.ReactElement | React.ReactNode;
@@ -17,15 +18,17 @@ const MainFrame: React.FC<IProps> = (props) => {
     }
   }, [location.pathname, navigate]);
 
-  // if(location.pathname === '/')
   return (
-    <div className="w-[95vw] flex gap-2 lg:gap-10 justify-center">
+    <div className="w-[100vw] sm:w-[95vw] flex flex-col md:flex-row gap-2 lg:gap-10 justify-center">
       <SideBar />
-      <div className="w-[100%] md:w-[90%] xl:w-[80vw] 2xl:w-[70vw] h-[95vh] overflow-y-scroll shadow border-t-white border-t-2 rounded-3xl border-l-2 border-l-gray-200/30 bg-primary dark:bg-slate-900 dark:border-t-emerald-800 dark:border-l-stone-500/30 py-4 xl:py-10 px-2 md:px-4 3xl:px-12">
+
+      <main className="w-[100%] md:w-[95%] xl:w-[80vw] 2xl:w-[70vw] h-[100vh] sm:h-[95vh] overflow-y-scroll shadow sm:rounded-3xl bg-primary dark:bg-slate-900 py-4 xl:py-10 px-4 3xl:px-12">
         <Outlet />
-      </div>
+      </main>
+
+      <BottomBar />
     </div>
   );
 };
 
-export default MainFrame;
+export default memo(MainFrame);

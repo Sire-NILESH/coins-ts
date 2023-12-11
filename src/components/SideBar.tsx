@@ -1,42 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Brand from "./ui/Brand";
 import { Link, useLocation } from "react-router-dom";
-import { CiViewBoard, CiViewTable } from "react-icons/ci";
-import { BsGraphUp } from "react-icons/bs";
-import { BiUser } from "react-icons/bi";
+import routeConfig, { ILinkItemProps } from "../config/routeConfig";
 
-// const ids = [
-//   { id: "sdfke78ey", name: "Dashboard", pathName: "dashboard" },
-//   { id: "n4wr8343", name: "All Coins", pathName: "all_coins" },
-//   { id: "se3kj767u", name: "Watchlist", pathName: "watchlist" },
-//   { id: "kj88yf3dd", name: "Coin", pathName: "coin" },
-//   { id: "cbrg8r7wet", name: "Not Found", pathName: "not_found" },
-// ];
-const ids = [
-  { id: "/dashboard", name: "Dashboard", pathName: "dashboard" },
-  { id: "/all_coins", name: "All Coins", pathName: "all_coins" },
-  { id: "/watchlist", name: "Watchlist", pathName: "watchlist" },
-  // { id: "/coin", name: "Coin", pathName: "coin" },
-  { id: "/not_found", name: "Not Found", pathName: "not_found" },
-];
-
-const icons = [
-  <CiViewBoard className="h-5 w-5" />,
-  <CiViewTable className="h-5 w-5" />,
-  <BiUser className="h-5 w-5" />,
-  <BsGraphUp className="h-5 w-5" />,
-  <BsGraphUp className="h-5 w-5" />,
-];
-
-interface LinkItemProps {
-  id: string;
-  selected: string;
-  setSelected: React.Dispatch<React.SetStateAction<string>>;
-  to: string;
-  children: React.ReactNode;
-}
-
-const LinkItem: React.FC<LinkItemProps> = ({
+const SideBarLinkItem: React.FC<ILinkItemProps> = ({
   id,
   selected,
   setSelected,
@@ -63,7 +30,7 @@ const LinkItem: React.FC<LinkItemProps> = ({
 
 const SideBar = function () {
   const location = useLocation();
-  console.log(location.pathname.split("/")[1]);
+
   const [selected, setSelected] = useState(
     `/${location.pathname.split("/")[1]}` || "/dashboard"
   );
@@ -95,17 +62,19 @@ const SideBar = function () {
       {/* NAVIGATION */}
       <div className="flex flex-col justify-between flex-1 mt-6">
         <nav>
-          {ids.map((item, i) => {
+          {routeConfig.routesLinking.map((item, i) => {
             return (
-              <LinkItem
-                id={ids[i].id}
+              <SideBarLinkItem
+                id={routeConfig.routesLinking[i].id}
                 selected={selected}
                 setSelected={setSelected}
-                to={ids[i].pathName}
+                to={routeConfig.routesLinking[i].pathName}
               >
-                {icons[i]}
-                <span className="mx-4 font-medium">{ids[i].name}</span>
-              </LinkItem>
+                {routeConfig.icons[i]}
+                <span className="mx-4 font-medium">
+                  {routeConfig.routesLinking[i].name}
+                </span>
+              </SideBarLinkItem>
             );
           })}
         </nav>

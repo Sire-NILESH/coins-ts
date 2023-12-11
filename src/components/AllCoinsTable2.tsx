@@ -9,7 +9,7 @@ import PaginationV2 from "./ui/PaginationV2";
 import Search from "./ui/Search";
 import { useNavigate } from "react-router-dom";
 
-const totalPages = 10;
+// const totalPages = 10;
 const pageEnteries = 10;
 
 const TableRow: React.FC<{ data: Coin; navigationHandler: () => void }> = ({
@@ -125,7 +125,6 @@ const AllCoinsTable2: React.FC = () => {
   const finalData = useMemo(
     function () {
       if (search.trim().length > 0) {
-        console.log("inside search handler", search);
         const temp = allCoins?.filter(
           (coin) =>
             coin.name.toLowerCase().includes(search) ||
@@ -156,17 +155,14 @@ const AllCoinsTable2: React.FC = () => {
     );
   }
 
-  console.log("All coins : ", allCoins);
-  console.log("search : ", search);
-
   return (
-    <>
+    <div className="">
       {allCoins && allCoins?.length > 0 && (
-        <section className="antialiased w-full text-gray-600 h-screen px-4">
+        <section className="mt-5 antialiased text-gray-600 md:px-4">
           <div className="h-full space-y-10">
             {/*  Table  */}
             <div className="w-full rounded-3xl max-w-full mx-auto bg-primary border dark:border-primary">
-              <header className="flex flex-col space-y-4 sm:flex-row items-center justify-between px-5 py-4">
+              <header className="flex flex-col gap-4 sm:flex-row items-center justify-between px-5 py-4">
                 <div className="w-full">
                   <h2 className="font-semibold text-lg text-secondary">
                     Top 250 Coins
@@ -248,7 +244,7 @@ const AllCoinsTable2: React.FC = () => {
           </div>
         </section>
       )}
-    </>
+    </div>
   );
 };
 

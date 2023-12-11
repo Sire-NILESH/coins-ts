@@ -18,10 +18,10 @@ interface IProps {
 
 const CoinCard: React.FC<IProps> = (props) => {
   return (
-    <div className="py-4 px-1 w-80 h-28 cursor-pointer">
+    <div className="py-4 px-2 w-80 h-28 cursor-pointer">
       <header className="flex items-center justify-between mb-1 w-full">
         <div className="flex justify-between w-full">
-          <div className="flex">
+          <div className="flex items-center">
             <CoinImage image={props.data.image} name={props.data.name} />
             <p className="ml-2 text-secondary text-sm font-semibold">
               {props.data.name}

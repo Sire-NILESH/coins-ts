@@ -1,16 +1,15 @@
 import React from "react";
 import { BiMedal } from "react-icons/bi";
+import { BsCurrencyExchange } from "react-icons/bs";
+import { MdTrendingUp } from "react-icons/md";
 import { RxTriangleDown, RxTriangleUp } from "react-icons/rx";
-import TableRowData from "../ui/TableRowData";
-import { Coin, Exchange, TrendingCoin } from "../../../typing";
-import { allCoins } from "../../data/all-coins/all-coin-markets";
-import CoinImage from "./CoinImage";
-import { exchangesData } from "../../data/exchanges/exchangesData";
-import { formatCurrency } from "../../uitls/helper";
-import { trending } from "./../../data/trending/trendingCoins";
 import { Link } from "react-router-dom";
-import Button from "../ui/Button";
+import { Coin, Exchange, TrendingCoin } from "../../../typing";
 import { useAppSelector } from "../../redux/store";
+import { formatCurrency } from "../../uitls/helper";
+import Button from "../ui/Button";
+import TableRowData from "../ui/TableRowData";
+import CoinImage from "./CoinImage";
 
 const CoinReportRow: React.FC<{ coin: Coin }> = ({ coin }) => {
   return (
@@ -58,12 +57,13 @@ const ExchangesReportRow: React.FC<{ coin: Exchange }> = ({ coin }) => {
     </div>
   );
 };
+
 const TrendingReportRow: React.FC<{ coin: TrendingCoin }> = ({ coin }) => {
   return (
     // {/* ROW */}
     <div className="flex gap-2 items-center">
       <CoinImage image={coin.small} name={coin.name} />
-      <span className="text-xs font-normal text-tertiary px-2 py-1">{`${coin.name}`}</span>
+      <span className="text-xs font-normal text-tertiary py-1">{`${coin.name}`}</span>
 
       <div className="flex items-center ml-auto gap-4">
         <span className="text-xs font-bold text-tertiary px-2 py-1 inline rounded-full border border-primary dark:border-gray-700">
@@ -72,6 +72,7 @@ const TrendingReportRow: React.FC<{ coin: TrendingCoin }> = ({ coin }) => {
 
         <span className="text-xs font-bold text-tertiary px-2 py-1">
           {`${coin.price_btc.toFixed(12)}`}
+          {/* {`${coin.price_btc.toExponential(4)}`} */}
           <span className="ml-2 text-xs font-normal text-tertiary">
             BTC
           </span>{" "}
@@ -86,34 +87,40 @@ const CoinsReport = (props: {
   subtitle?: string;
 }): JSX.Element => {
   const navTo = {
-    Trending: "/all_coins/trending",
-    Winners: "/all_coins/top_coins",
-    Exchanges: "/all_coins/exchanges",
+    Trending: "/tables/trending",
+    Winners: "/tables/top-coins",
+    Exchanges: "/tables/exchanges",
   };
 
   const {
-    isLoading: istopCoinsLoading,
+    // isLoading: istopCoinsLoading,
     data: topCoins,
-    isError: isErrorTopCoins,
+    // isError: isErrorTopCoins,
   } = useAppSelector((state) => state.topCoins);
 
   const {
-    isLoading: istrendingCoinsLoading,
+    // isLoading: istrendingCoinsLoading,
     data: allTrendingCoins,
-    isError: isErrorTrending,
+    // isError: isErrorTrending,
   } = useAppSelector((state) => state.allTrendingCoins);
 
   const {
-    isLoading: isexchangesLoading,
+    // isLoading: isexchangesLoading,
     data: allExchanges,
-    isError: isErrorExchanges,
+    // isError: isErrorExchanges,
   } = useAppSelector((state) => state.allExchanges);
 
   return (
     <div className="space-y-6">
       <header className="flex items-center justify-between">
         <div className="space-x-2 flex py-1 items-center">
-          <BiMedal className="h-6 w-6 inline text-yellow-500 " />
+          {props.title === "Winners" ? (
+            <BiMedal className="h-6 w-6 inline text-yellow-500 " />
+          ) : props.title === "Exchanges" ? (
+            <BsCurrencyExchange className="h-6 w-6 inline text-yellow-500 " />
+          ) : (
+            <MdTrendingUp className="h-6 w-6 inline text-yellow-500 " />
+          )}
           <p className="text-lg inline font-semibold text-secondary">
             {props.title}
             <span className="text-xs ml-4 font-light text-tertiary/80">

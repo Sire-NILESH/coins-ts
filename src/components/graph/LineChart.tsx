@@ -22,8 +22,6 @@ const LineChart: React.FC<IProps> = ({ coin }) => {
     setIsLoading(false);
   };
 
-  console.log("chart data", chartData);
-
   useEffect(() => {
     fetchHistoricData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -57,6 +55,7 @@ const LineChart: React.FC<IProps> = ({ coin }) => {
                   data: chartData.map((coin) => coin[1]),
                   label: `Price ( Past ${days} Days ) in USD`,
                   borderColor: "#EEBC1D",
+                  // borderColor: "rgb(22, 163, 74)",
                 },
               ],
             }}

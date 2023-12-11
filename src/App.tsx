@@ -1,23 +1,23 @@
+import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import MainFrame from "./scenes/MainFrame";
 import Login from "./scenes/Login";
+import MainFrame from "./scenes/MainFrame";
 import NotFound from "./scenes/NotFound";
 import WatchList from "./scenes/WatchList";
-import { useEffect } from "react";
-// import axios from "axios";
-import DashBoard from "./scenes/DashBoard";
-import CoinsTable from "./scenes/CoinsTable";
-import ExchangesTable from "./components/ExchangesTable";
-import TrendingCoinsTable from "./components/TrendingCoinsTable";
 import AllCoinsTable2 from "./components/AllCoinsTable2";
-import { ThemeProvider } from "./uitls/contexts/ThemeContext";
-import CoinContext from "./uitls/contexts/CoinContext";
-import { fetchTopCoins } from "./redux/topCoinsSlice";
-import { useAppDispatch } from "./redux/store";
+import ExchangesTable from "./components/ExchangesTable";
+import Providers from "./components/Providers";
+import TrendingCoinsTable from "./components/TrendingCoinsTable";
+import { setDataFetchTime } from "./redux/dataFetchTimeSlice";
 import { fetchExchanges } from "./redux/exchangesSlice";
+import { useAppDispatch } from "./redux/store";
+import { fetchTopCoins } from "./redux/topCoinsSlice";
 import { fetchTrending } from "./redux/trendingCoinsSlice";
 import CoinPage from "./scenes/CoinPage";
-import { setDataFetchTime } from "./redux/dataFetchTimeSlice";
+import CoinsTable from "./scenes/CoinsTable";
+import DashBoard from "./scenes/DashBoard";
+import Register from "./scenes/Register";
+import AppLayout from "./components/AppLayout";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -31,30 +31,27 @@ function App() {
   }, [dispatch]);
 
   return (
-    <ThemeProvider>
-      <CoinContext>
-        <div className="bg-secondary text-slate-700 dark-bg flex items-center justify-center h-screen w-screen font-poppins">
-          {/* <SideBar /> */}
-          <Routes>
-            <Route path="/" element={<MainFrame />}>
-              <Route path="dashboard" element={<DashBoard />} />
-              <Route path="watchlist" element={<WatchList />} />
-              <Route path="all_coins/" element={<CoinsTable />}>
-                {/* <Route path="top_coins" element={<AllCoinsTable />} /> */}
-                <Route path="top_coins" element={<AllCoinsTable2 />} />
-                <Route path="trending" element={<TrendingCoinsTable />} />
-                <Route path="exchanges" element={<ExchangesTable />} />
-              </Route>
-              <Route path="coin">
-                <Route path=":coinId" element={<CoinPage />} />
-              </Route>
+    <Providers>
+      <AppLayout>
+        <Routes>
+          <Route path="/" element={<MainFrame />}>
+            <Route path="dashboard" element={<DashBoard />} />
+            <Route path="watchlist" element={<WatchList />} />
+            <Route path="tables/" element={<CoinsTable />}>
+              <Route path="top-coins" element={<AllCoinsTable2 />} />
+              <Route path="trending" element={<TrendingCoinsTable />} />
+              <Route path="exchanges" element={<ExchangesTable />} />
             </Route>
-            <Route path="/login" element={<Login />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </div>
-      </CoinContext>
-    </ThemeProvider>
+            <Route path="coin">
+              <Route path=":coinId" element={<CoinPage />} />
+            </Route>
+          </Route>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </AppLayout>
+    </Providers>
   );
 }
 
