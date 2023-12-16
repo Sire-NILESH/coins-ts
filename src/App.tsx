@@ -1,56 +1,54 @@
-import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import Login from "./scenes/Login";
-import MainFrame from "./scenes/MainFrame";
-import NotFound from "./scenes/NotFound";
-import WatchList from "./scenes/WatchList";
-import AllCoinsTable2 from "./components/AllCoinsTable2";
+import AllCoinsTable from "./components/AllCoinsTable";
+import AppLayout from "./components/AppLayout";
+import AuthProtectedLayout from "./components/AuthProtectedLayout";
 import ExchangesTable from "./components/ExchangesTable";
+import InitAuthCheck from "./components/InitAuthCheck";
 import Providers from "./components/Providers";
 import TrendingCoinsTable from "./components/TrendingCoinsTable";
-import { setDataFetchTime } from "./redux/dataFetchTimeSlice";
-import { fetchExchanges } from "./redux/exchangesSlice";
-import { useAppDispatch } from "./redux/store";
-import { fetchTopCoins } from "./redux/topCoinsSlice";
-import { fetchTrending } from "./redux/trendingCoinsSlice";
 import CoinPage from "./scenes/CoinPage";
 import CoinsTable from "./scenes/CoinsTable";
-import DashBoard from "./scenes/DashBoard";
+import DashboardLayout from "./scenes/DashboardLayout";
+import HomePage from "./scenes/HomePage";
+import Login from "./scenes/Login";
+import NotFound from "./scenes/NotFound";
+import Overview from "./scenes/Overview";
 import Register from "./scenes/Register";
-import AppLayout from "./components/AppLayout";
+import WatchList from "./scenes/WatchList";
 
 function App() {
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    console.log("loading initial top coins...");
-    dispatch(fetchTopCoins());
-    dispatch(fetchExchanges());
-    dispatch(fetchTrending());
-    dispatch(setDataFetchTime(Date.now()));
-  }, [dispatch]);
-
   return (
     <Providers>
-      <AppLayout>
-        <Routes>
-          <Route path="/" element={<MainFrame />}>
-            <Route path="dashboard" element={<DashBoard />} />
-            <Route path="watchlist" element={<WatchList />} />
-            <Route path="tables/" element={<CoinsTable />}>
-              <Route path="top-coins" element={<AllCoinsTable2 />} />
-              <Route path="trending" element={<TrendingCoinsTable />} />
-              <Route path="exchanges" element={<ExchangesTable />} />
+      <Routes>
+        {/* Checks for init auth user if any*/}
+        <Route element={<InitAuthCheck />}>
+          <Route element={<AppLayout />}>
+            {/* Public routes */}
+            <Route path="/" element={<HomePage />} />
+
+            {/* Auth protected routes */}
+            <Route element={<AuthProtectedLayout />}>
+              <Route path="/dashboard/" element={<DashboardLayout />}>
+                <Route path="overview" element={<Overview />} />
+                <Route path="watchlist" element={<WatchList />} />
+                <Route path="tables/" element={<CoinsTable />}>
+                  <Route path="top-coins" element={<AllCoinsTable />} />
+                  <Route path="trending" element={<TrendingCoinsTable />} />
+                  <Route path="exchanges" element={<ExchangesTable />} />
+                </Route>
+                <Route path="coin">
+                  <Route path=":coinId" element={<CoinPage />} />
+                </Route>
+              </Route>
             </Route>
-            <Route path="coin">
-              <Route path=":coinId" element={<CoinPage />} />
-            </Route>
+
+            {/* Public routes */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </AppLayout>
+        </Route>
+      </Routes>
     </Providers>
   );
 }

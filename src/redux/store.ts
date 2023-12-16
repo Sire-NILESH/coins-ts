@@ -4,7 +4,13 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import exchangesReducer from "./exchangesSlice";
 import trendingCoinsReducer from "./trendingCoinsSlice";
 import dataFetchTimeSliceReducer from "./dataFetchTimeSlice";
-import authSliceReducer, { login, registerAccount } from "./authSlice";
+import authSliceReducer, {
+  login,
+  registerAccount,
+  loginWithGoogle,
+} from "./authSlice";
+import initDataStatusSliceReducer from "./initDataStatusSlice";
+import modalSliceReducer from "./modalSlice";
 
 export const store = configureStore({
   reducer: {
@@ -13,16 +19,20 @@ export const store = configureStore({
     allTrendingCoins: trendingCoinsReducer,
     allExchanges: exchangesReducer,
     dataFetchTime: dataFetchTimeSliceReducer,
+    initDataStatus: initDataStatusSliceReducer,
+    modalSlice: modalSliceReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [
           "auth/setInitialAuthUser",
-          login.fulfilled.type,
           registerAccount.fulfilled.type,
+          login.fulfilled.type,
+          loginWithGoogle.fulfilled.type,
+          "modalSlice/modalHandler",
         ],
-        ignoredPaths: ["auth.user"],
+        ignoredPaths: ["auth.user", "modalSlice.onCloseModalHandler"],
       },
     }),
 });

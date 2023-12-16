@@ -30,3 +30,17 @@ export const registerAuthSchema = baseAuthArgsSchema.extend({
     .min(5, "User name must be atleast 5 characters long")
     .max(12, "User name must be atmost 12 characters long"),
 });
+
+export const registerAuthFormSchema = registerAuthSchema
+  .extend({
+    confirmPassword: z
+      .string({
+        required_error: "Confirm your password",
+        invalid_type_error: "Password must be a string",
+      })
+      .min(1, "Confirm your password"),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ["confirmPassword"],
+  });

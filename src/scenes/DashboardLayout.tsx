@@ -3,20 +3,26 @@ import { Outlet } from "react-router-dom";
 import SideBar from "../components/SideBar";
 import { useNavigate, useLocation } from "react-router-dom";
 import BottomBar from "../components/BottomBar";
+import routeConfig from "../config/routeConfig";
+import useLoadData from "../hooks/useLoadData";
+import useLoadInitData from "../hooks/useLoadInitData";
 
 interface IProps {
   children?: React.ReactElement | React.ReactNode;
 }
 
-const MainFrame: React.FC<IProps> = (props) => {
+const DashboardLayout: React.FC<IProps> = (props) => {
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (location.pathname === "/") {
-      navigate("/dashboard");
+    if (location.pathname === "/dashboard") {
+      navigate(routeConfig.routeLinking.overview.path);
     }
   }, [location.pathname, navigate]);
+
+  // useLoadData();
+  useLoadInitData();
 
   return (
     <div className="w-[100vw] sm:w-[95vw] flex flex-col md:flex-row gap-2 lg:gap-10 justify-center">
@@ -31,4 +37,4 @@ const MainFrame: React.FC<IProps> = (props) => {
   );
 };
 
-export default memo(MainFrame);
+export default memo(DashboardLayout);

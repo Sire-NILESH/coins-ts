@@ -1,162 +1,248 @@
-import React, { useState } from "react";
-import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-import { Link } from "react-router-dom";
-import { Sparklines, SparklinesLine, SparklinesSpots } from "react-sparklines";
-import { allCoins } from "../data/all-coins/all-coin-markets";
-import { RiNumbersFill } from "react-icons/ri";
+import React, { useMemo, useState } from "react";
 import { Coin } from "../../typing";
+import { formatCurrency } from "../uitls/helper";
+import { Sparklines, SparklinesLine, SparklinesSpots } from "react-sparklines";
+import { AiOutlineStar } from "react-icons/ai";
+import { useAppSelector } from "../redux/store";
+import LoadingSpinner from "./ui/LoadingSpinner";
+import PaginationV2 from "./ui/PaginationV2";
+import Search from "./ui/Search";
+import { useNavigate } from "react-router-dom";
 
-// https://tailwindcomponents.com/component/table-ui-with-tailwindcss-and-alpinejs
+const pageEnteries = 10;
 
-const CoinItem: React.FC<{ coin: Coin }> = ({ coin }) => {
+const TableRow: React.FC<{ data: Coin; navigationHandler: () => void }> = ({
+  data,
+  navigationHandler,
+}) => {
   return (
-    <>
-      {/* STAR */}
-      <div className="">
-        <span>
-          <AiOutlineStar className="h-4 w-4 text-tertiary" />
-        </span>
-      </div>
-      {/* RANK */}
-      <div className="mr-auto">
-        <span className="border border-primary text-sm bg-slate-100 text-secondary  flex items-center justify-center rounded-full h-6 w-6 my-auto">
-          {coin.market_cap_rank}
-        </span>
-      </div>
-      {/* COIN */}
-      <div className="place-self-start">
-        <Link to={`/coin/${coin.id}`} className="">
-          <div className="flex items-center gap-2">
-            <img className="w-5 rounded-full" src={coin.image} alt={coin.id} />
-            <span className="font-semibold text-base text-secondary text-left">
-              {coin.symbol.toUpperCase()}
-            </span>
+    <tr onClick={navigationHandler} className="hover:cursor-pointer">
+      <td className="p-2 whitespace-nowrap">
+        <div className="text-center font-bold text-tertiary">
+          <AiOutlineStar className="mx-auto h-4 w-4 text-tertiary" />
+        </div>
+      </td>
+      <td className="p-2 whitespace-nowrap">
+        <div className="text-left font-bold text-tertiary">
+          <p className="font-medium uppercase  text-tertiary">
+            {" "}
+            &nbsp; {data.market_cap_rank}
+          </p>
+        </div>
+      </td>
+      <td className="p-2 whitespace-nowrap">
+        <div className="flex items-center">
+          <div className="w-8 min-w-10 h-10 flex-shrink-0 mr-2 sm:mr-3">
+            <img
+              className="rounded-full bg-white"
+              src={data.image}
+              width="40"
+              height="40"
+              alt={data.name}
+            />
           </div>
-          <p className="hidden sm:block text-left text-xs text-secondary ml-6">
-            {coin.name}
-          </p>
-        </Link>
-      </div>
-      {/* PRICE */}
-      <div className="col-span-2 text-sm text-secondary">
-        ${coin.current_price.toLocaleString()}
-      </div>
-      {/* CHART */}
-      {/* <Sparklines data={coin.sparkline_in_7d.price}>
-        <SparklinesLine color="#166534" />
-      </Sparklines> */}
-      <div className="col-span-2 w-full h-full">
-        <Sparklines data={coin.sparkline_in_7d.price} margin={6}>
-          <SparklinesLine
-            style={{
-              strokeWidth: 1,
-              stroke: "#336aff",
-              fill: "none",
-            }}
-          />
-          <SparklinesSpots
-            size={1}
-            style={{
-              stroke: "#336aff",
-              strokeWidth: 2,
-              fill: "white",
-            }}
-          />
-        </Sparklines>
-      </div>
-      {/* 24H */}
-      <div>
-        {coin.price_change_percentage_24h > 0 ? (
-          <p className="text-green-600 text-sm font-semibold">
-            {coin.price_change_percentage_24h.toFixed(2)}%
-          </p>
-        ) : (
-          <p className="text-red-500 text-sm font-semibold">
-            {coin.price_change_percentage_24h.toFixed(2)}%
-          </p>
-        )}
-      </div>
-      {/* 24H VOL */}
-      <div className="col-span-2 w-[180px] text-sm text-secondary hidden md:table-cell">
-        ${coin.total_volume.toLocaleString()}
-      </div>
-      {/* MKT */}
-      <div className="col-span-2 w-[180px] text-sm text-secondary hidden sm:block">
-        ${coin.market_cap.toLocaleString()}
-      </div>
-    </>
+          <div className="flex space-x-3 items-center">
+            <p className="font-medium text-primary">{data.name}</p>
+            <p className="font-medium uppercase  text-tertiary">
+              {" "}
+              {data.symbol}
+            </p>
+          </div>
+          {/* <div className="font-medium text-tertiary">
+            {data.name} {data.symbol}
+          </div> */}
+          {/* <div className="font-medium text-tertiary">
+            {data.name} {data.symbol}
+          </div> */}
+        </div>
+      </td>
+      <td className="p-2 whitespace-nowrap">
+        <div className="text-left text-green-500">
+          {`$${
+            data.current_price < 10
+              ? data.current_price
+              : formatCurrency(data.current_price, 3)
+          }`}
+        </div>
+      </td>
+      <td className="p-2 whitespace-nowrap">
+        <div
+          className={`text-left font-medium ${
+            data.price_change_24h > 0 ? "text-green-500" : "text-red-500"
+          }`}
+        >
+          {`${formatCurrency(data.price_change_24h, 3)}%`}
+        </div>
+      </td>
+
+      <td className="p-2 whitespace-nowrap">
+        <div className=" text-left text-tertiary">
+          {`$${formatCurrency(data.total_volume, 1)}`}
+        </div>
+      </td>
+      <td className="p-2 whitespace-nowrap">
+        <div className=" text-left text-tertiary">
+          {`$${formatCurrency(data.market_cap, 1)}`}
+        </div>
+      </td>
+      <td className="p-2 min-w-[6rem] whitespace-nowrap">
+        {/* <div className="text-left">{data.circulating_supply}</div> */}
+        <div className="">
+          <Sparklines data={data.sparkline_in_7d.price} margin={6}>
+            <SparklinesLine
+              style={{
+                strokeWidth: 1,
+                stroke: "#336aff",
+                fill: "#336aff",
+              }}
+            />
+            <SparklinesSpots
+              size={1}
+              style={{
+                stroke: "#336aff",
+                strokeWidth: 1,
+                fill: "white",
+              }}
+            />
+          </Sparklines>
+        </div>
+      </td>
+    </tr>
   );
 };
 
-const AllCoinsTable = () => {
-  const [searchText, setSearchText] = useState("");
-  // console.log(allCoins)
-  return (
-    <div>
-      {/* <header className="flex flex-col md:flex-row justify-between pb-5 text-center md:text-right ">
-        <h1 className="text-2xl font-semibold mb-2 uppercase tracking-widest text-tertiary">
-          All &nbsp;Cryptocurrencies
-        </h1>
-        <form>
-          <input
-            onChange={(e) => setSearchText(e.target.value)}
-            className="w-full bg-primary border border-input px-4 py-2 rounded-full focus:outline-none focus:ring-blue-600"
-            type="text"
-            placeholder="Search a coin"
-          />
-        </form>
-      </header> */}
+const AllCoinsTable: React.FC = () => {
+  const {
+    isLoading,
+    data: allCoins,
+    isError,
+  } = useAppSelector((state) => state.topCoins);
 
-      <div className="max-w-full text-center rounded-3xl space-y-6 mx-auto bg-primary  border border-gray-200 p-4">
-        <p className="px-5 py-4 border-b text-left border-primary">
-          <h2 className="font-semibold text-lg text-secondary mb-1">
-            Top 10 Cryptocurrencies
-          </h2>
-          <p className="text-xs text-quaternary max-w-lg">
-            A top 10 list of all the cryptocurrencies in the last 24 hours{" "}
-            <br />
-            (Ordered by ranking)
-          </p>
-        </p>
-        <header className="px-4 grid grid-cols-12 place-items-center rounded-full bg-secondary/80 py-4">
-          {/* <div className="">⭐</div> */}
-          <div className="px-4">⭐</div>
-          <div className="px-4 text-secondary mr-auto">
-            <RiNumbersFill />
-          </div>
-          <div className="place-self-start my-auto font-semibold text-secondary">
-            🪙&nbsp;Coin
-          </div>
-          <div className="col-span-2 font-semibold text-secondary">
-            🏷️&nbsp;Price
-          </div>
-          <div className="col-span-2 font-semibold text-secondary">
-            📅&nbsp;7 Days
-          </div>
-          <div className="font-semibold text-secondary">🕒&nbsp;24h</div>
-          <div className="col-span-2 hidden md:block font-semibold text-secondary">
-            24h Volume
-          </div>
-          <div className="col-span-2 hidden sm:block font-semibold text-secondary">
-            Market cap
-          </div>
-        </header>
-        <div className="grid grid-cols-12 place-items-center px-4 gap-y-10 ">
-          {allCoins
-            .filter((value) => {
-              if (searchText === "") {
-                return value;
-              } else if (
-                value.name.toLowerCase().includes(searchText.toLowerCase())
-              ) {
-                return value;
-              }
-            })
-            .map((coin) => (
-              <CoinItem key={coin.id} coin={coin} />
-            ))}
-        </div>
+  const [page, setPage] = useState<number>(1);
+  const [search, setSearch] = useState("");
+
+  const finalData = useMemo(
+    function () {
+      if (search.trim().length > 0) {
+        const temp = allCoins?.filter(
+          (coin) =>
+            coin.name.toLowerCase().includes(search) ||
+            coin.symbol.toLowerCase().includes(search)
+        );
+
+        if (temp && temp.length > 0) {
+          setPage(1);
+          return temp;
+        }
+      } else if (allCoins) return allCoins;
+      return [];
+    },
+    [allCoins, search]
+  );
+
+  const pageHandler = (page: number) => {
+    if (page <= Math.ceil(finalData.length / 10) && page >= 1) setPage(page);
+  };
+
+  const navigate = useNavigate();
+
+  if (isLoading && !isError) {
+    return (
+      <div className="h-full w-full overflow-hidden flex items-center justify-center">
+        <LoadingSpinner />
       </div>
+    );
+  }
+
+  return (
+    <div className="">
+      {allCoins && allCoins?.length > 0 && (
+        <section className="mt-5 antialiased text-gray-600 md:px-4">
+          <div className="h-full space-y-10">
+            {/*  Table  */}
+            <div className="w-full rounded-3xl max-w-full mx-auto bg-primary border dark:border-primary">
+              <header className="flex flex-col gap-4 sm:flex-row items-center justify-between px-5 py-4">
+                <div className="w-full">
+                  <h2 className="font-semibold text-lg text-secondary">
+                    Top 250 Coins
+                  </h2>
+                  <p className="text-xs text-quaternary max-w-lg">
+                    A top 250 list of all the cryptocurrencies in the last 24
+                    hours <br />
+                    (Ordered by ranking)
+                  </p>
+                </div>
+                <Search setSearch={setSearch} />
+              </header>
+              {/* <HeaderTitle title="Trending" /> */}
+
+              <div className="p-3">
+                <div className="overflow-x-auto">
+                  <table className="table-auto w-full">
+                    <thead className="text-xs font-semibold uppercase text-gray-400 mb-5 ">
+                      <tr className="">
+                        <th className="px-4 py-4 whitespace-nowrap rounded-l-3xl bg-secondary">
+                          <div className="font-semibold text-left">Star</div>
+                        </th>
+                        <th className="p-2 py-4 whitespace-nowrap bg-secondary">
+                          <div className="font-semibold text-left">Rank</div>
+                        </th>
+                        <th className="p-2 py-4 whitespace-nowrap bg-secondary">
+                          <div className="font-semibold text-left">Name</div>
+                        </th>
+                        <th className="p-2 py-4 whitespace-nowrap bg-secondary">
+                          <div className="font-semibold text-left">Price</div>
+                        </th>
+                        <th className="p-2 py-4 whitespace-nowrap bg-secondary">
+                          <div className="font-semibold text-left">24H</div>
+                        </th>
+                        <th className="p-2 py-4 whitespace-nowrap bg-secondary">
+                          <div className="font-semibold text-left">
+                            Volume (24H)
+                          </div>
+                        </th>
+                        <th className="p-2 py-4 whitespace-nowrap bg-secondary">
+                          <div className="font-semibold text-left">
+                            Market cap
+                          </div>
+                        </th>
+                        <th className="p-2 py-4 whitespace-nowrap rounded-r-3xl bg-secondary">
+                          <div className="font-semibold text-left">Week</div>
+                        </th>
+                      </tr>
+                    </thead>
+
+                    <tbody className="text-sm divide-y divide-gray-200 dark:divide-stone-700">
+                      {finalData
+                        .slice(
+                          (page - 1) * pageEnteries,
+                          (page - 1) * pageEnteries + pageEnteries
+                        )
+                        .map((data, index) => (
+                          <TableRow
+                            navigationHandler={() => {
+                              navigate(`/coin/${data.id}`);
+                            }}
+                            data={data}
+                            key={data.name}
+                          />
+                        ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <PaginationV2
+              currentPage={page}
+              pageSetter={pageHandler}
+              pageEnteries={pageEnteries}
+              totalPages={Math.ceil(finalData.length / 10)}
+              totalEnteries={finalData.length}
+            />
+          </div>
+        </section>
+      )}
     </div>
   );
 };

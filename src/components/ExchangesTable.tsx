@@ -97,7 +97,6 @@ const ExchangesTable: React.FC = () => {
   const finalData = useMemo(
     function () {
       if (search.trim().length > 0) {
-        console.log("Memooo inside search handler", search);
         const temp = allExchanges?.filter((coin) =>
           coin.name.toLowerCase().includes(search)
         );
@@ -123,10 +122,6 @@ const ExchangesTable: React.FC = () => {
       </div>
     );
   }
-
-  console.log("All exchanges : ", allExchanges);
-
-  console.log("Page number", page);
 
   return (
     <>

@@ -27,7 +27,6 @@ interface IProps {
 }
 
 const CoinInfoCard: React.FC<IProps> = (props) => {
-  console.log(props.data.market_cap_change_24h);
   return (
     <figure
       className="min-w-[19rem] px-3 flex gap-1 flex-col py-4 hover:cursor-pointer"

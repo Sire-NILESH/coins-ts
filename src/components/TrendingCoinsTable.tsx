@@ -74,8 +74,6 @@ const TrendingCoinsTable: React.FC = () => {
     );
   }
 
-  console.log("All trending coins : ", allTrendingCoins);
-
   return (
     <>
       {allTrendingCoins && allTrendingCoins?.coins.length > 0 && (

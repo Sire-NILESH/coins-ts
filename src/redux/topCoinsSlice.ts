@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getTopCoins } from "../uitls/api";
 import { CoinArray } from "../../typing";
+import { RootState } from "./store";
 
 interface InitialState {
   isLoading: boolean;
@@ -36,11 +37,12 @@ const topCoinsSlice = createSlice({
       state.data = action.payload as CoinArray;
     });
     builder.addCase(fetchTopCoins.rejected, (state, action) => {
-      console.log("Error", action.payload);
       state.isError = true;
     });
   },
 });
+
+export const selectTopCoinsDataSlice = (state: RootState) => state.topCoins;
 
 const topCoinsReducer = topCoinsSlice.reducer;
 

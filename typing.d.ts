@@ -1,3 +1,18 @@
+export type ModalProps = {
+  isModalOpen: boolean;
+  onCloseModalHandler: () => void;
+  modalContent: {
+    title: string;
+    description: string;
+  };
+};
+
+export interface CustomError {
+  errorType: "Firebase auth createUserWithEmailAndPassword Error" | string;
+  title: string;
+  description: string;
+}
+
 export interface Coin {
   id: string;
   symbol: string;

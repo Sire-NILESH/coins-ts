@@ -1,14 +1,15 @@
 import { useEffect } from "react";
 import Tabs from "../components/ui/Tabs";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import routeConfig from "../config/routeConfig";
 
 const CoinsTable = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (location.pathname === "/tables") {
-      navigate("top-coins");
+    if (location.pathname === "/dashboard/tables") {
+      navigate(routeConfig.routeLinking.topCoins.path);
     }
   }, [location.pathname, navigate]);
   return (

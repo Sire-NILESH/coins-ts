@@ -138,14 +138,20 @@ const CoinsReport = (props: {
           {props.title === "Exchanges"
             ? allExchanges
                 .slice(0, 10)
-                .map((coin, index) => <ExchangesReportRow coin={coin} />)
+                .map((coin, index) => (
+                  <ExchangesReportRow key={coin.id} coin={coin} />
+                ))
             : props.title === "Winners"
             ? topCoins
                 .slice(0, 4)
-                .map((coin, index) => <CoinReportRow coin={coin} />)
+                .map((coin, index) => (
+                  <CoinReportRow key={coin.id} coin={coin} />
+                ))
             : allTrendingCoins.coins
                 .slice(0, 4)
-                .map((coin, index) => <TrendingReportRow coin={coin.item} />)}
+                .map((coin, index) => (
+                  <TrendingReportRow key={coin.item.id} coin={coin.item} />
+                ))}
         </div>
       )}
     </div>

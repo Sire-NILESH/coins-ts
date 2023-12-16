@@ -79,7 +79,6 @@ const CoinPage = () => {
     setIsLoading(true);
     try {
       const { data } = await axios.get(getSingleCoin(coinId));
-      console.log("raw coin data", data);
       setCoin(data as CoinInfo);
     } catch (err) {
       setIsError(err as Error);
@@ -91,8 +90,6 @@ const CoinPage = () => {
     fetchCoin();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  console.log("Coin data", coin);
 
   if (isLoading && !isError) {
     return (

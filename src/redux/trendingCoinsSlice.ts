@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getTrendingCoins } from "../uitls/api";
 import { Trending } from "../../typing";
+import { RootState } from "./store";
 
 interface InitialState {
   isLoading: boolean;
@@ -35,12 +36,14 @@ const trendingCoinsSlice = createSlice({
       state.isLoading = false;
       state.data = action.payload as Trending;
     });
-    builder.addCase(fetchTrending.rejected, (state, action) => {
-      console.log("Error", action.payload);
+    builder.addCase(fetchTrending.rejected, (state) => {
       state.isError = true;
     });
   },
 });
+
+export const selectTrendingCoinsDataSlice = (state: RootState) =>
+  state.allTrendingCoins;
 
 const trendingCoinsReducer = trendingCoinsSlice.reducer;
 

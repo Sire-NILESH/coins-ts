@@ -6,8 +6,9 @@ import Header from "../components/ui/Header";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../redux/store";
+import routeConfig from "../config/routeConfig";
 
-const DashBoard = () => {
+const Overview = () => {
   const navigate = useNavigate();
 
   const {
@@ -56,21 +57,27 @@ const DashBoard = () => {
                 graphColor={"blue"}
                 data={topCoins[0]}
                 navigationHandler={() => {
-                  navigate(`/coin/${topCoins[0].id}`);
+                  navigate(
+                    routeConfig.routeLinking.coin.path + `/${topCoins[0].id}`
+                  );
                 }}
               />
               <CoinInfoCard
                 graphColor={"green"}
                 data={topCoins[1]}
                 navigationHandler={() => {
-                  navigate(`/coin/${topCoins[1].id}`);
+                  navigate(
+                    routeConfig.routeLinking.coin.path + `/${topCoins[1].id}`
+                  );
                 }}
               />
               <CoinInfoCard
                 graphColor={"red"}
                 data={topCoins[2]}
                 navigationHandler={() => {
-                  navigate(`/coin/${topCoins[2].id}`);
+                  navigate(
+                    routeConfig.routeLinking.coin.path + `/${topCoins[2].id}`
+                  );
                 }}
               />
 
@@ -79,7 +86,9 @@ const DashBoard = () => {
                   graphColor={"blue"}
                   data={topCoins[3]}
                   navigationHandler={() => {
-                    navigate(`/coin/${topCoins[3].id}`);
+                    navigate(
+                      routeConfig.routeLinking.coin.path + `/${topCoins[3].id}`
+                    );
                   }}
                 />
               </div>
@@ -108,4 +117,4 @@ const DashBoard = () => {
   );
 };
 
-export default DashBoard;
+export default Overview;

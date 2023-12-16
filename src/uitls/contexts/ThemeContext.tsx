@@ -38,8 +38,6 @@ export const ThemeProvider: React.FC<IProps> = ({ initialTheme, children }) => {
     rawSetTheme(theme);
   }, [theme]);
 
-  console.log("helloo-----------", theme);
-
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       {children}

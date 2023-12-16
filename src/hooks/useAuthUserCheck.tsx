@@ -4,7 +4,7 @@ import { auth } from "../firebase";
 import { authActions } from "../redux/authSlice";
 import { useAppDispatch } from "../redux/store";
 
-const useAuthUser = () => {
+const useAuthUserCheck = () => {
   // checking initial auth user here
   const dispatch = useAppDispatch();
 
@@ -12,7 +12,6 @@ const useAuthUser = () => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log(currentUser);
       if (currentUser) {
         dispatch(authActions.setInitialAuthUser(currentUser));
       }
@@ -24,4 +23,4 @@ const useAuthUser = () => {
   }, [dispatch]);
 };
 
-export default useAuthUser;
+export default useAuthUserCheck;

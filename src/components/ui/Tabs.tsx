@@ -63,7 +63,6 @@ const Tabs = () => {
           {tabs.map((item, i) => (
             <li
               key={item.title}
-              className=""
               onClick={() =>
                 setSelected(
                   item.title as "Top Coins" | "Trending" | "Exchanges"

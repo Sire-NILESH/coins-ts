@@ -21,14 +21,11 @@ const useLoadPageData = (
         url: getCoinList(currency),
         // signals: abortCont.signal,
       };
-      console.log("in useEffect", options.url);
 
       axios
         .request(options)
         .then(function (response: any) {
-          console.log("in response");
           setData(response.data);
-          console.log(response.data);
         })
         .catch(function (error: any) {
           console.error(error);

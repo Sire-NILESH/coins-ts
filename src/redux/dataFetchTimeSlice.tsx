@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { RootState } from "./store";
 
 interface InitialState {
   time: number;
@@ -15,6 +16,9 @@ const dataFetchTimeSlice = createSlice({
     },
   },
 });
+
+export const selectDataFetchTimeSlice = (state: RootState) =>
+  state.dataFetchTime;
 
 export const { setDataFetchTime } = dataFetchTimeSlice.actions;
 

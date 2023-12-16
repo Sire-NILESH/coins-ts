@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getExchanges } from "../uitls/api";
 import { Exchange } from "../../typing";
+import { RootState } from "./store";
 
 interface InitialState {
   isLoading: boolean;
@@ -33,11 +34,13 @@ const exchangesSlice = createSlice({
       state.data = action.payload as Exchange[];
     });
     builder.addCase(fetchExchanges.rejected, (state, action) => {
-      console.log("Error", action.payload);
       state.isError = true;
     });
   },
 });
+
+export const selectExchnagesDataSlice = (state: RootState) =>
+  state.allExchanges;
 
 const exchangesReducer = exchangesSlice.reducer;
 

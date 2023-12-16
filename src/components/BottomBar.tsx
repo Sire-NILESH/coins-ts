@@ -1,6 +1,7 @@
-import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import appIcons from "../config/appIcons";
 import routeConfig, { ILinkItemProps } from "../config/routeConfig";
-import { useEffect, useState } from "react";
 
 interface IProps {}
 
@@ -16,7 +17,7 @@ const BottomBarLinkItem: React.FC<ILinkItemProps> = ({
       id={id}
       className={`flex-1 flex m-1 flex-col items-center justify-center rounded-2xl text-primary transition-colors duration-200 ease-in-out dark:secondary   dark:hover:text-gray-200 ${
         selected === id
-          ? "bg-secondary dark:bg-lime-600 "
+          ? "bg-secondary dark:bg-purple-500 "
           : "bg-transparent hover:bg-gray-300/60 dark:hover:bg-gray-700"
       }`}
       to={to}
@@ -30,33 +31,25 @@ const BottomBarLinkItem: React.FC<ILinkItemProps> = ({
 };
 
 const BottomBar: React.FC<IProps> = (props) => {
-  const location = useLocation();
-
-  const [selected, setSelected] = useState(
-    `/${location.pathname.split("/")[1]}` || "/dashboard"
+  const [selected, setSelected] = useState<string>(
+    routeConfig.bottombarRoutes[0].id
   );
-
-  useEffect(() => {
-    setSelected(`/${location.pathname.split("/")[1]}` || "/dashboard");
-
-    return () => {};
-  }, [location.pathname]);
 
   return (
     <div className="w-[100vw] sm:w-[95vw]  fixed bottom-4 z-50 px-2 sm:px-0 lg:hidden">
       <div className="flex h-20 justify-around bg-primary shadow-lg rounded-xl border border-gray-300 dark:border-gray-700">
-        {routeConfig.routesLinking.map((item, i) => {
+        {routeConfig.bottombarRoutes.map((route) => {
           return (
             <BottomBarLinkItem
-              id={routeConfig.routesLinking[i].id}
-              key={routeConfig.routesLinking[i].id}
+              id={route.id}
+              key={route.id}
               selected={selected}
               setSelected={setSelected}
-              to={routeConfig.routesLinking[i].pathName}
+              to={route.path}
             >
-              {routeConfig.icons[i]}
+              {appIcons[route.id]}
               <span className="mt-1 py-1 px-2 md:text-sm text-xs font-medium text-primary dark:secondary   dark:hover:text-gray-200">
-                {routeConfig.routesLinking[i].name}
+                {route.name}
               </span>
             </BottomBarLinkItem>
           );
