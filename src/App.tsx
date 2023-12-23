@@ -7,14 +7,15 @@ import InitAuthCheck from "./components/InitAuthCheck";
 import Providers from "./components/Providers";
 import TrendingCoinsTable from "./components/TrendingCoinsTable";
 import CoinPage from "./scenes/CoinPage";
-import CoinsTable from "./scenes/CoinsTable";
-import DashboardLayout from "./scenes/DashboardLayout";
+import DashboardLayout from "./components/DashboardLayout";
 import HomePage from "./scenes/HomePage";
 import Login from "./scenes/Login";
 import NotFound from "./scenes/NotFound";
 import Overview from "./scenes/Overview";
 import Register from "./scenes/Register";
 import WatchList from "./scenes/WatchList";
+import DataLayer from "./components/DataLayer";
+import AllTables from "./scenes/AllTables";
 
 function App() {
   return (
@@ -28,16 +29,18 @@ function App() {
 
             {/* Auth protected routes */}
             <Route element={<AuthProtectedLayout />}>
-              <Route path="/dashboard/" element={<DashboardLayout />}>
-                <Route path="overview" element={<Overview />} />
-                <Route path="watchlist" element={<WatchList />} />
-                <Route path="tables/" element={<CoinsTable />}>
-                  <Route path="top-coins" element={<AllCoinsTable />} />
-                  <Route path="trending" element={<TrendingCoinsTable />} />
-                  <Route path="exchanges" element={<ExchangesTable />} />
-                </Route>
-                <Route path="coin">
-                  <Route path=":coinId" element={<CoinPage />} />
+              <Route element={<DataLayer />}>
+                <Route path="/dashboard/" element={<DashboardLayout />}>
+                  <Route path="overview" element={<Overview />} />
+                  <Route path="watchlist" element={<WatchList />} />
+                  <Route path="tables/" element={<AllTables />}>
+                    <Route path="top-coins" element={<AllCoinsTable />} />
+                    <Route path="trending" element={<TrendingCoinsTable />} />
+                    <Route path="exchanges" element={<ExchangesTable />} />
+                  </Route>
+                  <Route path="coin">
+                    <Route path=":coinId" element={<CoinPage />} />
+                  </Route>
                 </Route>
               </Route>
             </Route>

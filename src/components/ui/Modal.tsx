@@ -51,7 +51,7 @@ const Modal = ({
                   </div>
                 </div>
 
-                <div className="ml-auto">
+                <div className="mt-6 ml-auto">
                   <Button onClick={onCloseModalHandler}>
                     <p className="text-primary text-base font-semibold py-2">
                       Okay

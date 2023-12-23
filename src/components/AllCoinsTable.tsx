@@ -1,22 +1,23 @@
 import React, { useMemo, useState } from "react";
-import { Coin } from "../../typing";
-import { formatCurrency } from "../uitls/helper";
-import { Sparklines, SparklinesLine, SparklinesSpots } from "react-sparklines";
 import { AiOutlineStar } from "react-icons/ai";
+import { Link } from "react-router-dom";
+import { Sparklines, SparklinesLine, SparklinesSpots } from "react-sparklines";
+import { Coin } from "../../typing";
+import routeConfig from "../config/routeConfig";
 import { useAppSelector } from "../redux/store";
+import { formatCurrency } from "../uitls/helper";
 import LoadingSpinner from "./ui/LoadingSpinner";
 import PaginationV2 from "./ui/PaginationV2";
 import Search from "./ui/Search";
-import { useNavigate } from "react-router-dom";
 
 const pageEnteries = 10;
 
-const TableRow: React.FC<{ data: Coin; navigationHandler: () => void }> = ({
+const TableRow: React.FC<{ data: Coin; onClickNavigateTo: string }> = ({
   data,
-  navigationHandler,
+  onClickNavigateTo,
 }) => {
   return (
-    <tr onClick={navigationHandler} className="hover:cursor-pointer">
+    <tr>
       <td className="p-2 whitespace-nowrap">
         <div className="text-center font-bold text-tertiary">
           <AiOutlineStar className="mx-auto h-4 w-4 text-tertiary" />
@@ -31,30 +32,26 @@ const TableRow: React.FC<{ data: Coin; navigationHandler: () => void }> = ({
         </div>
       </td>
       <td className="p-2 whitespace-nowrap">
-        <div className="flex items-center">
-          <div className="w-8 min-w-10 h-10 flex-shrink-0 mr-2 sm:mr-3">
-            <img
-              className="rounded-full bg-white"
-              src={data.image}
-              width="40"
-              height="40"
-              alt={data.name}
-            />
+        <Link to={onClickNavigateTo}>
+          <div className="flex items-center">
+            <div className="w-8 min-w-10 h-10 flex-shrink-0 mr-2 sm:mr-3">
+              <img
+                className="rounded-full bg-white"
+                src={data.image}
+                width="40"
+                height="40"
+                alt={data.name}
+              />
+            </div>
+            <div className="flex space-x-3 items-center">
+              <p className="font-medium text-primary">{data.name}</p>
+              <p className="font-medium uppercase  text-tertiary">
+                {" "}
+                {data.symbol}
+              </p>
+            </div>
           </div>
-          <div className="flex space-x-3 items-center">
-            <p className="font-medium text-primary">{data.name}</p>
-            <p className="font-medium uppercase  text-tertiary">
-              {" "}
-              {data.symbol}
-            </p>
-          </div>
-          {/* <div className="font-medium text-tertiary">
-            {data.name} {data.symbol}
-          </div> */}
-          {/* <div className="font-medium text-tertiary">
-            {data.name} {data.symbol}
-          </div> */}
-        </div>
+        </Link>
       </td>
       <td className="p-2 whitespace-nowrap">
         <div className="text-left text-green-500">
@@ -144,8 +141,6 @@ const AllCoinsTable: React.FC = () => {
     if (page <= Math.ceil(finalData.length / 10) && page >= 1) setPage(page);
   };
 
-  const navigate = useNavigate();
-
   if (isLoading && !isError) {
     return (
       <div className="h-full w-full overflow-hidden flex items-center justify-center">
@@ -169,7 +164,7 @@ const AllCoinsTable: React.FC = () => {
                   <p className="text-xs text-quaternary max-w-lg">
                     A top 250 list of all the cryptocurrencies in the last 24
                     hours <br />
-                    (Ordered by ranking)
+                    (Ordered by Market cap)
                   </p>
                 </div>
                 <Search setSearch={setSearch} />
@@ -212,7 +207,7 @@ const AllCoinsTable: React.FC = () => {
                       </tr>
                     </thead>
 
-                    <tbody className="text-sm divide-y divide-gray-200 dark:divide-stone-700">
+                    <tbody className="text-sm divide-y divide-gray-200 dark:divide-gray-700">
                       {finalData
                         .slice(
                           (page - 1) * pageEnteries,
@@ -220,9 +215,7 @@ const AllCoinsTable: React.FC = () => {
                         )
                         .map((data, index) => (
                           <TableRow
-                            navigationHandler={() => {
-                              navigate(`/coin/${data.id}`);
-                            }}
+                            onClickNavigateTo={`${routeConfig.routeLinking.coin.path}/${data.id}`}
                             data={data}
                             key={data.name}
                           />

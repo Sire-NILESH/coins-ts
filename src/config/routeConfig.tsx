@@ -13,7 +13,7 @@ const routeLinking = {
   },
   tables: {
     id: "tables",
-    path: "/dashboard/tables",
+    path: "/dashboard/tables/top-coins",
     name: "Tables",
     pathName: "tables",
   },
@@ -78,7 +78,6 @@ const bottombarRoutes = sidebarRoutes;
 export interface ILinkItemProps {
   id: string;
   selected: string;
-  setSelected: React.Dispatch<React.SetStateAction<string>>;
   to: string;
   children: React.ReactNode;
 }

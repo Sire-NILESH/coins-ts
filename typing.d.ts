@@ -95,7 +95,7 @@ export interface ChartData {
   total_volumes: number[][];
 }
 
-export interface CoinInfo {
+export type CoinInfo = {
   id: string;
   symbol: string;
   name: string;
@@ -1629,4 +1629,4 @@ export interface CoinInfo {
   };
   status_updates: never[];
   last_updated: string;
-}
+};

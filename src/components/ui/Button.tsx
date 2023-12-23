@@ -9,7 +9,7 @@ const Button: React.FC<Props> = forwardRef<Ref, Props>(
     return (
       <button
         ref={ref}
-        className={`${className} cursor-pointer transition-colors duration-300 ease-in-out text-tertiary text-xs font-semibold rounded-full w-24 hover:bg-btnHover bg-button dark:bg-purple-500 dark:text-purple-50 hover:dark:bg-purple-400`}
+        className={`${className} cursor-pointer transition-colors duration-300 ease-in-out text-tertiary text-xs font-semibold rounded-full min-w-[6rem] hover:bg-btnHover bg-button dark:bg-purple-500 dark:text-purple-50 hover:dark:bg-purple-400`}
         {...restProps}
       >
         {children}

@@ -1,38 +1,28 @@
 import React from "react";
-import HeaderTitle from "./HeaderTitle";
-import DataFetchTime from "./DataFetchTime";
+import useReloadData from "../../hooks/useReloadData";
+import DataFetchTime from "../DataFetchTime";
 import GoBackButton from "./GoBackButton";
-import { useAppDispatch } from "../../redux/store";
-import { fetchTopCoins } from "../../redux/topCoinsSlice";
-import { fetchExchanges } from "../../redux/exchangesSlice";
-import { fetchTrending } from "../../redux/trendingCoinsSlice";
-import { setDataFetchTime } from "../../redux/dataFetchTimeSlice";
+import HeaderTitle from "./HeaderTitle";
 
 interface IProps {
   title: string;
   time: "local" | "state";
-  goBack?: boolean;
+  hasGoBackBtn?: boolean;
 }
 
 const Header: React.FC<IProps> = (props) => {
-  const dispatch = useAppDispatch();
-
-  function reloadState() {
-    console.log("reloading state");
-    dispatch(fetchTopCoins());
-    dispatch(fetchExchanges());
-    dispatch(fetchTrending());
-    dispatch(setDataFetchTime(Date.now()));
-  }
-
+  const reloadDataState = useReloadData();
   return (
     <header className="flex gap-4 md:px-4 shadow-md py-2 md:shadow-none flex-row items-center justify-center flex-wrap md:justify-between">
       <div className="w-full md:w-auto flex items-center justify-center space-x-4">
-        {props.goBack ? <GoBackButton /> : null}
+        {props.hasGoBackBtn ? <GoBackButton /> : null}
         <HeaderTitle title={props.title} />
       </div>
 
-      <DataFetchTime onRefreshHandler={reloadState} time={props.time} />
+      <DataFetchTime
+        onRefreshHandler={!props.hasGoBackBtn ? reloadDataState : undefined}
+        time={props.time}
+      />
     </header>
   );
 };

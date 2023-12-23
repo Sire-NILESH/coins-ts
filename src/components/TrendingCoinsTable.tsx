@@ -1,37 +1,37 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { TrendingCoin } from "../../typing";
-// import { trending } from "../data/trending/trendingCoins";
-import LoadingSpinner from "./ui/LoadingSpinner";
+import routeConfig from "../config/routeConfig";
 import { useAppSelector } from "../redux/store";
-// import PaginationV2 from "./ui/PaginationV2";
-import { useNavigate } from "react-router-dom";
+import LoadingSpinner from "./ui/LoadingSpinner";
 
 const TableRow: React.FC<{
   coin: TrendingCoin;
-  navigationHandler: () => void;
-}> = ({ coin, navigationHandler }) => {
+  onClickNavigateTo: string;
+}> = ({ coin, onClickNavigateTo }) => {
   return (
-    <tr onClick={navigationHandler} className="hover:cursor-pointer">
+    <tr>
       <td className="p-2 whitespace-nowrap">
-        <div className="flex items-center">
-          <div className="w-8 min-w-10 h-10 flex-shrink-0 mr-2 sm:mr-3">
-            <img
-              className="rounded-full"
-              src={coin.small}
-              width="40"
-              height="40"
-              alt={coin.name}
-            />
+        <Link to={onClickNavigateTo}>
+          <div className="flex items-center">
+            <div className="w-8 min-w-10 h-10 flex-shrink-0 mr-2 sm:mr-3">
+              <img
+                className="rounded-full"
+                src={coin.small}
+                width="40"
+                height="40"
+                alt={coin.name}
+              />
+            </div>
+            <div className="flex space-x-3 items-center">
+              <p className="font-medium text-primary">{coin.name}</p>
+              <p className="font-medium uppercase  text-tertiary">
+                {" "}
+                {coin.symbol}
+              </p>
+            </div>
           </div>
-          <div className="flex space-x-3 items-center">
-            <p className="font-medium text-primary">{coin.name}</p>
-            <p className="font-medium uppercase  text-tertiary">
-              {" "}
-              {coin.symbol}
-            </p>
-          </div>
-          {/* <div className="font-medium text-tertiary">{coin.name}</div> */}
-        </div>
+        </Link>
       </td>
       <td className="p-2 whitespace-nowrap">
         <div className="text-left font-bold text-tertiary">{coin.symbol}</div>
@@ -57,14 +57,6 @@ const TrendingCoinsTable: React.FC = () => {
     data: allTrendingCoins,
     isError,
   } = useAppSelector((state) => state.allTrendingCoins);
-
-  // const [page, setPage] = useState<number>(1);
-
-  // const pageHandler = (page: number) => {
-  //   if (page <= totalPages && page >= 1) setPage(page);
-  // };
-
-  const navigate = useNavigate();
 
   if (isLoading && !isError) {
     return (
@@ -119,12 +111,10 @@ const TrendingCoinsTable: React.FC = () => {
                       </tr>
                     </thead>
 
-                    <tbody className="text-sm divide-y divide-gray-200 dark:divide-stone-700">
+                    <tbody className="text-sm divide-y divide-gray-200 dark:divide-gray-700">
                       {allTrendingCoins.coins.map((coin) => (
                         <TableRow
-                          navigationHandler={() => {
-                            navigate(`/coin/${coin.item.id}`);
-                          }}
+                          onClickNavigateTo={`${routeConfig.routeLinking.coin.path}/${coin.item.id}`}
                           coin={coin.item}
                           key={coin.item.coin_id}
                         />
@@ -134,13 +124,6 @@ const TrendingCoinsTable: React.FC = () => {
                 </div>
               </div>
             </div>
-
-            {/* <PaginationV2
-              currentPage={page}
-              pageSetter={pageHandler}
-              pageEnteries={pageEnteries}
-              totalPages={totalPages}
-            /> */}
           </div>
         </section>
       )}

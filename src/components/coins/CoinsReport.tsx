@@ -10,6 +10,7 @@ import { formatCurrency } from "../../uitls/helper";
 import Button from "../ui/Button";
 import TableRowData from "../ui/TableRowData";
 import CoinImage from "./CoinImage";
+import routeConfig from "../../config/routeConfig";
 
 const CoinReportRow: React.FC<{ coin: Coin }> = ({ coin }) => {
   return (
@@ -87,9 +88,9 @@ const CoinsReport = (props: {
   subtitle?: string;
 }): JSX.Element => {
   const navTo = {
-    Trending: "/tables/trending",
-    Winners: "/tables/top-coins",
-    Exchanges: "/tables/exchanges",
+    Trending: routeConfig.routeLinking.trending.path,
+    Winners: routeConfig.routeLinking.topCoins.path,
+    Exchanges: routeConfig.routeLinking.exchanges.path,
   };
 
   const {

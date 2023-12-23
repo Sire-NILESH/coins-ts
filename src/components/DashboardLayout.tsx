@@ -1,11 +1,9 @@
 import React, { memo, useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import SideBar from "../components/SideBar";
+import SideBar from "./SideBar";
 import { useNavigate, useLocation } from "react-router-dom";
-import BottomBar from "../components/BottomBar";
+import BottomBar from "./BottomBar";
 import routeConfig from "../config/routeConfig";
-import useLoadData from "../hooks/useLoadData";
-import useLoadInitData from "../hooks/useLoadInitData";
 
 interface IProps {
   children?: React.ReactElement | React.ReactNode;
@@ -20,9 +18,6 @@ const DashboardLayout: React.FC<IProps> = (props) => {
       navigate(routeConfig.routeLinking.overview.path);
     }
   }, [location.pathname, navigate]);
-
-  // useLoadData();
-  useLoadInitData();
 
   return (
     <div className="w-[100vw] sm:w-[95vw] flex flex-col md:flex-row gap-2 lg:gap-10 justify-center">

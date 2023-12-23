@@ -1,14 +1,10 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import appIcons from "../config/appIcons";
 import routeConfig, { ILinkItemProps } from "../config/routeConfig";
-
-interface IProps {}
 
 const BottomBarLinkItem: React.FC<ILinkItemProps> = ({
   id,
   selected,
-  setSelected,
   children,
   to,
 }) => {
@@ -21,19 +17,14 @@ const BottomBarLinkItem: React.FC<ILinkItemProps> = ({
           : "bg-transparent hover:bg-gray-300/60 dark:hover:bg-gray-700"
       }`}
       to={to}
-      onClick={function (e) {
-        setSelected(id);
-      }}
     >
       {children}
     </Link>
   );
 };
 
-const BottomBar: React.FC<IProps> = (props) => {
-  const [selected, setSelected] = useState<string>(
-    routeConfig.bottombarRoutes[0].id
-  );
+const BottomBar = () => {
+  const path = useLocation();
 
   return (
     <div className="w-[100vw] sm:w-[95vw]  fixed bottom-4 z-50 px-2 sm:px-0 lg:hidden">
@@ -43,8 +34,7 @@ const BottomBar: React.FC<IProps> = (props) => {
             <BottomBarLinkItem
               id={route.id}
               key={route.id}
-              selected={selected}
-              setSelected={setSelected}
+              selected={path.pathname.split("/")[2]}
               to={route.path}
             >
               {appIcons[route.id]}

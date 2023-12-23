@@ -42,6 +42,10 @@ code {
   background: linear-gradient(145deg, #2044bb, #1b3a9e);
 }
 
+.card-shadow-outline {
+  @apply outline outline-1 outline-neutral-200 dark:outline-transparent shadow;
+}
+
 /* ----------------Error page-------------------- */
 .emoji-404 {
   position: relative;
@@ -97,7 +101,7 @@ code {
   --color-bg-secondary: rgb(55 65 81 / 0.2);
   --color-text-primary: rgb(226 232 240);
   --color-text-secondary: rgb(203 213 225);
-  --color-bg-accent: 243 232 255; /*purple-100*/
+  --color-bg-accent: rgb(243 232 255); /*purple-100*/
   --color-text-tertiary: rgb(148 163 184);
   --color-text-quaternary: rgb(100 116 139);
   --color-text-textLighter: rgb(71 85 105);
@@ -112,7 +116,7 @@ code {
 .light {
   --color-bg-primary: rgb(239, 246, 255);
   --color-bg-secondary: rgb(219, 234, 254);
-  --color-bg-accent: 243 232 255; /*purple-100*/
+  --color-bg-accent: rgb(243 232 255); /*purple-100*/
   --color-text-primary: rgb(51 65 85);
   --color-text-secondary: rgb(71 85 105);
   --color-text-tertiary: rgb(100 116 139);

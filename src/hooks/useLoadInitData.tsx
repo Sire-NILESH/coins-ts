@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { setDataFetchTime } from "../redux/dataFetchTimeSlice";
 import { fetchExchanges } from "../redux/exchangesSlice";
 import {
@@ -20,24 +19,19 @@ const useLoadInitData = () => {
     const fetchExchangesRes = dispatch(fetchExchanges());
     const fetchTrendingRes = dispatch(fetchTrending());
 
-    const res = await Promise.allSettled([
+    await Promise.allSettled([
       fetchtopCoinsRes,
       fetchExchangesRes,
       fetchTrendingRes,
     ]);
 
-    console.log([res[0].status, res[1].status, res[2].status]);
-
     dispatch(setDataFetchTime(Date.now()));
-    dispatch(setInitDataStatus("success"));
+    dispatch(setInitDataStatus("checked"));
   }
 
-  useEffect(() => {
-    if (initDataStatus === "false") {
-      init();
-    }
-    // eslint-disable-next-line
-  }, [initDataStatus]);
+  if (initDataStatus === "unchecked") {
+    init();
+  }
 };
 
 export default useLoadInitData;

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
 import appIcons from "../config/appIcons";
 import routeConfig, { ILinkItemProps } from "../config/routeConfig";
 import { authSelectors } from "../redux/authSlice";
@@ -9,7 +9,6 @@ import Brand from "./ui/Brand";
 const SideBarLinkItem: React.FC<ILinkItemProps> = ({
   id,
   selected,
-  setSelected,
   children,
   to,
 }) => {
@@ -22,9 +21,6 @@ const SideBarLinkItem: React.FC<ILinkItemProps> = ({
           : "bg-transparent hover:bg-gray-300/60 dark:hover:bg-gray-700"
       }`}
       to={to}
-      onClick={function () {
-        setSelected(id);
-      }}
     >
       {children}
     </Link>
@@ -34,14 +30,14 @@ const SideBarLinkItem: React.FC<ILinkItemProps> = ({
 const SideBar = function () {
   const user = useAppSelector(authSelectors.authUser);
 
-  const [selected, setSelected] = useState<string>(
-    routeConfig.sidebarRoutes[0].id
-  );
+  const path = useLocation();
 
   return (
     <div className="hidden lg:flex font-poppins flex-grow-0 flex-col w-40 2xl:w-64 h-[95vh] py-8 text-textLighter text-center">
       {/* BRANDING */}
-      <Brand />
+      <div className="mt-4">
+        <Brand />
+      </div>
       {/* PROFILE */}
       <div className="flex flex-col items-center mt-6">
         {!user?.photoURL ? (
@@ -69,8 +65,7 @@ const SideBar = function () {
               <SideBarLinkItem
                 key={route.id}
                 id={route.id}
-                selected={selected}
-                setSelected={setSelected}
+                selected={path.pathname.split("/")[2]}
                 to={route.path}
               >
                 {appIcons[route.id]}

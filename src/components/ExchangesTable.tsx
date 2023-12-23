@@ -192,7 +192,7 @@ const ExchangesTable: React.FC = () => {
                       </tr>
                     </thead>
 
-                    <tbody className="text-sm divide-y divide-gray-200 dark:divide-stone-700">
+                    <tbody className="text-sm divide-y divide-gray-200 dark:divide-gray-700">
                       {finalData
                         .slice(
                           (page - 1) * pageEnteries,

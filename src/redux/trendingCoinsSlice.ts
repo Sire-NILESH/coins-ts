@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getTrendingCoins } from "../uitls/api";
 import { Trending } from "../../typing";
 import { RootState } from "./store";
+import axios from "axios";
 
 interface InitialState {
   isLoading: boolean;
@@ -19,31 +20,43 @@ const initialState: InitialState = {
 export const fetchTrending = createAsyncThunk(
   "fetch/trendingCoins",
   async () => {
-    const response = await fetch(getTrendingCoins());
-    return response.json();
+    const response = await axios.get(getTrendingCoins());
+    return response.data;
   }
 );
 
 const trendingCoinsSlice = createSlice({
   name: "allTrendingCoins",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    resetError: (state) => {
+      state.isError = false;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchTrending.pending, (state, _action) => {
       state.isLoading = true;
+      state.isError = false;
     });
     builder.addCase(fetchTrending.fulfilled, (state, action) => {
       state.isLoading = false;
       state.data = action.payload as Trending;
     });
     builder.addCase(fetchTrending.rejected, (state) => {
+      state.isLoading = false;
       state.isError = true;
     });
   },
 });
 
-export const selectTrendingCoinsDataSlice = (state: RootState) =>
-  state.allTrendingCoins;
+export const selectTrendingCoinsData = (state: RootState) =>
+  state.allTrendingCoins.data;
+export const selectTrendingCoinsIsLoading = (state: RootState) =>
+  state.allTrendingCoins.isLoading;
+export const selectTrendingCoinsIsError = (state: RootState) =>
+  state.allTrendingCoins.isError;
+
+export const trendingCoinsActions = trendingCoinsSlice.actions;
 
 const trendingCoinsReducer = trendingCoinsSlice.reducer;
 

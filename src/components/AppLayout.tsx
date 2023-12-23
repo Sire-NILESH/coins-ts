@@ -4,6 +4,7 @@ import { useAppSelector } from "../redux/store";
 import { selectModalSlice } from "../redux/modalSlice";
 
 const AppLayout = () => {
+  // app's modal is handled here.
   const { isModalOpen, modalContent, onCloseModalHandler } =
     useAppSelector(selectModalSlice);
 

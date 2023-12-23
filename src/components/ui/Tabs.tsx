@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import DataFetchTime from "./DataFetchTime";
+import DataFetchTime from "../DataFetchTime";
 import { useAppDispatch } from "../../redux/store";
 import { fetchTopCoins } from "../../redux/topCoinsSlice";
 import { fetchExchanges } from "../../redux/exchangesSlice";
@@ -58,7 +58,7 @@ const Tabs = () => {
 
   return (
     <div className="space-y-5 mb-10 shadow-md md:shadow-none">
-      <div className="flex flex-col lg:flex-row lg:space-x-4 space-y-4 lg:space-y-0 lg:px-4 py-2 justify-between items-center overflow-hidden rounded-xl ">
+      <div className="flex flex-row flex-wrap gap-4  md:px-4 py-2 justify-center items-center md:justify-between overflow-hidden rounded-xl ">
         <ul className="flex items-center gap-5 text-sm font-medium">
           {tabs.map((item, i) => (
             <li

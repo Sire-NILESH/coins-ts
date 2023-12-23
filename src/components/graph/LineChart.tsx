@@ -1,5 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import {
+  Chart as ChartJS,
+  CategoryScale, //X AXIS
+  LinearScale, //Y AXIS
+  PointElement,
+  LineElement,
+  Tooltip,
+} from "chart.js";
 import { Line } from "react-chartjs-2";
 import { CoinInfo } from "../../../typing";
 import { chartIntervals } from "../../uitls/helper";
@@ -10,16 +18,31 @@ interface IProps {
   coin: CoinInfo;
 }
 
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Tooltip
+);
+
 const LineChart: React.FC<IProps> = ({ coin }) => {
   const [chartData, setChartData] = useState<number[][]>();
   const [days, setDays] = useState("1");
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchHistoricData = async () => {
-    setIsLoading(true);
-    const { data } = await axios.get(getHistoricalChart(coin.id, days, "usd"));
-    setChartData(data.prices);
-    setIsLoading(false);
+    try {
+      setIsLoading(true);
+      const { data } = await axios.get(
+        getHistoricalChart(coin.id, days, "usd")
+      );
+      setChartData(data.prices);
+    } catch (error) {
+      setChartData([[]]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -54,8 +77,9 @@ const LineChart: React.FC<IProps> = ({ coin }) => {
                 {
                   data: chartData.map((coin) => coin[1]),
                   label: `Price ( Past ${days} Days ) in USD`,
-                  borderColor: "#EEBC1D",
-                  // borderColor: "rgb(22, 163, 74)",
+                  borderColor: "#75acff",
+                  borderWidth: 2,
+                  tension: 0.2,
                 },
               ],
             }}

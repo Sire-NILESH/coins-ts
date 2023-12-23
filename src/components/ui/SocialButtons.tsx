@@ -1,10 +1,5 @@
 import React from "react";
-import { BsFacebook, BsGithub, BsReddit, BsTwitter } from "react-icons/bs";
-import { IoLogoBitbucket } from "react-icons/io";
-import { FaTelegramPlane } from "react-icons/fa";
-import { AiFillHome } from "react-icons/ai";
-import { MdForum } from "react-icons/md";
-import { BiLink } from "react-icons/bi";
+import appIcons from "../../config/appIcons";
 
 interface IProps {
   homePage?: string;
@@ -19,9 +14,6 @@ interface IProps {
   bitbucket_repo?: string;
   blockchain_site?: string;
   official_fork_url?: string;
-}
-{
-  /* <BsFacebook></BsFacebook> */
 }
 
 const SocialLink = ({
@@ -53,31 +45,19 @@ const SocialButtons: React.FC<IProps> = (props) => {
       <div className="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
         {props.homePage ? (
           <SocialLink url={props.homePage} name="Home page">
-            <AiFillHome
-              className="w-[1.25rem] h-[1.25rem]"
-              fillRule="evenodd"
-              fill="currentColor"
-            />{" "}
+            {appIcons.social_home}
           </SocialLink>
         ) : null}
 
         {props.blockchain_site_url ? (
           <SocialLink url={props.blockchain_site_url} name="Blockchain page">
-            <BiLink
-              className="w-[1.25rem] h-[1.25rem]"
-              fillRule="evenodd"
-              fill="currentColor"
-            />{" "}
+            {appIcons.social_link}
           </SocialLink>
         ) : null}
 
         {props.officialForum_url ? (
           <SocialLink url={props.officialForum_url} name="Official forum page">
-            <MdForum
-              className="w-[1.25rem] h-[1.25rem]"
-              fillRule="evenodd"
-              fill="currentColor"
-            />{" "}
+            {appIcons.social_chatForum}
           </SocialLink>
         ) : null}
 
@@ -86,11 +66,7 @@ const SocialButtons: React.FC<IProps> = (props) => {
             url={`https://facebook.com/${props.facebook_username}`}
             name="Facebook page"
           >
-            <BsFacebook
-              className="w-5 h-5"
-              fillRule="evenodd"
-              fill="currentColor"
-            />{" "}
+            {appIcons.social_facebook}
           </SocialLink>
         ) : null}
 
@@ -99,21 +75,13 @@ const SocialButtons: React.FC<IProps> = (props) => {
             url={`https://twitter.com/${props.twitter_username}`}
             name="Twitter page"
           >
-            <BsTwitter
-              className="w-5 h-5"
-              fillRule="evenodd"
-              fill="currentColor"
-            />{" "}
+            {appIcons.social_twitter}
           </SocialLink>
         ) : null}
 
         {props.subreddit ? (
           <SocialLink url={props.subreddit} name="Subreddit page">
-            <BsReddit
-              className="w-5 h-5"
-              fillRule="evenodd"
-              fill="currentColor"
-            />{" "}
+            {appIcons.social_reddit}
           </SocialLink>
         ) : null}
 
@@ -122,31 +90,19 @@ const SocialButtons: React.FC<IProps> = (props) => {
             url={`https://t.me/${props.telegram_channel_identifier}`}
             name="Telegram Page"
           >
-            <FaTelegramPlane
-              className="w-5 h-5"
-              fillRule="evenodd"
-              fill="currentColor"
-            />{" "}
+            {appIcons.social_telegram}
           </SocialLink>
         ) : null}
 
         {props.github_repo ? (
           <SocialLink url={props.github_repo} name="Github Repository">
-            <BsGithub
-              className="w-5 h-5"
-              fillRule="evenodd"
-              fill="currentColor"
-            />{" "}
+            {appIcons.social_github}
           </SocialLink>
         ) : null}
 
         {props.bitbucket_repo ? (
           <SocialLink url={props.bitbucket_repo} name="Bitbucket Repository">
-            <IoLogoBitbucket
-              className="w-5 h-5"
-              fillRule="evenodd"
-              fill="currentColor"
-            />{" "}
+            {appIcons.social_bitbucket}
           </SocialLink>
         ) : null}
       </div>

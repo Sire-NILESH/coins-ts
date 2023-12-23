@@ -2,13 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 
-export type TInitDataStatus = "loading" | "success" | "false";
+export type TInitDataStatus = "loading" | "checked" | "unchecked";
 interface InitalState {
   initDataStatus: TInitDataStatus;
 }
 
 const initialState: InitalState = {
-  initDataStatus: "false",
+  initDataStatus: "unchecked",
 };
 
 const initDataStatusSlice = createSlice({
