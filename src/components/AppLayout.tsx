@@ -1,22 +1,13 @@
 import { Outlet } from "react-router-dom";
-import Modal from "./ui/Modal";
-import { useAppSelector } from "../redux/store";
-import { selectModalSlice } from "../redux/modalSlice";
+import AppModal from "./AppModal";
 
 const AppLayout = () => {
-  // app's modal is handled here.
-  const { isModalOpen, modalContent, onCloseModalHandler } =
-    useAppSelector(selectModalSlice);
-
   return (
     <div className="bg-secondary text-slate-700 dark-bg flex items-center justify-center min-h-screen font-poppins">
       <Outlet />
 
-      <Modal
-        isModalOpen={isModalOpen}
-        onCloseModalHandler={onCloseModalHandler}
-        modalContent={modalContent}
-      />
+      {/* app's modal is handled here. */}
+      <AppModal />
     </div>
   );
 };

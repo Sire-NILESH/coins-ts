@@ -1,27 +1,44 @@
-import React, { useMemo, useState } from "react";
-import { AiOutlineStar } from "react-icons/ai";
+import React from "react";
 import { Link } from "react-router-dom";
-import { Sparklines, SparklinesLine, SparklinesSpots } from "react-sparklines";
 import { Coin } from "../../typing";
 import routeConfig from "../config/routeConfig";
 import { useAppSelector } from "../redux/store";
 import { formatCurrency } from "../uitls/helper";
 import LoadingSpinner from "./ui/LoadingSpinner";
-import PaginationV2 from "./ui/PaginationV2";
 import Search from "./ui/Search";
+import appIcons from "../config/appIcons";
+import useDBWatchlistActions from "../hooks/useDBWatchlistActions";
+import Pagination from "./ui/Pagination";
+import AppSparklines from "./AppSparklines";
+import {
+  selectTopCoinsData,
+  selectTopCoinsIsError,
+  selectTopCoinsIsLoading,
+} from "../redux/topCoinsSlice";
+import usePagination from "../hooks/usePagination";
+import useSearch from "../hooks/useSearch";
 
-const pageEnteries = 10;
+type TableRowProps = {
+  data: Coin;
+  onClickNavigateTo: string;
+  isCoinWatchlisted: boolean;
+};
 
-const TableRow: React.FC<{ data: Coin; onClickNavigateTo: string }> = ({
+const TableRow = ({
   data,
   onClickNavigateTo,
-}) => {
+  isCoinWatchlisted,
+}: TableRowProps) => {
   return (
-    <tr>
+    <tr className={"table-rowHover-color"}>
       <td className="p-2 whitespace-nowrap">
-        <div className="text-center font-bold text-tertiary">
-          <AiOutlineStar className="mx-auto h-4 w-4 text-tertiary" />
-        </div>
+        <button
+          id="watchlist-star"
+          data-coin-id={data.id}
+          className="hover:bg-white dark:hover:bg-gray-900/40 h-10 w-10 m-auto rounded-full flex items-center justify-center text-center font-bold text-tertiary"
+        >
+          {isCoinWatchlisted ? appIcons.starFill : appIcons.starOutline}
+        </button>
       </td>
       <td className="p-2 whitespace-nowrap">
         <div className="text-left font-bold text-tertiary">
@@ -54,7 +71,7 @@ const TableRow: React.FC<{ data: Coin; onClickNavigateTo: string }> = ({
         </Link>
       </td>
       <td className="p-2 whitespace-nowrap">
-        <div className="text-left text-green-500">
+        <div className="text-left font-medium text-green-600 dark:text-green-500">
           {`$${
             data.current_price < 10
               ? data.current_price
@@ -65,7 +82,9 @@ const TableRow: React.FC<{ data: Coin; onClickNavigateTo: string }> = ({
       <td className="p-2 whitespace-nowrap">
         <div
           className={`text-left font-medium ${
-            data.price_change_24h > 0 ? "text-green-500" : "text-red-500"
+            data.price_change_24h > 0
+              ? "text-green-600 dark:text-green-500"
+              : "text-red-500"
           }`}
         >
           {`${formatCurrency(data.price_change_24h, 3)}%`}
@@ -83,62 +102,65 @@ const TableRow: React.FC<{ data: Coin; onClickNavigateTo: string }> = ({
         </div>
       </td>
       <td className="p-2 min-w-[6rem] whitespace-nowrap">
-        {/* <div className="text-left">{data.circulating_supply}</div> */}
-        <div className="">
-          <Sparklines data={data.sparkline_in_7d.price} margin={6}>
-            <SparklinesLine
-              style={{
-                strokeWidth: 1,
-                stroke: "#336aff",
-                fill: "#336aff",
-              }}
-            />
-            <SparklinesSpots
-              size={1}
-              style={{
-                stroke: "#336aff",
-                strokeWidth: 1,
-                fill: "white",
-              }}
-            />
-          </Sparklines>
-        </div>
+        <AppSparklines data={data.sparkline_in_7d.price} sparklineFill />
       </td>
     </tr>
   );
 };
 
-const AllCoinsTable: React.FC = () => {
+const AllCoinsTable = () => {
+  const allCoins = useAppSelector(selectTopCoinsData);
+  const isLoading = useAppSelector(selectTopCoinsIsLoading);
+  const isError = useAppSelector(selectTopCoinsIsError);
+
+  const { isCoinWatchlisted, addToWatchlist, removeFromWatchlist } =
+    useDBWatchlistActions();
+
+  const searchFilter = (value: Coin, searchQuery: string): boolean => {
+    return (
+      value.name.toLowerCase().includes(searchQuery) ||
+      value.symbol.toLowerCase().includes(searchQuery)
+    );
+  };
+
+  const { setSearch, searchFilteredData } = useSearch<Coin>({
+    dataList: allCoins,
+    searchFilterResolver: searchFilter,
+  });
+
   const {
-    isLoading,
-    data: allCoins,
-    isError,
-  } = useAppSelector((state) => state.topCoins);
+    pageData,
+    currentPage,
+    totalEnteries,
+    pageSetter,
+    totalPages,
+    pageEnteries,
+  } = usePagination<Coin>({
+    dataList: searchFilteredData,
+    pageEnteries: 10, // the number of entries in each page
+  });
 
-  const [page, setPage] = useState<number>(1);
-  const [search, setSearch] = useState("");
+  // handled using event delegation
+  const handleStarClick = (
+    event: React.MouseEvent<HTMLTableElement, MouseEvent>
+  ) => {
+    const target = event.target as HTMLElement;
 
-  const finalData = useMemo(
-    function () {
-      if (search.trim().length > 0) {
-        const temp = allCoins?.filter(
-          (coin) =>
-            coin.name.toLowerCase().includes(search) ||
-            coin.symbol.toLowerCase().includes(search)
-        );
+    // Check if the clicked element is a 'star'
+    if (
+      target &&
+      target.tagName === "BUTTON" &&
+      target.id === "watchlist-star"
+    ) {
+      // Handle the star click
+      const starClickedCoinId = target.getAttribute("data-coin-id");
 
-        if (temp && temp.length > 0) {
-          setPage(1);
-          return temp;
-        }
-      } else if (allCoins) return allCoins;
-      return [];
-    },
-    [allCoins, search]
-  );
-
-  const pageHandler = (page: number) => {
-    if (page <= Math.ceil(finalData.length / 10) && page >= 1) setPage(page);
+      if (starClickedCoinId) {
+        isCoinWatchlisted(starClickedCoinId)
+          ? removeFromWatchlist(starClickedCoinId)
+          : addToWatchlist(starClickedCoinId);
+      }
+    }
   };
 
   if (isLoading && !isError) {
@@ -150,7 +172,7 @@ const AllCoinsTable: React.FC = () => {
   }
 
   return (
-    <div className="">
+    <div onClick={handleStarClick} className="">
       {allCoins && allCoins?.length > 0 && (
         <section className="mt-5 antialiased text-gray-600 md:px-4">
           <div className="h-full space-y-10">
@@ -161,10 +183,12 @@ const AllCoinsTable: React.FC = () => {
                   <h2 className="font-semibold text-lg text-secondary">
                     Top 250 Coins
                   </h2>
-                  <p className="text-xs text-quaternary max-w-lg">
-                    A top 250 list of all the cryptocurrencies in the last 24
-                    hours <br />
-                    (Ordered by Market cap)
+                  <p className="text-xs text-tertiary max-w-lg">
+                    {
+                      "A top 250 list of all the cryptocurrencies in the last 24 hours"
+                    }
+                    <br />
+                    {"(Ordered by Market cap)"}
                   </p>
                 </div>
                 <Search setSearch={setSearch} />
@@ -173,7 +197,10 @@ const AllCoinsTable: React.FC = () => {
 
               <div className="p-3">
                 <div className="overflow-x-auto">
-                  <table className="table-auto w-full">
+                  <table
+                    onClick={handleStarClick}
+                    className="table-auto w-full"
+                  >
                     <thead className="text-xs font-semibold uppercase text-gray-400 mb-5 ">
                       <tr className="">
                         <th className="px-4 py-4 whitespace-nowrap rounded-l-3xl bg-secondary">
@@ -208,30 +235,26 @@ const AllCoinsTable: React.FC = () => {
                     </thead>
 
                     <tbody className="text-sm divide-y divide-gray-200 dark:divide-gray-700">
-                      {finalData
-                        .slice(
-                          (page - 1) * pageEnteries,
-                          (page - 1) * pageEnteries + pageEnteries
-                        )
-                        .map((data, index) => (
-                          <TableRow
-                            onClickNavigateTo={`${routeConfig.routeLinking.coin.path}/${data.id}`}
-                            data={data}
-                            key={data.name}
-                          />
-                        ))}
+                      {pageData.map((coin) => (
+                        <TableRow
+                          onClickNavigateTo={`${routeConfig.routeLinking.coin.path}/${coin.id}`}
+                          data={coin}
+                          key={coin.id}
+                          isCoinWatchlisted={isCoinWatchlisted(coin.id)}
+                        />
+                      ))}
                     </tbody>
                   </table>
                 </div>
               </div>
             </div>
 
-            <PaginationV2
-              currentPage={page}
-              pageSetter={pageHandler}
+            <Pagination
+              currentPage={currentPage}
+              pageSetter={pageSetter}
               pageEnteries={pageEnteries}
-              totalPages={Math.ceil(finalData.length / 10)}
-              totalEnteries={finalData.length}
+              totalPages={totalPages}
+              totalEnteries={totalEnteries}
             />
           </div>
         </section>

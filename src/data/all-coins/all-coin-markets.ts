@@ -1,6 +1,6 @@
-import { CoinArray } from "../../../typing";
+import { Coin } from "../../../typing";
 
-export const allCoins: CoinArray = [
+export const allCoins: Coin[] = [
   {
     id: "bitcoin",
     symbol: "btc",

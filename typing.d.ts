@@ -49,8 +49,6 @@ export interface Coin {
   };
 }
 
-export type CoinArray = Coin[];
-
 export interface Exchange {
   id: string;
   name: string;

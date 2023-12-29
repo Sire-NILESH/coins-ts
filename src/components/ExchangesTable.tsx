@@ -1,18 +1,21 @@
-import React, { useMemo, useState } from "react";
-// import { exchangesData } from "./../data/exchanges/exchangesData";
-import { Exchange } from "./../../typing.d";
-import { formatCurrency } from "../uitls/helper";
+import React from "react";
+import usePagination from "../hooks/usePagination";
+import useSearch from "../hooks/useSearch";
+import {
+  selectExchnagesData,
+  selectExchnagesIsError,
+  selectExchnagesIsLoading,
+} from "../redux/exchangesSlice";
 import { useAppSelector } from "../redux/store";
+import { formatCurrency } from "../uitls/helper";
+import { Exchange } from "./../../typing.d";
 import LoadingSpinner from "./ui/LoadingSpinner";
-import PaginationV2 from "./ui/PaginationV2";
+import Pagination from "./ui/Pagination";
 import Search from "./ui/Search";
-
-// const totalPages = 10;
-const pageEnteries = 10;
 
 const TableRow: React.FC<{ data: Exchange }> = ({ data }) => {
   return (
-    <tr>
+    <tr className={"table-rowHover-color"}>
       <td className="p-2 whitespace-nowrap">
         <div className="flex items-center">
           <div className="w-10 min-w-10 h-10 flex-shrink-0 mr-2 sm:mr-3">
@@ -35,21 +38,23 @@ const TableRow: React.FC<{ data: Exchange }> = ({ data }) => {
         </div>
       </td>
       <td className="p-2 whitespace-nowrap">
-        <div className="text-left">
+        <div className="text-left text-tertiary">
           {data.year_established ? data.year_established : "--"}
         </div>
       </td>
       <td className="p-2 whitespace-nowrap">
         <div
           className={`text-center font-medium ${
-            data.has_trading_incentive ? "text-green-500" : "text-red-500"
+            data.has_trading_incentive
+              ? "text-green-600 dark:text-green-500"
+              : "text-red-500"
           }`}
         >
           {`${data.has_trading_incentive}`}
         </div>
       </td>
       <td className="p-2 whitespace-nowrap">
-        <div className=" text-center text-green-500">
+        <div className="text-center font-medium text-green-600 dark:text-green-500">
           {formatCurrency(data.trade_volume_24h_btc, 1)} BTC
         </div>
       </td>
@@ -70,50 +75,31 @@ const TableRow: React.FC<{ data: Exchange }> = ({ data }) => {
   );
 };
 
-const ExchangesTable: React.FC = () => {
-  const {
-    isLoading,
-    data: allExchanges,
-    isError,
-  } = useAppSelector((state) => state.allExchanges);
+const ExchangesTable = () => {
+  const allExchanges = useAppSelector(selectExchnagesData);
+  const isLoading = useAppSelector(selectExchnagesIsLoading);
+  const isError = useAppSelector(selectExchnagesIsError);
 
-  const [page, setPage] = useState<number>(1);
-  const [search, setSearch] = useState("");
-
-  // const searchHandler = () => {
-  //   if (search.trim().length > 0) {
-  //     console.log("inside search handler", search);
-  //     const temp = allExchanges?.filter((coin) =>
-  //       coin.name.toLowerCase().includes(search)
-  //     );
-
-  //     if (temp && temp.length > 0) {
-  //       return temp;
-  //     }
-  //   } else if (allExchanges) return allExchanges;
-  //   return [];
-  // };
-
-  const finalData = useMemo(
-    function () {
-      if (search.trim().length > 0) {
-        const temp = allExchanges?.filter((coin) =>
-          coin.name.toLowerCase().includes(search)
-        );
-
-        if (temp && temp.length > 0) {
-          setPage(1);
-          return temp;
-        }
-      } else if (allExchanges) return allExchanges;
-      return [];
-    },
-    [allExchanges, search]
-  );
-
-  const pageHandler = (page: number) => {
-    if (page <= Math.ceil(finalData.length / 10) && page >= 1) setPage(page);
+  const searchFilter = (value: Exchange, searchQuery: string): boolean => {
+    return value.name.toLowerCase().includes(searchQuery);
   };
+
+  const { setSearch, searchFilteredData } = useSearch<Exchange>({
+    dataList: allExchanges,
+    searchFilterResolver: searchFilter,
+  });
+
+  const {
+    pageData,
+    currentPage,
+    totalEnteries,
+    pageSetter,
+    totalPages,
+    pageEnteries,
+  } = usePagination<Exchange>({
+    dataList: searchFilteredData,
+    pageEnteries: 10, // the number of entries in each page
+  });
 
   if (isLoading && !isError) {
     return (
@@ -135,17 +121,16 @@ const ExchangesTable: React.FC = () => {
                   <h2 className="font-semibold text-lg text-secondary">
                     Exchanges
                   </h2>
-                  <p className="text-xs text-quaternary max-w-lg">
-                    List of all exchanges, Active with trading volumes in the
-                    last 24 hours
+                  <p className="text-xs text-tertiary max-w-lg">
+                    {
+                      "List of all exchanges, Active with trading volumes in the last 24 hours"
+                    }
                     <br />
-                    (Ordered by Trust score rank)
+                    {"(Ordered by Trust score rank)"}
                   </p>
                 </div>
                 <Search setSearch={setSearch} />
-                {/* <Search setSearch={setSearch} searchHandler={searchHandler} /> */}
               </header>
-              {/* <HeaderTitle title="Trending" /> */}
 
               <div className="p-3">
                 <div className="overflow-x-auto">
@@ -193,27 +178,21 @@ const ExchangesTable: React.FC = () => {
                     </thead>
 
                     <tbody className="text-sm divide-y divide-gray-200 dark:divide-gray-700">
-                      {finalData
-                        .slice(
-                          (page - 1) * pageEnteries,
-                          (page - 1) * pageEnteries + pageEnteries
-                        )
-                        .map((data) => (
-                          <TableRow data={data} key={data.name} />
-                        ))}
+                      {pageData.map((exchange) => (
+                        <TableRow data={exchange} key={exchange.name} />
+                      ))}
                     </tbody>
                   </table>
                 </div>
               </div>
             </div>
 
-            <PaginationV2
-              currentPage={page}
-              pageSetter={pageHandler}
+            <Pagination
+              currentPage={currentPage}
+              pageSetter={pageSetter}
               pageEnteries={pageEnteries}
-              totalPages={Math.ceil(finalData.length / 10)}
-              totalEnteries={finalData.length}
-              // totalPages={totalPages}
+              totalPages={totalPages}
+              totalEnteries={totalEnteries}
             />
           </div>
         </section>

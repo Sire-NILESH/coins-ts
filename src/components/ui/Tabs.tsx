@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import DataFetchTime from "../DataFetchTime";
-import { useAppDispatch } from "../../redux/store";
-import { fetchTopCoins } from "../../redux/topCoinsSlice";
-import { fetchExchanges } from "../../redux/exchangesSlice";
-import { fetchTrending } from "../../redux/trendingCoinsSlice";
-import { setDataFetchTime } from "../../redux/dataFetchTimeSlice";
+import useReloadData from "../../hooks/useReloadData";
 
 const ListItem: React.FC<{
   title: string;
@@ -19,7 +15,7 @@ const ListItem: React.FC<{
       className={`${
         props.selected
           ? "bg-blue-600 text-white border-blue-600"
-          : "border-blue-200"
+          : "border-blue-200 dark:border-blue-900"
       } flex  border items-center justify-center gap-2 max-w-[7rem] rounded-full cursor-pointer px-3 py-2 text-secondary hover:bg-blue-500 hover:text-white dark:hover:border-blue-500 transition-all duration-300 ease-in-out`}
     >
       {props.title}
@@ -46,15 +42,7 @@ const Tabs = () => {
     })[0]?.title as SelectType) || "Top Coins"
   );
 
-  const dispatch = useAppDispatch();
-
-  function reloadState() {
-    console.log("reloading state");
-    dispatch(fetchTopCoins());
-    dispatch(fetchExchanges());
-    dispatch(fetchTrending());
-    dispatch(setDataFetchTime(Date.now()));
-  }
+  const reloadDataState = useReloadData();
 
   return (
     <div className="space-y-5 mb-10 shadow-md md:shadow-none">
@@ -79,7 +67,7 @@ const Tabs = () => {
           ))}
         </ul>
 
-        <DataFetchTime onRefreshHandler={reloadState} time="state" />
+        <DataFetchTime onRefreshHandler={reloadDataState} time="state" />
       </div>
     </div>
   );

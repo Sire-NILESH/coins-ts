@@ -1,9 +1,9 @@
 import React from "react";
-import { BsCalendar4Week } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { Sparklines, SparklinesLine, SparklinesSpots } from "react-sparklines";
 import { Coin } from "../../../typing";
+import appIcons from "../../config/appIcons";
 import { formatCurrency } from "../../uitls/helper";
+import AppSparklines from "../AppSparklines";
 import TableRowData from "../ui/TableRowData";
 import CoinImage from "./CoinImage";
 
@@ -48,30 +48,13 @@ const CoinInfoCard: React.FC<IProps> = (props) => {
           }`}</p>
         </div>
 
-        {/* GRAPH dark-bg */}
+        {/* GRAPH/SPARKLINE */}
         <div className="flex-[2] my-2 p-2 rounded-3xl border dark:border-gray-800">
           <div className="py-4 w-full">
-            <Sparklines data={props.data.sparkline_in_7d.price} margin={6}>
-              <SparklinesLine
-                style={{
-                  strokeWidth: 1,
-                  stroke: "#336aff",
-                  // fill: "#336aff",
-                  fill: "transparent",
-                }}
-              />
-              <SparklinesSpots
-                size={1}
-                style={{
-                  stroke: "#336aff",
-                  strokeWidth: 1,
-                  fill: "white",
-                }}
-              />
-            </Sparklines>
+            <AppSparklines data={props.data.sparkline_in_7d.price} />
             <p className="mt-4 text-xs text-center text-secondary flex items-center gap-2 justify-center">
-              <BsCalendar4Week className="inline h-3 w-3 text-tertiary" />
-              In past 7 days
+              {appIcons.calendar}
+              {"In past 7 days"}
             </p>
           </div>
         </div>

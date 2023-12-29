@@ -1,25 +1,33 @@
-import { CiViewBoard, CiViewTable } from "react-icons/ci";
+import { AiFillHome, AiFillStar, AiOutlineStar } from "react-icons/ai";
+import { BiLink, BiMedal, BiUser } from "react-icons/bi";
 import {
+  BsCalendar4Week,
+  BsClock,
   BsCurrencyExchange,
   BsFacebook,
   BsGithub,
   BsReddit,
   BsTwitter,
 } from "react-icons/bs";
-import { BiLink, BiMedal, BiUser } from "react-icons/bi";
-import { IoHomeOutline, IoLogoBitbucket } from "react-icons/io5";
-import { HiOutlineIdentification } from "react-icons/hi";
-import { FiLogIn, FiRefreshCw } from "react-icons/fi";
-import { MdForum, MdTrendingUp } from "react-icons/md";
+import { CiViewBoard, CiViewTable } from "react-icons/ci";
 import {
   FaGithub,
   FaReact,
   FaTelegramPlane,
   FaUserCircle,
 } from "react-icons/fa";
-import { TbError404 } from "react-icons/tb";
+import {
+  FiArrowLeft,
+  FiArrowRight,
+  FiLogIn,
+  FiRefreshCw,
+} from "react-icons/fi";
+import { HiOutlineIdentification } from "react-icons/hi";
+import { IoIosSearch } from "react-icons/io";
+import { IoHomeOutline, IoLogoBitbucket } from "react-icons/io5";
+import { MdForum, MdTrendingUp } from "react-icons/md";
 import { RiErrorWarningLine } from "react-icons/ri";
-import { AiFillHome } from "react-icons/ai";
+import { TbError404 } from "react-icons/tb";
 
 type Props = {
   className?: string;
@@ -39,8 +47,21 @@ const appIcons = {
   github: <FaGithub className="w-5 h-5" />,
   react: <FaReact className="text-sky-400 h-10 w-10" />,
   error: <RiErrorWarningLine className="h-10 w-10 text-red-500" />,
+  calendar: <BsCalendar4Week className="inline h-3 w-3 text-tertiary" />,
+  clock: <BsClock className="inline h-4 w-4 text-tertiary" />,
+  starOutline: (
+    <AiOutlineStar className="pointer-events-none mx-auto h-4 w-4 text-tertiary" />
+  ),
+  starFill: (
+    <AiFillStar className="pointer-events-none mx-auto h-4 w-4 text-yellow-500" />
+  ),
+  arrowRight: <FiArrowRight className="w-5 h-5 ml-2" />,
+  arrowLeft: <FiArrowLeft className="w-5 h-5 mr-2" />,
   Refresh: ({ className }: Props) => (
     <FiRefreshCw className={"text-secondary " + className} />
+  ),
+  Search: ({ className }: Props) => (
+    <IoIosSearch className={"text-secondary " + className} />
   ),
   user: (
     <FaUserCircle className="w-20 h-20 mx-2 rounded-full border border-primary mt-1 text-primary" />

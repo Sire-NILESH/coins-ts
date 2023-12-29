@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getTopCoins } from "../uitls/api";
-import { CoinArray } from "../../typing";
+import { Coin } from "../../typing";
 import { RootState } from "./store";
 import axios from "axios";
 
 interface InitialState {
   isLoading: boolean;
-  data: null | CoinArray;
+  data: null | Coin[];
   isError: boolean;
 }
 
@@ -40,7 +40,7 @@ const topCoinsSlice = createSlice({
     });
     builder.addCase(fetchTopCoins.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.data = action.payload as CoinArray;
+      state.data = action.payload as Coin[];
     });
     builder.addCase(fetchTopCoins.rejected, (state, action) => {
       state.isLoading = false;

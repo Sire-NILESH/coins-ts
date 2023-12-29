@@ -4,7 +4,7 @@ type Props = React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 type Ref = HTMLButtonElement;
 
-const Button: React.FC<Props> = forwardRef<Ref, Props>(
+const Button = forwardRef<Ref, Props>(
   ({ className, children, ...restProps }, ref) => {
     return (
       <button

@@ -12,6 +12,7 @@ import authSliceReducer, {
 import initDataStatusSliceReducer from "./initDataStatusSlice";
 import modalSliceReducer from "./modalSlice";
 import coinInfoSliceReducer from "./coinInfoSlice";
+import watchlistSliceReducer from "./watchlistSlice";
 
 export const store = configureStore({
   reducer: {
@@ -23,6 +24,7 @@ export const store = configureStore({
     initDataStatus: initDataStatusSliceReducer,
     modalSlice: modalSliceReducer,
     coinInfo: coinInfoSliceReducer,
+    watchlistSlice: watchlistSliceReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

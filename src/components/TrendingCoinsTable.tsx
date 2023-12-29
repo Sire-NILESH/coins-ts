@@ -10,7 +10,7 @@ const TableRow: React.FC<{
   onClickNavigateTo: string;
 }> = ({ coin, onClickNavigateTo }) => {
   return (
-    <tr>
+    <tr className={"table-rowHover-color"}>
       <td className="p-2 whitespace-nowrap">
         <Link to={onClickNavigateTo}>
           <div className="flex items-center">
@@ -40,7 +40,7 @@ const TableRow: React.FC<{
         <div className="text-center">{coin.market_cap_rank}</div>
       </td>
       <td className="p-2 whitespace-nowrap">
-        <div className="text-center font-medium text-green-500">
+        <div className="text-center font-medium text-green-600 dark:text-green-500">
           {coin.price_btc.toFixed(15)} BTC
         </div>
       </td>
@@ -77,12 +77,14 @@ const TrendingCoinsTable: React.FC = () => {
                 <h2 className="font-semibold text-lg text-secondary">
                   Trending
                 </h2>
-                <p className="text-xs text-quaternary max-w-lg">
-                  Top 7 trending coins on CoinGecko as searched by users in the
-                  last 24 hours (Ordered by most popular first)
+                <p className="text-xs text-tertiary max-w-lg">
+                  {
+                    "Top trending coins on CoinGecko as searched by users in the last 24 hours."
+                  }
+                  <br />
+                  {"(Ordered by most popular first)"}
                 </p>
               </header>
-              {/* <HeaderTitle title="Trending" /> */}
 
               <div className="p-3">
                 <div className="overflow-x-auto">
