@@ -9,8 +9,9 @@ import useReloadData from "../hooks/useReloadData";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
 import NoDataErr from "../components/NoDataErr";
 import { selectTopCoinsData } from "../redux/topCoinsSlice";
+import Header from "../components/ui/Header";
 
-const AllTables = () => {
+const ExplorePage = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -38,6 +39,10 @@ const AllTables = () => {
 
   return (
     <div className="overflow-hidden">
+      <div className="lg:hidden">
+        <Header title="" time="state" />
+      </div>
+
       <Tabs />
 
       {overallDataError && !topCoins && (
@@ -51,4 +56,4 @@ const AllTables = () => {
   );
 };
 
-export default AllTables;
+export default ExplorePage;

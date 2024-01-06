@@ -69,7 +69,7 @@ const TrendingCoinsTable: React.FC = () => {
   return (
     <>
       {allTrendingCoins && allTrendingCoins?.coins.length > 0 && (
-        <section className="antialiased w-full text-tertiary px-4">
+        <section className="antialiased w-full text-tertiary md:px-4">
           <div className="h-full space-y-10">
             {/* <!-- Table --> */}
             <div className="w-full rounded-3xl max-w-full mx-auto bg-primary border border-gray-200 dark:border-primary">

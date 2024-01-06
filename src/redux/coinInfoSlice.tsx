@@ -7,12 +7,14 @@ import axios from "axios";
 interface InitialState {
   isLoading: boolean;
   data: null | CoinInfo;
+  timestamp: number;
   isError: boolean;
 }
 
 const initialState: InitialState = {
   isLoading: false,
   data: null,
+  timestamp: Date.now(),
   isError: false,
 };
 
@@ -42,10 +44,12 @@ const coinInfoSlice = createSlice({
     builder.addCase(fetchCoinInfo.fulfilled, (state, action) => {
       state.isLoading = false;
       state.data = action.payload as CoinInfo;
+      state.timestamp = Date.now();
     });
     builder.addCase(fetchCoinInfo.rejected, (state) => {
       state.isLoading = false;
       state.isError = true;
+      state.timestamp = Date.now();
     });
   },
 });
@@ -55,6 +59,8 @@ export const selectCoinInfoIsLoading = (state: RootState) =>
   state.coinInfo.isLoading;
 export const selectCoinInfoIsError = (state: RootState) =>
   state.coinInfo.isError;
+export const selectCoinInfoTimestap = (state: RootState) =>
+  state.coinInfo.timestamp;
 
 export const coinInfoSliceActions = coinInfoSlice.actions;
 

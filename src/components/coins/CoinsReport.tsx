@@ -131,7 +131,7 @@ const CoinsReport = (props: {
         </div>
 
         <Link to={navTo[props.title]}>
-          <Button className="h-10">{props.title}</Button>
+          <Button className="h-10 min-w-[6rem]">{props.title}</Button>
         </Link>
       </header>
       {topCoins && allTrendingCoins && allExchanges && (

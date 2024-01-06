@@ -19,16 +19,13 @@ const Pagination: React.FC<IProps> = (props) => {
     <div className="flex flex-col items-center">
       {/*  Help text  */}
       <span className="text-sm text-gray-700 dark:text-gray-400">
-        Showing{" "}
-        <span className="font-semibold text-gray-900 dark:text-white">
-          {pageStart}
-        </span>{" "}
+        Showing <span className="font-semibold text-primary">{pageStart}</span>{" "}
         to{" "}
-        <span className="font-semibold text-gray-900 dark:text-white">
+        <span className="font-semibold text-primary">
           {pageEnd > props.totalEnteries ? props.totalEnteries : pageEnd}
         </span>{" "}
         of{" "}
-        <span className="font-semibold text-gray-900 dark:text-white">
+        <span className="font-semibold text-primary">
           {props.totalEnteries}
         </span>{" "}
         Entries
@@ -36,7 +33,7 @@ const Pagination: React.FC<IProps> = (props) => {
       <div className="inline-flex mt-2 xs:mt-0">
         {/*  Buttons */}
         <button
-          className="cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-l hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          className="cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-l hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white space-x-2"
           disabled={props.currentPage === 1 ? true : false}
           onClick={(e) => {
             e.preventDefault();
@@ -44,17 +41,17 @@ const Pagination: React.FC<IProps> = (props) => {
           }}
         >
           {appIcons.arrowLeft}
-          Prev
+          <span>{"Prev"}</span>
         </button>
         <button
-          className="cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 border-0 border-l border-gray-700 rounded-r hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          className="cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 border-0 border-l border-gray-700 rounded-r hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white space-x-2"
           disabled={props.currentPage === props.totalPages ? true : false}
           onClick={(e) => {
             e.preventDefault();
             props.pageSetter(props.currentPage + 1);
           }}
         >
-          Next
+          <span>{"Next"}</span>
           {appIcons.arrowRight}
         </button>
       </div>

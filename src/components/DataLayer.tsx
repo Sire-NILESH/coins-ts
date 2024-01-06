@@ -1,7 +1,5 @@
-import { Outlet } from "react-router-dom";
 import useLoadDBWatchlist from "../hooks/useLoadDBWatchlist";
 import useLoadInitData from "../hooks/useLoadInitData";
-import DataErrorModal from "./DataErrorModal";
 
 const DataLayer = () => {
   // Load the initial data
@@ -10,14 +8,7 @@ const DataLayer = () => {
   // Load watchlist coins from database
   useLoadDBWatchlist();
 
-  return (
-    <>
-      <Outlet />
-
-      {/* any app-data related error will invoke a modal */}
-      <DataErrorModal />
-    </>
-  );
+  return <></>;
 };
 
 export default DataLayer;

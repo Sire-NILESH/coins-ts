@@ -45,8 +45,8 @@ const Tabs = () => {
   const reloadDataState = useReloadData();
 
   return (
-    <div className="space-y-5 mb-10 shadow-md md:shadow-none">
-      <div className="flex flex-row flex-wrap gap-4  md:px-4 py-2 justify-center items-center md:justify-between overflow-hidden rounded-xl ">
+    <div className="space-y-5 mb-10 border-b border-gray-300 dark:border-gray-700 sm:border-none">
+      <div className="flex flex-row flex-wrap gap-4  md:px-4 py-2 justify-center items-center lg:justify-between overflow-hidden rounded-xl ">
         <ul className="flex items-center gap-5 text-sm font-medium">
           {tabs.map((item, i) => (
             <li
@@ -67,7 +67,9 @@ const Tabs = () => {
           ))}
         </ul>
 
-        <DataFetchTime onRefreshHandler={reloadDataState} time="state" />
+        <div className="hidden lg:block">
+          <DataFetchTime onRefreshHandler={reloadDataState} time="state" />
+        </div>
       </div>
     </div>
   );

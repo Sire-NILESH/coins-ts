@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { auth } from "../firebase";
 import { authActions } from "../redux/authSlice";
 import { useAppDispatch } from "../redux/store";
+import { watchlistSliceActions } from "../redux/watchlistSlice";
 
 const useAuthUserCheck = () => {
   // checking initial auth user here
@@ -15,6 +16,7 @@ const useAuthUserCheck = () => {
       if (currentUser) {
         dispatch(authActions.setInitialAuthUser(currentUser));
       }
+      dispatch(watchlistSliceActions.resetWatchlistState());
       dispatch(authActions.setInitialAuthLoading(false));
     });
     return () => {

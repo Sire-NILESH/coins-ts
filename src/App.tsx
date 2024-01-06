@@ -14,8 +14,7 @@ import NotFound from "./scenes/NotFound";
 import Overview from "./scenes/Overview";
 import Register from "./scenes/Register";
 import WatchList from "./scenes/WatchList";
-import DataLayer from "./components/DataLayer";
-import AllTables from "./scenes/AllTables";
+import ExplorePage from "./scenes/ExplorePage";
 
 function App() {
   return (
@@ -29,18 +28,16 @@ function App() {
 
             {/* Auth protected routes */}
             <Route element={<AuthProtectedLayout />}>
-              <Route element={<DataLayer />}>
-                <Route path="/dashboard/" element={<DashboardLayout />}>
-                  <Route path="overview" element={<Overview />} />
-                  <Route path="watchlist" element={<WatchList />} />
-                  <Route path="tables/" element={<AllTables />}>
-                    <Route path="top-coins" element={<AllCoinsTable />} />
-                    <Route path="trending" element={<TrendingCoinsTable />} />
-                    <Route path="exchanges" element={<ExchangesTable />} />
-                  </Route>
-                  <Route path="coin">
-                    <Route path=":coinId" element={<CoinPage />} />
-                  </Route>
+              <Route path="/dashboard/" element={<DashboardLayout />}>
+                <Route path="overview" element={<Overview />} />
+                <Route path="watchlist" element={<WatchList />} />
+                <Route path="explore/" element={<ExplorePage />}>
+                  <Route path="top-coins" element={<AllCoinsTable />} />
+                  <Route path="trending" element={<TrendingCoinsTable />} />
+                  <Route path="exchanges" element={<ExchangesTable />} />
+                </Route>
+                <Route path="coin">
+                  <Route path=":coinId" element={<CoinPage />} />
                 </Route>
               </Route>
             </Route>

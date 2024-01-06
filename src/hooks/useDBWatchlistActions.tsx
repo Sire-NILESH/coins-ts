@@ -1,9 +1,10 @@
-import { useAppSelector } from "../redux/store";
+import { useAppDispatch, useAppSelector } from "../redux/store";
 import { authSelectors } from "../redux/authSlice";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { selectDBWatchlistCoins } from "../redux/watchlistSlice";
 import { useMemo } from "react";
+import { modalActions } from "../redux/modalSlice";
 
 const useDBWatchlistActions = () => {
   const user = useAppSelector(authSelectors.authUser);
@@ -11,8 +12,28 @@ const useDBWatchlistActions = () => {
 
   const lookup = useMemo(() => new Set(watchlist), [watchlist]);
 
+  const dispatch = useAppDispatch();
+
   const isCoinWatchlisted = (coinId: string) => {
     return lookup.has(coinId);
+  };
+
+  const onModalClose = () => {
+    dispatch(modalActions.resetModalHandler());
+  };
+
+  const onError = () => {
+    dispatch(
+      modalActions.modalHandler({
+        isModalOpen: true,
+        modalContent: {
+          title: "Failed watchlist action",
+          description:
+            "Something went wrong while performing that watchlist action. Please try again later.",
+        },
+        onCloseModalHandler: onModalClose,
+      })
+    );
   };
 
   const addToWatchlist = async (coinId: string) => {
@@ -26,7 +47,7 @@ const useDBWatchlistActions = () => {
           { merge: true }
         );
       } catch (error) {
-        console.log("Error Adding watchlist", coinId, error);
+        onError();
       }
     }
   };
@@ -41,7 +62,7 @@ const useDBWatchlistActions = () => {
           { merge: true }
         );
       } catch (error) {
-        console.log("Error Adding watchlist", coinId, error);
+        onError();
       }
     }
   };

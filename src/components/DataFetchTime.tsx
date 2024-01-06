@@ -1,7 +1,6 @@
 import React from "react";
 import { useAppSelector } from "../redux/store";
 import HeaderButton from "./ui/HeaderButton";
-// import { FiRefreshCw } from "react-icons/fi";
 import { selectExchnagesIsLoading } from "../redux/exchangesSlice";
 import { selectTopCoinsIsLoading } from "../redux/topCoinsSlice";
 import { selectTrendingCoinsIsLoading } from "../redux/trendingCoinsSlice";
@@ -32,7 +31,7 @@ const DataFetchTime: React.FC<IProps> = (props) => {
 
   return (
     <div
-      className={`flex items-center justify-center space-x-2 md:space-x-8 ${
+      className={`flex items-center justify-center space-x-2 xl:space-x-8 ${
         !isReloadType ? "hover:cursor-default" : "hover:cursor-pointer"
       }`}
     >
@@ -44,20 +43,22 @@ const DataFetchTime: React.FC<IProps> = (props) => {
       >
         {isReloadType ? (
           <appIcons.Refresh
-            className={`${overallLoading ? " animate-spin" : ""}`}
+            className={`h-5 w-5 font-bold mr-1 ${
+              overallLoading ? " animate-spin" : ""
+            }`}
           />
         ) : null}
-        <p className="hidden sm:block text-sm md:text-base font-normal text-tertiary">
-          {`As of ${currentTime.toDateString()}, `}
+        <p className="hidden xl:block text-sm lg:text-base font-normal text-tertiary">
+          {"As of "}
         </p>
-        <p className="text-sm md:text-base font-semibold text-secondary">
+        <p className="hidden sm:block text-sm lg:text-base font-normal text-tertiary">
+          {`${currentTime.toDateString()}, `}
+        </p>
+        <p className="hidden sm:block text-sm lg:text-base font-semibold text-secondary">
           {currentTime.toLocaleTimeString()}
         </p>
-
-        {/* <p className="text-sm md:text-base font-semibold text-secondary">
-          {"Reload"}
-        </p> */}
       </div>
+
       <HeaderButton />
     </div>
   );

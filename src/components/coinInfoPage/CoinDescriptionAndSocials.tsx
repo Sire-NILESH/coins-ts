@@ -8,7 +8,7 @@ type Props = {
 
 const CoinDescriptionAndSocials = ({ coin }: Props) => {
   return (
-    <div className="block w-full md:w-[95%] space-y-2 mb-6 p-6 mx-auto  rounded-2xl">
+    <div className="block w-full md:w-[95%] space-y-2 mb-6 py-6 px-2 lg:px-4 mx-auto rounded-2xl">
       <div className="flex items-center">
         <div className="w-8 min-w-10 flex-shrink-0 mr-2 sm:mr-3">
           <img

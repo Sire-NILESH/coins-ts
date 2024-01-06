@@ -12,7 +12,7 @@ const NoDataErr = ({ reloadHandler }: Props) => {
       <h4 className="text-primary text-3xl text-center">Error occured</h4>
       <p className="text-center text-secondary">
         Insufficient or no data detected. This could possibly be the result of
-        crossing the API limit. Please try again after some time.
+        crossing the API rate limit. Please try again later.
       </p>
 
       <Button

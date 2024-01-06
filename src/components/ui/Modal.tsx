@@ -8,7 +8,6 @@ const Modal = ({
   onCloseModalHandler,
   modalContent,
 }: ModalProps) => {
-  console.log("modal here hehehehehehehehe", onCloseModalHandler);
   return (
     <Transition appear show={isModalOpen} as={Fragment}>
       <Dialog as="div" className="relative z-50" onClose={onCloseModalHandler}>
@@ -53,7 +52,7 @@ const Modal = ({
 
                 <div className="mt-6 ml-auto">
                   <Button onClick={onCloseModalHandler}>
-                    <p className="text-primary text-base font-semibold py-2">
+                    <p className="text-primary text-base font-semibold py-2 px-5">
                       Okay
                     </p>
                   </Button>

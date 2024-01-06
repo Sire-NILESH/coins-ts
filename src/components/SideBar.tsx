@@ -2,9 +2,12 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import appIcons from "../config/appIcons";
 import routeConfig, { ILinkItemProps } from "../config/routeConfig";
+import useLogout from "../hooks/useLogout";
 import { authSelectors } from "../redux/authSlice";
 import { useAppSelector } from "../redux/store";
+import Avatar from "./ui/Avatar";
 import Brand from "./ui/Brand";
+import Divider from "./ui/Divider";
 
 const SideBarLinkItem: React.FC<ILinkItemProps> = ({
   id,
@@ -15,12 +18,12 @@ const SideBarLinkItem: React.FC<ILinkItemProps> = ({
   return (
     <Link
       id={id}
-      className={`flex items-center px-4 py-2 text-sm mt-5 rounded-2xl text-primary transition-colors duration-200 ease-in-out dark:secondary  dark:hover:text-gray-200 ${
-        selected === id
-          ? "bg-primary dark:bg-purple-600 "
-          : "bg-transparent hover:bg-gray-300/60 dark:hover:bg-gray-700"
-      }`}
       to={to}
+      className={`sidebar-item text-white line-clamp-1 ${
+        selected === id
+          ? "bg-blue-50 !text-blue-900"
+          : "bg-transparent hover:bg-blue-300/60"
+      }`}
     >
       {children}
     </Link>
@@ -28,35 +31,35 @@ const SideBarLinkItem: React.FC<ILinkItemProps> = ({
 };
 
 const SideBar = function () {
-  const user = useAppSelector(authSelectors.authUser);
-
   const path = useLocation();
 
+  const user = useAppSelector(authSelectors.authUser);
+  const { logoutHandler } = useLogout();
+
   return (
-    <div className="hidden lg:flex font-poppins flex-grow-0 flex-col w-40 2xl:w-64 h-[95vh] py-8 text-textLighter text-center">
+    <div className="rounded-3xl bg-blue-900 px-4 hidden lg:flex font-poppins flex-grow-0 flex-col w-44 2xl:w-64 h-[95vh] py-8 text-textLighter text-center">
       {/* BRANDING */}
       <div className="mt-4">
-        <Brand />
+        <Brand isOnColouredBg />
       </div>
+
       {/* PROFILE */}
       <div className="flex flex-col items-center mt-6">
-        {!user?.photoURL ? (
-          appIcons.user
-        ) : (
-          <img
-            className="object-cover w-20 h-20 mx-2 rounded-full border border-primary mt-1"
-            src={user?.photoURL ? user.photoURL : ""}
-            alt={user?.displayName ? user.displayName : "user"}
-          />
-        )}
+        <Avatar
+          avatarSize="lg"
+          className="mt-1 !text-blue-50 !border-blue-50"
+          src={user?.photoURL ? user.photoURL : ""}
+          alt={user?.displayName ? user.displayName : "user"}
+        />
 
-        <h4 className="mx-2 font-medium text-secondary dark:text-gray-200 hover:underline">
+        <h4 className="mt-2 mx-2 font-medium text-white hover:underline">
           {user?.displayName ? user.displayName : "user"}
         </h4>
-        <p className="mx-2 mt-1 text-sm font-medium text-quaternary dark:text-gray-400 hover:underline">
+        <p className="mx-2 mt-1 text-xs 2xl:text-sm text-blue-200 hover:underline line-clamp-1">
           {user?.email ? user.email : "user@exapmle.com"}
         </p>
       </div>
+
       {/* NAVIGATION */}
       <div className="flex flex-col justify-between flex-1 mt-6">
         <nav>
@@ -73,7 +76,35 @@ const SideBar = function () {
               </SideBarLinkItem>
             );
           })}
+
+          <Divider
+            horizonatal
+            className="mt-5 mx-3 !border-blue-700 dark:border-blue-700"
+          />
+
+          {/* LOGOUT BTN */}
+          <button
+            type="button"
+            onClick={logoutHandler}
+            className="w-full sidebar-item text-white hover:bg-blue-50 hover:text-blue-900 line-clamp-1"
+          >
+            {appIcons["logout"]}
+            <span className="mx-4 font-medium">{"Logout"}</span>
+          </button>
         </nav>
+      </div>
+
+      <div className="flex flex-col items-center text-white space-y-2">
+        <p className="text-xs text-blue-300">Powered by</p>
+        <a
+          href={"https://www.coingecko.com/"}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center space-x-2"
+        >
+          <img src="/images/coinGecko.png" className="w-6" alt="" />
+          <p className="text-sm">CoinGecko API</p>
+        </a>
       </div>
     </div>
   );

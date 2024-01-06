@@ -1,6 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
 import appIcons from "../config/appIcons";
 import routeConfig, { ILinkItemProps } from "../config/routeConfig";
+import UserAvatarPopover from "./UserAvatarPopover";
+import Divider from "./ui/Divider";
 
 const BottomBarLinkItem: React.FC<ILinkItemProps> = ({
   id,
@@ -11,10 +13,10 @@ const BottomBarLinkItem: React.FC<ILinkItemProps> = ({
   return (
     <Link
       id={id}
-      className={`flex-1 flex m-1 flex-col items-center justify-center rounded-2xl text-primary transition-colors duration-200 ease-in-out dark:secondary   dark:hover:text-gray-200 ${
+      className={`flex-1 flex m-1 flex-col items-center justify-center rounded-2xl text-primary transition-colors duration-200 ease-in-out text-white ${
         selected === id
-          ? "bg-secondary dark:bg-purple-500 "
-          : "bg-transparent hover:bg-gray-300/60 dark:hover:bg-gray-700"
+          ? "bg-blue-50 !text-blue-900"
+          : "bg-transparent hover:bg-blue-300/60"
       }`}
       to={to}
     >
@@ -27,8 +29,8 @@ const BottomBar = () => {
   const path = useLocation();
 
   return (
-    <div className="w-[100vw] sm:w-[95vw]  fixed bottom-4 z-50 px-2 sm:px-0 lg:hidden">
-      <div className="flex h-20 justify-around bg-primary shadow-lg rounded-xl border border-gray-300 dark:border-gray-700">
+    <div className="w-[100vw] sm:w-[95vw] fixed bottom-4 z-50 px-2 sm:px-0 lg:hidden">
+      <div className="flex h-20 justify-around bg-blue-900 shadow-lg rounded-xl dark:border-gray-700">
         {routeConfig.bottombarRoutes.map((route) => {
           return (
             <BottomBarLinkItem
@@ -38,12 +40,15 @@ const BottomBar = () => {
               to={route.path}
             >
               {appIcons[route.id]}
-              <span className="mt-1 py-1 px-2 md:text-sm text-xs font-medium text-primary dark:secondary   dark:hover:text-gray-200">
+              <span className="mt-1 py-1 px-2 md:text-sm text-xs font-medium line-clamp-1">
                 {route.name}
               </span>
             </BottomBarLinkItem>
           );
         })}
+
+        <Divider vertical className="!border-blue-700 dark:border-blue-700" />
+        <UserAvatarPopover />
       </div>
     </div>
   );

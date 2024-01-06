@@ -1,5 +1,5 @@
 import { AiFillHome, AiFillStar, AiOutlineStar } from "react-icons/ai";
-import { BiLink, BiMedal, BiUser } from "react-icons/bi";
+import { BiLink, BiLogOut, BiMedal, BiUser } from "react-icons/bi";
 import {
   BsCalendar4Week,
   BsClock,
@@ -9,7 +9,7 @@ import {
   BsReddit,
   BsTwitter,
 } from "react-icons/bs";
-import { CiViewBoard, CiViewTable } from "react-icons/ci";
+import { CiViewBoard } from "react-icons/ci";
 import {
   FaGithub,
   FaReact,
@@ -24,10 +24,16 @@ import {
 } from "react-icons/fi";
 import { HiOutlineIdentification } from "react-icons/hi";
 import { IoIosSearch } from "react-icons/io";
-import { IoHomeOutline, IoLogoBitbucket } from "react-icons/io5";
+import {
+  IoChevronDownOutline,
+  IoChevronUpOutline,
+  IoHomeOutline,
+  IoLogoBitbucket,
+} from "react-icons/io5";
 import { MdForum, MdTrendingUp } from "react-icons/md";
 import { RiErrorWarningLine } from "react-icons/ri";
 import { TbError404 } from "react-icons/tb";
+import { PiBinocularsLight } from "react-icons/pi";
 
 type Props = {
   className?: string;
@@ -36,7 +42,7 @@ type Props = {
 const appIcons = {
   home: <IoHomeOutline className="h-5 w-5" />,
   overview: <CiViewBoard className="h-5 w-5" />,
-  tables: <CiViewTable className="h-5 w-5" />,
+  explore: <PiBinocularsLight className="h-5 w-5" />,
   topCoins: <BiMedal className="h-5 w-5" />,
   trending: <MdTrendingUp className="h-5 w-5" />,
   exchanges: <BsCurrencyExchange className="h-5 w-5" />,
@@ -44,8 +50,9 @@ const appIcons = {
   notFound: <TbError404 className="h-5 w-5" />,
   register: <HiOutlineIdentification className="h-5 w-5" />,
   login: <FiLogIn className="h-5 w-5" />,
+  logout: <BiLogOut className="h-5 w-5" />,
   github: <FaGithub className="w-5 h-5" />,
-  react: <FaReact className="text-sky-400 h-10 w-10" />,
+  react: <FaReact className="text-blue-200 h-8 w-8 2xl:h-10 2xl:w-10" />,
   error: <RiErrorWarningLine className="h-10 w-10 text-red-500" />,
   calendar: <BsCalendar4Week className="inline h-3 w-3 text-tertiary" />,
   clock: <BsClock className="inline h-4 w-4 text-tertiary" />,
@@ -55,16 +62,22 @@ const appIcons = {
   starFill: (
     <AiFillStar className="pointer-events-none mx-auto h-4 w-4 text-yellow-500" />
   ),
-  arrowRight: <FiArrowRight className="w-5 h-5 ml-2" />,
-  arrowLeft: <FiArrowLeft className="w-5 h-5 mr-2" />,
+  arrowRight: <FiArrowRight className="w-5 h-5" />,
+  arrowLeft: <FiArrowLeft className="w-5 h-5" />,
+  chevronDown: <IoChevronDownOutline className="w-5 h-5" />,
+  chevronUp: <IoChevronUpOutline className="w-5 h-5" />,
   Refresh: ({ className }: Props) => (
     <FiRefreshCw className={"text-secondary " + className} />
   ),
   Search: ({ className }: Props) => (
     <IoIosSearch className={"text-secondary " + className} />
   ),
-  user: (
+  user_lg: (
     <FaUserCircle className="w-20 h-20 mx-2 rounded-full border border-primary mt-1 text-primary" />
+  ),
+
+  User: ({ className }: Props) => (
+    <FaUserCircle className={"text-secondary " + className} />
   ),
 
   // social icons

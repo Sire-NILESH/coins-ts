@@ -4,6 +4,7 @@ import {
   fetchWatchlistCoinsInfo,
   selectDBWatchlistCoins,
   selectWatchlistCoinsData,
+  selectWatchlistCoinsIsError,
   selectWatchlistCoinsIsLoading,
   selectshouldFetchWatchlistCoins,
 } from "../redux/watchlistSlice";
@@ -12,6 +13,7 @@ const useWatchlistData = () => {
   const dbWatchlistedCoins = useAppSelector(selectDBWatchlistCoins);
   const watchlistedCoinsData = useAppSelector(selectWatchlistCoinsData);
   const watchlistIsLoading = useAppSelector(selectWatchlistCoinsIsLoading);
+  const watchlistIsError = useAppSelector(selectWatchlistCoinsIsError);
   const shouldFetchWatchlistCoins = useAppSelector(
     selectshouldFetchWatchlistCoins
   );
@@ -27,6 +29,7 @@ const useWatchlistData = () => {
     dbWatchlistedCoins,
     watchlistedCoinsData,
     watchlistIsLoading,
+    watchlistIsError,
     shouldFetchWatchlistCoins,
   };
 };

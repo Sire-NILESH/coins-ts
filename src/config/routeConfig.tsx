@@ -11,27 +11,27 @@ const routeLinking = {
     name: "Overview",
     pathName: "overview",
   },
-  tables: {
-    id: "tables",
-    path: "/dashboard/tables/top-coins",
-    name: "Tables",
-    pathName: "tables",
+  explore: {
+    id: "explore",
+    path: "/dashboard/explore/top-coins",
+    name: "Explore",
+    pathName: "explore",
   },
   topCoins: {
     id: "topCoins",
-    path: "/dashboard/tables/top-coins",
+    path: "/dashboard/explore/top-coins",
     name: "Top coins",
     pathName: "top-coins",
   },
   trending: {
     id: "trending",
-    path: "/dashboard/tables/trending",
+    path: "/dashboard/explore/trending",
     name: "Trending",
     pathName: "trending",
   },
   exchanges: {
     id: "exchanges",
-    path: "/dashboard/tables/exchanges",
+    path: "/dashboard/explore/exchanges",
     name: "Exchanges",
     pathName: "exchanges",
   },
@@ -62,18 +62,19 @@ const routeLinking = {
   notFound: {
     id: "notFound",
     path: "/not-found",
-    name: "Not Found",
+    name: "Error",
   },
 } as const;
 
 const sidebarRoutes = [
   routeLinking.overview,
-  routeLinking.tables,
+  routeLinking.explore,
   routeLinking.watchlist,
-  routeLinking.notFound,
+  // routeLinking.notFound,
 ] as const;
 
 const bottombarRoutes = sidebarRoutes;
+// const bottombarRoutes = [...sidebarRoutes, routeLinking.notFound];
 
 export interface ILinkItemProps {
   id: string;

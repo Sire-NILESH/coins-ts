@@ -1,4 +1,6 @@
 import { Coin } from "../../typing";
+import EmptyWatchlist from "../components/EmptyWatchlist";
+import NoDataErr from "../components/NoDataErr";
 import WatchlistCoinCard from "../components/WatchlistCoinCard";
 import Header from "../components/ui/Header";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
@@ -7,8 +9,12 @@ import usePagination from "../hooks/usePagination";
 import useWatchlistData from "../hooks/useWatchlistData";
 
 const WatchList = () => {
-  const { watchlistIsLoading, dbWatchlistedCoins, watchlistedCoinsData } =
-    useWatchlistData();
+  const {
+    watchlistIsLoading,
+    dbWatchlistedCoins,
+    watchlistedCoinsData,
+    watchlistIsError,
+  } = useWatchlistData();
 
   const {
     pageData,
@@ -30,6 +36,10 @@ const WatchList = () => {
     );
   }
 
+  if (watchlistIsError && !watchlistIsLoading) {
+    return <NoDataErr reloadHandler={() => {}} />;
+  }
+
   return (
     <div className="h-full w-full">
       <div className="pb-1 overflow-hidden">
@@ -42,9 +52,13 @@ const WatchList = () => {
         </p>
 
         <div className="my-6 h-screen overflow-auto space-y-7 bg-secondary py-3 md:p-4 rounded-2xl border dark:border-primary">
-          {pageData.map((coin) => {
-            return <WatchlistCoinCard key={coin.id} coin={coin} />;
-          })}
+          {pageData.length > 0 ? (
+            pageData.map((coin) => {
+              return <WatchlistCoinCard key={coin.id} coin={coin} />;
+            })
+          ) : (
+            <EmptyWatchlist />
+          )}
         </div>
 
         <Pagination

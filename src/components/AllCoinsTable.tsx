@@ -193,7 +193,6 @@ const AllCoinsTable = () => {
                 </div>
                 <Search setSearch={setSearch} />
               </header>
-              {/* <HeaderTitle title="Trending" /> */}
 
               <div className="p-3">
                 <div className="overflow-x-auto">

@@ -9,6 +9,7 @@ interface InitialState {
   checkTicket: boolean;
   isLoading: boolean;
   data: null | Coin[];
+  timestamp: number;
   isError: boolean;
 }
 
@@ -17,6 +18,7 @@ const initialState: InitialState = {
   isLoading: false,
   checkTicket: false,
   data: null,
+  timestamp: Date.now(),
   isError: false,
 };
 
@@ -46,6 +48,11 @@ const watchlistSlice = createSlice({
     resetError: (state) => {
       state.isError = false;
     },
+    resetWatchlistState: (state) => {
+      state.dbWatchlistCoins = initialState.dbWatchlistCoins;
+      state.isError = initialState.isError;
+      state.data = initialState.data;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchWatchlistCoinsInfo.pending, (state) => {
@@ -57,11 +64,13 @@ const watchlistSlice = createSlice({
       state.isLoading = false;
       state.data = action.payload as Coin[];
       state.checkTicket = false;
+      state.timestamp = Date.now();
     });
     builder.addCase(fetchWatchlistCoinsInfo.rejected, (state) => {
       state.isLoading = false;
       state.isError = true;
       state.checkTicket = false;
+      state.timestamp = Date.now();
     });
   },
 });
@@ -74,6 +83,8 @@ export const selectWatchlistCoinsIsLoading = (state: RootState) =>
   state.watchlistSlice.isLoading;
 export const selectWatchlistCoinsIsError = (state: RootState) =>
   state.watchlistSlice.isError;
+export const selectWatchlistCoinsTimestamp = (state: RootState) =>
+  state.watchlistSlice.timestamp;
 export const selectshouldFetchWatchlistCoins = (state: RootState) =>
   state.watchlistSlice.checkTicket;
 

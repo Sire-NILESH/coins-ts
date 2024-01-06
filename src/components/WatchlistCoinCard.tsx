@@ -11,15 +11,18 @@ type Props = {
   coin: Coin;
 };
 
-const CardDivider = <Divider className="hidden md:block h-20" />;
-
+const CardDivider = <Divider vertical className="hidden md:block h-20" />;
+// w-80
 const WatchlistCoinCard = ({ coin }: Props) => {
   return (
     <div className="mx-auto w-full max-w-[20rem] sm:w-80 md:max-w-full md:w-full flex flex-col md:flex-row items-center justify-around bg-primary rounded-2xl py-2">
       {/* COIN NAME,IMG AND BASIC STATS */}
-      <Link to={`${routeConfig.routeLinking.coin.path}/${coin.id}`}>
+      <Link
+        className="max-w-[20rem] w-full"
+        to={`${routeConfig.routeLinking.coin.path}/${coin.id}`}
+      >
         <CoinIntro
-          className="py-4 px-2 w-80 h-28 cursor-pointer"
+          className="py-4 px-2 w-full h-28 cursor-pointer"
           coin={{
             name: coin.name,
             image: coin.image,
@@ -37,7 +40,7 @@ const WatchlistCoinCard = ({ coin }: Props) => {
       {CardDivider}
 
       {/* SPARKLINES */}
-      <div className="py-4 px-4 w-80 h-28 border-y-[1px] dark:border-stone-700 md:border-0">
+      <div className="py-4 px-4 max-w-[20rem] w-full h-28 border-y-[1px] dark:border-stone-700 md:border-0">
         <AppSparklines data={coin.sparkline_in_7d.price} />
         <p className="text-xs text-center text-secondary flex items-center gap-2 justify-center">
           {appIcons.calendar}
@@ -50,7 +53,7 @@ const WatchlistCoinCard = ({ coin }: Props) => {
 
       {/* 24 HOURS */}
       <CoinOvertime
-        className="py-3 px-4 w-80"
+        className="py-3 px-4 max-w-[20rem] w-full"
         data={{
           heading: "Past 24h",
           checkPerfromaceOver: coin.market_cap_change_24h,
