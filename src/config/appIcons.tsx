@@ -23,7 +23,11 @@ import {
   FiRefreshCw,
 } from "react-icons/fi";
 import { HiOutlineIdentification } from "react-icons/hi";
-import { IoIosSearch } from "react-icons/io";
+import {
+  IoIosSearch,
+  IoIosTrendingDown,
+  IoIosTrendingUp,
+} from "react-icons/io";
 import {
   IoChevronDownOutline,
   IoChevronUpOutline,
@@ -66,6 +70,8 @@ const appIcons = {
   arrowLeft: <FiArrowLeft className="w-5 h-5" />,
   chevronDown: <IoChevronDownOutline className="w-5 h-5" />,
   chevronUp: <IoChevronUpOutline className="w-5 h-5" />,
+  trendingDown: <IoIosTrendingDown className="w-5 h-5 text-red-500" />,
+  trendingUp: <IoIosTrendingUp className="w-5 h-5 text-green-600" />,
   Refresh: ({ className }: Props) => (
     <FiRefreshCw className={"text-secondary " + className} />
   ),

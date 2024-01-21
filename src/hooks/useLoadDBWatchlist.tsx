@@ -22,6 +22,10 @@ const useLoadDBWatchlist = () => {
               dispatch(
                 watchlistSliceActions.setDBWatchlistCoins({ coinIds: coins })
               );
+            } else {
+              dispatch(
+                watchlistSliceActions.setDBWatchlistCoins({ coinIds: [] })
+              );
             }
           }
         });

@@ -36,8 +36,8 @@ const WatchList = () => {
     );
   }
 
-  if (watchlistIsError && !watchlistIsLoading) {
-    return <NoDataErr reloadHandler={() => {}} />;
+  if (!watchlistIsLoading && !dbWatchlistedCoins.length) {
+    return <EmptyWatchlist />;
   }
 
   return (
@@ -46,32 +46,40 @@ const WatchList = () => {
         <Header title="Watchlist Coins" time="state" />
       </div>
 
-      <main className="w-full">
-        <p className="mt-5 md:mt-0 ml-5 text-xs text-secondary max-w-lg">
-          {"Your very own list of watchlisted coins. (Ordered by Market cap). "}
-        </p>
+      {watchlistIsError && !watchlistIsLoading ? (
+        <NoDataErr reloadHandler={() => {}} />
+      ) : (
+        <main className="w-full">
+          <p className="mt-5 md:mt-0 ml-5 text-xs text-secondary max-w-lg">
+            {
+              "Your very own list of watchlisted coins. (Ordered by Market cap). "
+            }
+          </p>
 
-        <div className="my-6 h-screen overflow-auto space-y-7 bg-secondary py-3 md:p-4 rounded-2xl border dark:border-primary">
-          {pageData.length > 0 ? (
-            pageData.map((coin) => {
-              return <WatchlistCoinCard key={coin.id} coin={coin} />;
-            })
-          ) : (
-            <EmptyWatchlist />
-          )}
-        </div>
+          <div className="my-6 h-screen overflow-auto space-y-7 bg-secondary py-3 md:p-4 rounded-2xl border dark:border-primary">
+            {pageData.length > 0 ? (
+              pageData.map((coin) => {
+                return <WatchlistCoinCard key={coin.id} coin={coin} />;
+              })
+            ) : (
+              <div className="h-full w-full overflow-hidden flex justify-center pt-28">
+                <LoadingSpinner />
+              </div>
+            )}
+          </div>
 
-        <Pagination
-          currentPage={currentPage}
-          pageSetter={pageSetter}
-          pageEnteries={pageEnteries}
-          totalPages={totalPages}
-          totalEnteries={totalEnteries}
-        />
+          <Pagination
+            currentPage={currentPage}
+            pageSetter={pageSetter}
+            pageEnteries={pageEnteries}
+            totalPages={totalPages}
+            totalEnteries={totalEnteries}
+          />
 
-        {/* spacer */}
-        <div className="xl:h-6 h-32" />
-      </main>
+          {/* spacer */}
+          <div className="xl:h-6 h-32" />
+        </main>
+      )}
     </div>
   );
 };

@@ -8,7 +8,6 @@ import useIsOverallDataError from "../hooks/useIsOverallDataError";
 import useReloadData from "../hooks/useReloadData";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
 import NoDataErr from "../components/NoDataErr";
-import { selectTopCoinsData } from "../redux/topCoinsSlice";
 import Header from "../components/ui/Header";
 
 const ExplorePage = () => {
@@ -22,9 +21,6 @@ const ExplorePage = () => {
   }, [location.pathname, navigate]);
 
   const { initDataStatus } = useAppSelector(selectInitDataStatusSlice);
-
-  // checking the exisitance of any one of the initial data (topcoins, exchanges, trending) is fine as we are only interested in checking if the error is from initial data fetch (and show NoDataErr component) or from the reload data fetch. Rest we can rely on the isOverallErr
-  const topCoins = useAppSelector(selectTopCoinsData);
 
   const { overallDataError } = useIsOverallDataError();
   const reloadDataState = useReloadData();
@@ -45,10 +41,11 @@ const ExplorePage = () => {
 
       <Tabs />
 
-      {overallDataError && !topCoins && (
+      {overallDataError ? (
         <NoDataErr reloadHandler={reloadDataState} />
+      ) : (
+        <Outlet />
       )}
-      <Outlet />
 
       {/* spacer */}
       <div className="xl:hidden h-28" />

@@ -42,12 +42,12 @@ const UserAvatarPopover = () => {
               leaveTo="opacity-0 translate-y-1"
             >
               <Popover.Panel className="absolute right-0 z-10 mt-3 w-screen max-w-[16rem] bottom-24 transform px-4 sm:px-0">
-                <div className="overflow-hidden rounded-2xl shadow-lg ring-1 ring-black/5">
+                <div className="overflow-hidden rounded-2xl shadow-lg ring-1 ring-white">
                   <div className="relative grid gap-8 bg-white p-7 lg:grid-cols-2">
                     {/* PROFILE */}
                     <div className="flex flex-col items-center mb-4">
                       <span className="text-sm font-medium text-gray-700 mb-5">
-                        Logged in as:
+                        My Account
                       </span>
 
                       <Avatar

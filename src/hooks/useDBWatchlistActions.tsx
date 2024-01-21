@@ -54,6 +54,7 @@ const useDBWatchlistActions = () => {
 
   const removeFromWatchlist = async (coinId: string) => {
     if (user && isCoinWatchlisted(coinId)) {
+      console.log("help");
       const coinRef = doc(db, "watchlist", user.uid);
       try {
         await setDoc(

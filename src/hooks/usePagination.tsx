@@ -12,7 +12,7 @@ export default function usePagination<T = unknown>({
   const [page, setPage] = useState<number>(1);
 
   const pageHandler = (page: number) => {
-    if (page <= Math.ceil(dataList.length / 10) && page >= 1) {
+    if (page <= Math.ceil(dataList.length / pageEnteries) && page >= 1) {
       setPage(page);
     }
   };
@@ -28,6 +28,6 @@ export default function usePagination<T = unknown>({
     pageSetter: pageHandler,
     pageEnteries,
     totalEnteries: dataList.length,
-    totalPages: Math.ceil(dataList.length / 10),
+    totalPages: Math.ceil(dataList.length / pageEnteries),
   };
 }

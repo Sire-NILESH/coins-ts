@@ -7,7 +7,7 @@ type Props = {
 
 const NoDataErr = ({ reloadHandler }: Props) => {
   return (
-    <div className="mt-24 overflow-hidden mx-auto max-w-lg space-y-4 flex flex-col items-center justify-center">
+    <div className="mt-24 py-4 overflow-hidden mx-auto max-w-lg space-y-4 flex flex-col items-center justify-center">
       {appIcons.error}
       <h4 className="text-primary text-3xl text-center">Error occured</h4>
       <p className="text-center text-secondary">

@@ -174,7 +174,7 @@ const AllCoinsTable = () => {
   return (
     <div onClick={handleStarClick} className="">
       {allCoins && allCoins?.length > 0 && (
-        <section className="mt-5 antialiased text-gray-600 md:px-4">
+        <section className="mt-5 antialiased md:px-4">
           <div className="h-full space-y-10">
             {/*  Table  */}
             <div className="w-full rounded-3xl max-w-full mx-auto bg-primary border dark:border-primary">
