@@ -4,6 +4,8 @@ import { TrendingCoin } from "../../typing";
 import routeConfig from "../config/routeConfig";
 import { useAppSelector } from "../redux/store";
 import LoadingSpinner from "./ui/LoadingSpinner";
+import NoDataErr from "./NoDataErr";
+import useReloadTrendingCoins from "../hooks/useReloadTrendingCoins";
 
 const TableRow: React.FC<{
   coin: TrendingCoin;
@@ -58,10 +60,22 @@ const TrendingCoinsTable: React.FC = () => {
     isError,
   } = useAppSelector((state) => state.allTrendingCoins);
 
-  if (isLoading && !isError) {
+  const reloadTrendingCoins = useReloadTrendingCoins();
+
+  const dataIsAvailable = allTrendingCoins && allTrendingCoins?.coins.length;
+
+  if (isLoading && !isError && !dataIsAvailable) {
     return (
       <div className="h-full w-full overflow-hidden flex items-center justify-center">
         <LoadingSpinner />
+      </div>
+    );
+  }
+
+  if (!isLoading && isError && !dataIsAvailable) {
+    return (
+      <div className="h-full w-full overflow-hidden flex items-center justify-center">
+        <NoDataErr reloadHandler={reloadTrendingCoins} />
       </div>
     );
   }

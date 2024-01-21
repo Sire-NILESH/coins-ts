@@ -12,6 +12,8 @@ import { Exchange } from "./../../typing.d";
 import LoadingSpinner from "./ui/LoadingSpinner";
 import Pagination from "./ui/Pagination";
 import Search from "./ui/Search";
+import useReloadExchanges from "../hooks/useReloadExchanges";
+import NoDataErr from "./NoDataErr";
 
 const TableRow: React.FC<{ data: Exchange }> = ({ data }) => {
   return (
@@ -80,6 +82,8 @@ const ExchangesTable = () => {
   const isLoading = useAppSelector(selectExchnagesIsLoading);
   const isError = useAppSelector(selectExchnagesIsError);
 
+  const reloadExchanges = useReloadExchanges();
+
   const searchFilter = (value: Exchange, searchQuery: string): boolean => {
     return value.name.toLowerCase().includes(searchQuery);
   };
@@ -101,10 +105,20 @@ const ExchangesTable = () => {
     pageEnteries: 10, // the number of entries in each page
   });
 
-  if (isLoading && !isError) {
+  const dataIsAvailable = allExchanges && allExchanges.length > 0;
+
+  if (isLoading && !isError && !dataIsAvailable) {
     return (
       <div className="h-full w-full overflow-hidden flex items-center justify-center">
         <LoadingSpinner />
+      </div>
+    );
+  }
+
+  if (!isLoading && isError && !dataIsAvailable) {
+    return (
+      <div className="h-full w-full overflow-hidden flex items-center justify-center">
+        <NoDataErr reloadHandler={reloadExchanges} />
       </div>
     );
   }

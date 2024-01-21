@@ -8,12 +8,14 @@ interface InitialState {
   isLoading: boolean;
   data: null | Trending;
   isError: boolean;
+  timestamp: number;
 }
 
 const initialState: InitialState = {
   isLoading: false,
   data: null,
   isError: false,
+  timestamp: Date.now(),
 };
 
 // Async Thunk Action
@@ -41,6 +43,7 @@ const trendingCoinsSlice = createSlice({
     builder.addCase(fetchTrending.fulfilled, (state, action) => {
       state.isLoading = false;
       state.data = action.payload as Trending;
+      state.timestamp = Date.now();
     });
     builder.addCase(fetchTrending.rejected, (state) => {
       state.isLoading = false;
@@ -55,6 +58,8 @@ export const selectTrendingCoinsIsLoading = (state: RootState) =>
   state.allTrendingCoins.isLoading;
 export const selectTrendingCoinsIsError = (state: RootState) =>
   state.allTrendingCoins.isError;
+export const selectTrendingCoinsTimeStamp = (state: RootState) =>
+  state.allTrendingCoins.timestamp;
 
 export const trendingCoinsActions = trendingCoinsSlice.actions;
 

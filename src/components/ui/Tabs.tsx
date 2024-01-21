@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import DataFetchTime from "../DataFetchTime";
-import useReloadData from "../../hooks/useReloadData";
+import DataFetchTime from "../DataTimeAndReload";
 
 const ListItem: React.FC<{
   title: string;
@@ -42,8 +41,6 @@ const Tabs = () => {
     })[0]?.title as SelectType) || "Top Coins"
   );
 
-  const reloadDataState = useReloadData();
-
   return (
     <div className="space-y-5 mb-10 border-b border-gray-300 dark:border-gray-700 sm:border-none">
       <div className="flex flex-row flex-wrap gap-4  md:px-4 py-2 justify-center items-center lg:justify-between overflow-hidden rounded-xl ">
@@ -68,7 +65,7 @@ const Tabs = () => {
         </ul>
 
         <div className="hidden lg:block">
-          <DataFetchTime onRefreshHandler={reloadDataState} time="state" />
+          <DataFetchTime />
         </div>
       </div>
     </div>

@@ -1,14 +1,11 @@
 import { useEffect } from "react";
-import Tabs from "../components/ui/Tabs";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import routeConfig from "../config/routeConfig";
-import { useAppSelector } from "../redux/store";
-import { selectInitDataStatusSlice } from "../redux/initDataStatusSlice";
-import useIsOverallDataError from "../hooks/useIsOverallDataError";
-import useReloadData from "../hooks/useReloadData";
-import LoadingSpinner from "../components/ui/LoadingSpinner";
-import NoDataErr from "../components/NoDataErr";
 import Header from "../components/ui/Header";
+import LoadingSpinner from "../components/ui/LoadingSpinner";
+import Tabs from "../components/ui/Tabs";
+import routeConfig from "../config/routeConfig";
+import { selectInitDataStatusSlice } from "../redux/initDataStatusSlice";
+import { useAppSelector } from "../redux/store";
 
 const ExplorePage = () => {
   const location = useLocation();
@@ -21,9 +18,6 @@ const ExplorePage = () => {
   }, [location.pathname, navigate]);
 
   const { initDataStatus } = useAppSelector(selectInitDataStatusSlice);
-
-  const { overallDataError } = useIsOverallDataError();
-  const reloadDataState = useReloadData();
 
   if (initDataStatus === "loading") {
     return (
@@ -41,11 +35,7 @@ const ExplorePage = () => {
 
       <Tabs />
 
-      {overallDataError ? (
-        <NoDataErr reloadHandler={reloadDataState} />
-      ) : (
-        <Outlet />
-      )}
+      <Outlet />
 
       {/* spacer */}
       <div className="xl:hidden h-28" />

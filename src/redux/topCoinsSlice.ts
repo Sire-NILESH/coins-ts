@@ -8,12 +8,14 @@ interface InitialState {
   isLoading: boolean;
   data: null | Coin[];
   isError: boolean;
+  timestamp: number;
 }
 
 const initialState: InitialState = {
   isLoading: false,
   data: null,
   isError: false,
+  timestamp: Date.now(),
 };
 
 // Async Thunk Action
@@ -41,6 +43,7 @@ const topCoinsSlice = createSlice({
     builder.addCase(fetchTopCoins.fulfilled, (state, action) => {
       state.isLoading = false;
       state.data = action.payload as Coin[];
+      state.timestamp = Date.now();
     });
     builder.addCase(fetchTopCoins.rejected, (state, action) => {
       state.isLoading = false;
@@ -54,6 +57,8 @@ export const selectTopCoinsIsLoading = (state: RootState) =>
   state.topCoins.isLoading;
 export const selectTopCoinsIsError = (state: RootState) =>
   state.topCoins.isError;
+export const selectTopCoinsTimeStamp = (state: RootState) =>
+  state.topCoins.timestamp;
 
 export const topCoinsActions = topCoinsSlice.actions;
 

@@ -47,9 +47,15 @@ const appIcons = {
   home: <IoHomeOutline className="h-5 w-5" />,
   overview: <CiViewBoard className="h-5 w-5" />,
   explore: <PiBinocularsLight className="h-5 w-5" />,
-  topCoins: <BiMedal className="h-5 w-5" />,
-  trending: <MdTrendingUp className="h-5 w-5" />,
-  exchanges: <BsCurrencyExchange className="h-5 w-5" />,
+  topCoins: ({ className }: Props) => (
+    <BiMedal className={"h-5 w-5 " + className} />
+  ),
+  trending: ({ className }: Props) => (
+    <MdTrendingUp className={"h-5 w-5 " + className} />
+  ),
+  exchanges: ({ className }: Props) => (
+    <BsCurrencyExchange className={"h-5 w-5 " + className} />
+  ),
   watchlist: <BiUser className="h-5 w-5" />,
   notFound: <TbError404 className="h-5 w-5" />,
   register: <HiOutlineIdentification className="h-5 w-5" />,

@@ -17,6 +17,8 @@ import {
 } from "../redux/topCoinsSlice";
 import usePagination from "../hooks/usePagination";
 import useSearch from "../hooks/useSearch";
+import NoDataErr from "./NoDataErr";
+import useReloadTopCoins from "../hooks/useReloadTopCoins";
 
 type TableRowProps = {
   data: Coin;
@@ -116,6 +118,8 @@ const AllCoinsTable = () => {
   const { isCoinWatchlisted, addToWatchlist, removeFromWatchlist } =
     useDBWatchlistActions();
 
+  const reloadTopCoins = useReloadTopCoins();
+
   const searchFilter = (value: Coin, searchQuery: string): boolean => {
     return (
       value.name.toLowerCase().includes(searchQuery) ||
@@ -163,7 +167,9 @@ const AllCoinsTable = () => {
     }
   };
 
-  if (isLoading && !isError) {
+  const dataIsAvailable = allCoins && allCoins?.length > 0;
+
+  if (isLoading && !isError && !dataIsAvailable) {
     return (
       <div className="h-full w-full overflow-hidden flex items-center justify-center">
         <LoadingSpinner />
@@ -171,9 +177,17 @@ const AllCoinsTable = () => {
     );
   }
 
+  if (!isLoading && isError && !dataIsAvailable) {
+    return (
+      <div className="h-full w-full overflow-hidden flex items-center justify-center">
+        <NoDataErr reloadHandler={reloadTopCoins} />
+      </div>
+    );
+  }
+
   return (
     <div onClick={handleStarClick} className="">
-      {allCoins && allCoins?.length > 0 && (
+      {dataIsAvailable && (
         <section className="mt-5 antialiased md:px-4">
           <div className="h-full space-y-10">
             {/*  Table  */}

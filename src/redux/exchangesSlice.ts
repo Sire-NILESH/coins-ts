@@ -8,12 +8,14 @@ interface InitialState {
   isLoading: boolean;
   data: null | Exchange[];
   isError: boolean;
+  timestamp: number;
 }
 
 const initialState: InitialState = {
   isLoading: false,
   data: null,
   isError: false,
+  timestamp: Date.now(),
 };
 
 // Async Thunk Action
@@ -38,6 +40,7 @@ const exchangesSlice = createSlice({
     builder.addCase(fetchExchanges.fulfilled, (state, action) => {
       state.isLoading = false;
       state.data = action.payload as Exchange[];
+      state.timestamp = Date.now();
     });
     builder.addCase(fetchExchanges.rejected, (state) => {
       state.isLoading = false;
@@ -52,6 +55,8 @@ export const selectExchnagesIsLoading = (state: RootState) =>
   state.allExchanges.isLoading;
 export const selectExchnagesIsError = (state: RootState) =>
   state.allExchanges.isError;
+export const selectExchnagesTimeStamp = (state: RootState) =>
+  state.allExchanges.timestamp;
 
 export const exchangesActions = exchangesSlice.actions;
 

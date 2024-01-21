@@ -1,16 +1,17 @@
 import React from "react";
-import { BiMedal } from "react-icons/bi";
-import { BsCurrencyExchange } from "react-icons/bs";
-import { MdTrendingUp } from "react-icons/md";
 import { RxTriangleDown, RxTriangleUp } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import { Coin, Exchange, TrendingCoin } from "../../../typing";
+import routeConfig from "../../config/routeConfig";
+import { selectExchnagesData } from "../../redux/exchangesSlice";
 import { useAppSelector } from "../../redux/store";
+import { selectTopCoinsData } from "../../redux/topCoinsSlice";
+import { selectTrendingCoinsData } from "../../redux/trendingCoinsSlice";
 import { formatCurrency } from "../../uitls/helper";
 import Button from "../ui/Button";
 import TableRowData from "../ui/TableRowData";
+import appIcons from "./../../config/appIcons";
 import CoinImage from "./CoinImage";
-import routeConfig from "../../config/routeConfig";
 
 const CoinReportRow: React.FC<{ coin: Coin }> = ({ coin }) => {
   return (
@@ -93,34 +94,20 @@ const CoinsReport = (props: {
     Exchanges: routeConfig.routeLinking.exchanges.path,
   };
 
-  const {
-    // isLoading: istopCoinsLoading,
-    data: topCoins,
-    // isError: isErrorTopCoins,
-  } = useAppSelector((state) => state.topCoins);
-
-  const {
-    // isLoading: istrendingCoinsLoading,
-    data: allTrendingCoins,
-    // isError: isErrorTrending,
-  } = useAppSelector((state) => state.allTrendingCoins);
-
-  const {
-    // isLoading: isexchangesLoading,
-    data: allExchanges,
-    // isError: isErrorExchanges,
-  } = useAppSelector((state) => state.allExchanges);
+  const topCoins = useAppSelector(selectTopCoinsData);
+  const trendingCoins = useAppSelector(selectTrendingCoinsData);
+  const allExchanges = useAppSelector(selectExchnagesData);
 
   return (
     <div className="space-y-6">
       <header className="flex items-center justify-between">
         <div className="space-x-2 flex py-1 items-center">
           {props.title === "Winners" ? (
-            <BiMedal className="h-6 w-6 inline text-yellow-500 " />
+            <appIcons.topCoins className="h-6 w-6 text-yellow-500" />
           ) : props.title === "Exchanges" ? (
-            <BsCurrencyExchange className="h-6 w-6 inline text-yellow-500 " />
+            <appIcons.exchanges className="h-6 w-6 text-yellow-500" />
           ) : (
-            <MdTrendingUp className="h-6 w-6 inline text-yellow-500 " />
+            <appIcons.trending className="h-6 w-6 text-yellow-500" />
           )}
           <p className="text-lg inline font-semibold text-secondary">
             {props.title}
@@ -134,27 +121,24 @@ const CoinsReport = (props: {
           <Button className="h-10 min-w-[6rem]">{props.title}</Button>
         </Link>
       </header>
-      {topCoins && allTrendingCoins && allExchanges && (
-        <div className="space-y-6 md:px-8 w-full">
-          {props.title === "Exchanges"
-            ? allExchanges
-                .slice(0, 10)
-                .map((coin, index) => (
-                  <ExchangesReportRow key={coin.id} coin={coin} />
-                ))
-            : props.title === "Winners"
-            ? topCoins
-                .slice(0, 4)
-                .map((coin, index) => (
-                  <CoinReportRow key={coin.id} coin={coin} />
-                ))
-            : allTrendingCoins.coins
-                .slice(0, 4)
-                .map((coin, index) => (
-                  <TrendingReportRow key={coin.item.id} coin={coin.item} />
-                ))}
-        </div>
-      )}
+
+      <div className="space-y-6 md:px-8 w-full">
+        {props.title === "Exchanges" && allExchanges
+          ? allExchanges
+              .slice(0, 10)
+              .map((coin) => <ExchangesReportRow key={coin.id} coin={coin} />)
+          : props.title === "Winners" && topCoins
+          ? topCoins
+              .slice(0, 4)
+              .map((coin) => <CoinReportRow key={coin.id} coin={coin} />)
+          : props.title === "Trending" && trendingCoins
+          ? trendingCoins.coins
+              .slice(0, 4)
+              .map((coin) => (
+                <TrendingReportRow key={coin.item.id} coin={coin.item} />
+              ))
+          : null}
+      </div>
     </div>
   );
 };
