@@ -1,11 +1,8 @@
 import { useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Header from "../components/ui/Header";
-import LoadingSpinner from "../components/ui/LoadingSpinner";
 import Tabs from "../components/ui/Tabs";
 import routeConfig from "../config/routeConfig";
-import { selectInitDataStatusSlice } from "../redux/initDataStatusSlice";
-import { useAppSelector } from "../redux/store";
 
 const ExplorePage = () => {
   const location = useLocation();
@@ -17,20 +14,10 @@ const ExplorePage = () => {
     }
   }, [location.pathname, navigate]);
 
-  const { initDataStatus } = useAppSelector(selectInitDataStatusSlice);
-
-  if (initDataStatus === "loading") {
-    return (
-      <div className="h-full w-full overflow-hidden flex items-center justify-center">
-        <LoadingSpinner />
-      </div>
-    );
-  }
-
   return (
     <div className="overflow-hidden">
       <div className="lg:hidden">
-        <Header title="" time="state" />
+        <Header title="" />
       </div>
 
       <Tabs />

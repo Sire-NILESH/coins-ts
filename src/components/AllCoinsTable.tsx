@@ -4,7 +4,6 @@ import { Coin } from "../../typing";
 import routeConfig from "../config/routeConfig";
 import { useAppSelector } from "../redux/store";
 import { formatCurrency } from "../uitls/helper";
-import LoadingSpinner from "./ui/LoadingSpinner";
 import Search from "./ui/Search";
 import appIcons from "../config/appIcons";
 import useDBWatchlistActions from "../hooks/useDBWatchlistActions";
@@ -19,6 +18,7 @@ import usePagination from "../hooks/usePagination";
 import useSearch from "../hooks/useSearch";
 import NoDataErr from "./NoDataErr";
 import useReloadTopCoins from "../hooks/useReloadTopCoins";
+import LoadingRowsSkeleton from "./LoadingRowsSkeleton";
 
 type TableRowProps = {
   data: Coin;
@@ -169,14 +169,6 @@ const AllCoinsTable = () => {
 
   const dataIsAvailable = allCoins && allCoins?.length > 0;
 
-  if (isLoading && !isError && !dataIsAvailable) {
-    return (
-      <div className="h-full w-full overflow-hidden flex items-center justify-center">
-        <LoadingSpinner />
-      </div>
-    );
-  }
-
   if (!isLoading && isError && !dataIsAvailable) {
     return (
       <div className="h-full w-full overflow-hidden flex items-center justify-center">
@@ -187,29 +179,32 @@ const AllCoinsTable = () => {
 
   return (
     <div onClick={handleStarClick} className="">
-      {dataIsAvailable && (
-        <section className="mt-5 antialiased md:px-4">
-          <div className="h-full space-y-10">
-            {/*  Table  */}
-            <div className="w-full rounded-3xl max-w-full mx-auto bg-primary border dark:border-primary">
-              <header className="flex flex-col gap-4 sm:flex-row items-center justify-between px-5 py-4">
-                <div className="w-full">
-                  <h2 className="font-semibold text-lg text-secondary">
-                    Top 250 Coins
-                  </h2>
-                  <p className="text-xs text-tertiary max-w-lg">
-                    {
-                      "A top 250 list of all the cryptocurrencies in the last 24 hours"
-                    }
-                    <br />
-                    {"(Ordered by Market cap)"}
-                  </p>
-                </div>
-                <Search setSearch={setSearch} />
-              </header>
+      <section className="mt-5 antialiased md:px-4">
+        <div className="h-full space-y-10">
+          {/*  Table  */}
+          <div className="w-full rounded-3xl max-w-full mx-auto bg-primary border dark:border-primary">
+            <header className="flex flex-col gap-4 sm:flex-row items-center justify-between px-5 py-4">
+              <div className="w-full">
+                <h2 className="font-semibold text-lg text-secondary">
+                  Top 250 Coins
+                </h2>
+                <p className="text-xs text-tertiary max-w-lg">
+                  {
+                    "A top 250 list of all the cryptocurrencies in the last 24 hours"
+                  }
+                  <br />
+                  {"(Ordered by Market cap)"}
+                </p>
+              </div>
+              <Search setSearch={setSearch} />
+            </header>
 
-              <div className="p-3">
-                <div className="overflow-x-auto">
+            <div className="p-3">
+              <div className="overflow-x-auto">
+                {/* loading skeleton */}
+                <LoadingRowsSkeleton isLoading={isLoading} rowCount={11} />
+
+                {dataIsAvailable && !isLoading && (
                   <table
                     onClick={handleStarClick}
                     className="table-auto w-full"
@@ -258,20 +253,20 @@ const AllCoinsTable = () => {
                       ))}
                     </tbody>
                   </table>
-                </div>
+                )}
               </div>
             </div>
-
-            <Pagination
-              currentPage={currentPage}
-              pageSetter={pageSetter}
-              pageEnteries={pageEnteries}
-              totalPages={totalPages}
-              totalEnteries={totalEnteries}
-            />
           </div>
-        </section>
-      )}
+
+          <Pagination
+            currentPage={currentPage}
+            pageSetter={pageSetter}
+            pageEnteries={pageEnteries}
+            totalPages={totalPages}
+            totalEnteries={totalEnteries}
+          />
+        </div>
+      </section>
     </div>
   );
 };

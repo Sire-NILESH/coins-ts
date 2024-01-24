@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getExchanges } from "../uitls/api";
-import { Exchange } from "../../typing";
+import { Exchange, Exchanges } from "../../typing";
 import { RootState } from "./store";
 import axios from "axios";
+import { exchangesData } from "../data/exchanges/exchangesData";
 
 interface InitialState {
   isLoading: boolean;
@@ -20,7 +21,10 @@ const initialState: InitialState = {
 
 // Async Thunk Action
 export const fetchExchanges = createAsyncThunk("fetch/exchanges", async () => {
-  const response = await axios.get(getExchanges());
+  // const response = await axios.get(getExchanges());
+  const response: { data: Exchanges } = await new Promise((resolve) => {
+    setTimeout(() => resolve({ data: exchangesData }), 80);
+  });
   return response.data;
 });
 

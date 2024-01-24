@@ -20,7 +20,7 @@ import {
   FiArrowLeft,
   FiArrowRight,
   FiLogIn,
-  FiRefreshCw,
+  // FiRefreshCw,
 } from "react-icons/fi";
 import { HiOutlineIdentification } from "react-icons/hi";
 import {
@@ -34,10 +34,11 @@ import {
   IoHomeOutline,
   IoLogoBitbucket,
 } from "react-icons/io5";
-import { MdForum, MdTrendingUp } from "react-icons/md";
+import { MdForum, MdRefresh, MdTrendingUp } from "react-icons/md";
 import { RiErrorWarningLine } from "react-icons/ri";
 import { TbError404 } from "react-icons/tb";
 import { PiBinocularsLight } from "react-icons/pi";
+import { RxTriangleDown, RxTriangleUp } from "react-icons/rx";
 
 type Props = {
   className?: string;
@@ -63,7 +64,9 @@ const appIcons = {
   logout: <BiLogOut className="h-5 w-5" />,
   github: <FaGithub className="w-5 h-5" />,
   react: <FaReact className="text-blue-200 h-8 w-8 2xl:h-10 2xl:w-10" />,
-  error: <RiErrorWarningLine className="h-10 w-10 text-red-500" />,
+  error: ({ className }: Props) => (
+    <RiErrorWarningLine className={"h-10 w-10 text-red-500 " + className} />
+  ),
   calendar: <BsCalendar4Week className="inline h-3 w-3 text-tertiary" />,
   clock: <BsClock className="inline h-4 w-4 text-tertiary" />,
   starOutline: (
@@ -76,10 +79,12 @@ const appIcons = {
   arrowLeft: <FiArrowLeft className="w-5 h-5" />,
   chevronDown: <IoChevronDownOutline className="w-5 h-5" />,
   chevronUp: <IoChevronUpOutline className="w-5 h-5" />,
+  triangleUp: <RxTriangleUp className="text-green-600" />,
+  triangleDown: <RxTriangleDown className="text-red-600" />,
   trendingDown: <IoIosTrendingDown className="w-5 h-5 text-red-500" />,
   trendingUp: <IoIosTrendingUp className="w-5 h-5 text-green-600" />,
   Refresh: ({ className }: Props) => (
-    <FiRefreshCw className={"text-secondary " + className} />
+    <MdRefresh className={"text-secondary " + className} />
   ),
   Search: ({ className }: Props) => (
     <IoIosSearch className={"text-secondary " + className} />

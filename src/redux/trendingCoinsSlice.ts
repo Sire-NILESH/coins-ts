@@ -3,6 +3,7 @@ import { getTrendingCoins } from "../uitls/api";
 import { Trending } from "../../typing";
 import { RootState } from "./store";
 import axios from "axios";
+import { trending } from "../data/trending/trendingCoins";
 
 interface InitialState {
   isLoading: boolean;
@@ -22,7 +23,10 @@ const initialState: InitialState = {
 export const fetchTrending = createAsyncThunk(
   "fetch/trendingCoins",
   async () => {
-    const response = await axios.get(getTrendingCoins());
+    // const response = await axios.get(getTrendingCoins());
+    const response: { data: Trending } = await new Promise((resolve) => {
+      setTimeout(() => resolve({ data: trending }), 80);
+    });
     return response.data;
   }
 );

@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { useAppSelector } from "../redux/store";
 import HeaderButton from "./ui/HeaderButton";
 import {
@@ -20,7 +20,10 @@ import useReloadTopCoins from "../hooks/useReloadTopCoins";
 import useReloadTrendingCoins from "../hooks/useReloadTrendingCoins";
 import useReloadExchanges from "../hooks/useReloadExchanges";
 import useReloadData from "../hooks/useReloadData";
-import { selectWatchlistCoinsTimestamp } from "../redux/watchlistSlice";
+import {
+  selectWatchlistCoinsIsLoading,
+  selectWatchlistCoinsTimestamp,
+} from "../redux/watchlistSlice";
 import useReloadWatchlist from "../hooks/useReloadWatchlist";
 
 interface IProps
@@ -29,8 +32,9 @@ interface IProps
     HTMLDivElement
   > {}
 
-const DataTimeAndReload: React.FC<IProps> = (props) => {
+const DataTimeAndReload: React.FC<IProps> = () => {
   const { pathname } = useLocation();
+  const [minLoadingTime, setMinLoadingTime] = useState<boolean>(false);
 
   const reloadTopCoins = useReloadTopCoins();
   const reloadTrendingCoins = useReloadTrendingCoins();
@@ -102,46 +106,64 @@ const DataTimeAndReload: React.FC<IProps> = (props) => {
     ]
   );
 
-  const reloadData = getReloadData(pathname);
+  const reloadData = useMemo(
+    () => getReloadData(pathname),
+    [getReloadData, pathname]
+  );
 
   const exchangesIsLoading = useAppSelector(selectExchnagesIsLoading);
   const topCoinsIsLoading = useAppSelector(selectTopCoinsIsLoading);
   const trendingCoinsIsLoading = useAppSelector(selectTrendingCoinsIsLoading);
+  const watchlistCoinsIsLoading = useAppSelector(selectWatchlistCoinsIsLoading);
+
+  const startMinLoadingTime = () => {
+    setMinLoadingTime(true);
+
+    setTimeout(() => {
+      setMinLoadingTime(false);
+    }, 1000);
+  };
 
   const overallLoading =
-    exchangesIsLoading || trendingCoinsIsLoading || topCoinsIsLoading;
+    exchangesIsLoading ||
+    trendingCoinsIsLoading ||
+    topCoinsIsLoading ||
+    watchlistCoinsIsLoading ||
+    minLoadingTime;
 
   const isReloadType = reloadData.reloadFn !== null;
 
   return (
-    <div
-      className={`flex items-center justify-center space-x-2 xl:space-x-8 ${
-        !isReloadType ? "hover:cursor-default" : "hover:cursor-pointer"
-      }`}
-    >
-      <div
+    <div className={"flex items-center justify-center space-x-2 xl:space-x-8"}>
+      <button
+        disabled={overallLoading}
         onClick={() => {
-          reloadData.reloadFn && reloadData.reloadFn();
+          if (reloadData.reloadFn) {
+            startMinLoadingTime();
+            reloadData.reloadFn();
+          }
         }}
-        className={"flex space-x-2 items-center"}
+        className={`px-2 md:px-4 py-1 rounded-lg flex space-x-2 items-center hover:bg-secondary transition-colors duration-300 ease-in-out ${
+          !isReloadType ? "hover:cursor-default" : "hover:cursor-pointer"
+        } ${overallLoading ? "!cursor-not-allowed" : ""}`}
       >
         {isReloadType ? (
           <appIcons.Refresh
-            className={`h-5 w-5 font-bold mr-1 ${
+            className={`h-6 w-6 font-bold mr-1 ${
               overallLoading ? " animate-spin" : ""
             }`}
           />
         ) : null}
-        <p className="hidden xl:block text-sm lg:text-base font-normal text-tertiary">
+        <p className="hidden xl:block text-sm xl:text-base font-normal text-tertiary">
           {"As of "}
         </p>
-        <p className="hidden sm:block text-sm lg:text-base font-normal text-tertiary">
+        <p className="hidden sm:block text-sm xl:text-base font-normal text-tertiary">
           {`${reloadData.time.toDateString()}, `}
         </p>
-        <p className="hidden sm:block text-sm lg:text-base font-semibold text-secondary">
+        <p className="hidden sm:block text-sm xl:text-base font-semibold text-secondary">
           {reloadData.time.toLocaleTimeString()}
         </p>
-      </div>
+      </button>
 
       <HeaderButton />
     </div>

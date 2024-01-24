@@ -3,6 +3,7 @@ import { getTopCoins } from "../uitls/api";
 import { Coin } from "../../typing";
 import { RootState } from "./store";
 import axios from "axios";
+import { allCoins } from "../data/all-coins/all-coin-markets";
 
 interface InitialState {
   isLoading: boolean;
@@ -22,7 +23,10 @@ const initialState: InitialState = {
 export const fetchTopCoins = createAsyncThunk(
   "fetch/topCurrencies",
   async () => {
-    const response = await axios.get(getTopCoins());
+    // const response = await axios.get(getTopCoins());
+    const response: { data: Coin[] } = await new Promise((resolve) => {
+      setTimeout(() => resolve({ data: allCoins }), 80);
+    });
     return response.data;
   }
 );

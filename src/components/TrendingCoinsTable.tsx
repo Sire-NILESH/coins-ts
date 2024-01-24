@@ -2,10 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { TrendingCoin } from "../../typing";
 import routeConfig from "../config/routeConfig";
-import { useAppSelector } from "../redux/store";
-import LoadingSpinner from "./ui/LoadingSpinner";
-import NoDataErr from "./NoDataErr";
 import useReloadTrendingCoins from "../hooks/useReloadTrendingCoins";
+import { useAppSelector } from "../redux/store";
+import LoadingRowsSkeleton from "./LoadingRowsSkeleton";
+import NoDataErr from "./NoDataErr";
 
 const TableRow: React.FC<{
   coin: TrendingCoin;
@@ -64,14 +64,6 @@ const TrendingCoinsTable: React.FC = () => {
 
   const dataIsAvailable = allTrendingCoins && allTrendingCoins?.coins.length;
 
-  if (isLoading && !isError && !dataIsAvailable) {
-    return (
-      <div className="h-full w-full overflow-hidden flex items-center justify-center">
-        <LoadingSpinner />
-      </div>
-    );
-  }
-
   if (!isLoading && isError && !dataIsAvailable) {
     return (
       <div className="h-full w-full overflow-hidden flex items-center justify-center">
@@ -82,26 +74,27 @@ const TrendingCoinsTable: React.FC = () => {
 
   return (
     <>
-      {allTrendingCoins && allTrendingCoins?.coins.length > 0 && (
-        <section className="antialiased w-full text-tertiary md:px-4">
-          <div className="h-full space-y-10">
-            {/* <!-- Table --> */}
-            <div className="w-full rounded-3xl max-w-full mx-auto bg-primary border border-gray-200 dark:border-primary">
-              <header className="px-5 py-4">
-                <h2 className="font-semibold text-lg text-secondary">
-                  Trending
-                </h2>
-                <p className="text-xs text-tertiary max-w-lg">
-                  {
-                    "Top trending coins on CoinGecko as searched by users in the last 24 hours."
-                  }
-                  <br />
-                  {"(Ordered by most popular first)"}
-                </p>
-              </header>
+      <section className="antialiased w-full text-tertiary md:px-4">
+        <div className="h-full space-y-10">
+          {/* <!-- Table --> */}
+          <div className="w-full rounded-3xl max-w-full mx-auto bg-primary border border-gray-200 dark:border-primary">
+            <header className="px-5 py-4">
+              <h2 className="font-semibold text-lg text-secondary">Trending</h2>
+              <p className="text-xs text-tertiary max-w-lg">
+                {
+                  "Top trending coins on CoinGecko as searched by users in the last 24 hours."
+                }
+                <br />
+                {"(Ordered by most popular first)"}
+              </p>
+            </header>
 
-              <div className="p-3">
-                <div className="overflow-x-auto">
+            <div className="p-3">
+              <div className="overflow-x-auto">
+                {/* loading skeleton */}
+                <LoadingRowsSkeleton isLoading={isLoading} rowCount={9} />
+
+                {dataIsAvailable && !isLoading && (
                   <table className="table-auto w-full">
                     <thead className="text-xs font-semibold uppercase text-quaternary mb-5 ">
                       <tr className="">
@@ -137,12 +130,12 @@ const TrendingCoinsTable: React.FC = () => {
                       ))}
                     </tbody>
                   </table>
-                </div>
+                )}
               </div>
             </div>
           </div>
-        </section>
-      )}
+        </div>
+      </section>
     </>
   );
 };

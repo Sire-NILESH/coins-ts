@@ -52,7 +52,7 @@ const SideBar = function () {
           alt={user?.displayName ? user.displayName : "user"}
         />
 
-        <h4 className="mt-2 mx-2 font-medium text-white hover:underline">
+        <h4 className="text-sm 2xl:text-base mt-2 mx-2 font-medium text-white hover:underline">
           {user?.displayName ? user.displayName : "user"}
         </h4>
         <p className="mx-2 mt-1 text-xs 2xl:text-sm text-blue-200 hover:underline line-clamp-1">

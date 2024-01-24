@@ -30,7 +30,7 @@ interface IProps {
 const CoinInfoCard: React.FC<IProps> = (props) => {
   return (
     <Link to={props.onClickNavigateTo} className="place-self-center">
-      <figure className="bg-primary sm:bg-transparent rounded-2xl border shadow sm:shadow-none dark:border-gray-800 sm:border-transparent sm:dark:border-transparent w-[20rem] md:w-[20rem] px-4 flex gap-1 flex-col py-4 hover:cursor-pointer">
+      <figure className="bg-primary sm:bg-transparent rounded-2xl border shadow sm:shadow-none dark:border-gray-800 sm:border-transparent sm:dark:border-transparent w-[20rem] px-4 flex gap-1 flex-col py-4 hover:cursor-pointer">
         {/* TITLE */}
         <div className="flex items-center justify-between">
           <div className="flex items-center font-semibold text-base gap-1 ">

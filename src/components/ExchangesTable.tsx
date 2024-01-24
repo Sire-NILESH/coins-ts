@@ -9,11 +9,11 @@ import {
 import { useAppSelector } from "../redux/store";
 import { formatCurrency } from "../uitls/helper";
 import { Exchange } from "./../../typing.d";
-import LoadingSpinner from "./ui/LoadingSpinner";
 import Pagination from "./ui/Pagination";
 import Search from "./ui/Search";
 import useReloadExchanges from "../hooks/useReloadExchanges";
 import NoDataErr from "./NoDataErr";
+import LoadingRowsSkeleton from "./LoadingRowsSkeleton";
 
 const TableRow: React.FC<{ data: Exchange }> = ({ data }) => {
   return (
@@ -107,14 +107,6 @@ const ExchangesTable = () => {
 
   const dataIsAvailable = allExchanges && allExchanges.length > 0;
 
-  if (isLoading && !isError && !dataIsAvailable) {
-    return (
-      <div className="h-full w-full overflow-hidden flex items-center justify-center">
-        <LoadingSpinner />
-      </div>
-    );
-  }
-
   if (!isLoading && isError && !dataIsAvailable) {
     return (
       <div className="h-full w-full overflow-hidden flex items-center justify-center">
@@ -125,29 +117,32 @@ const ExchangesTable = () => {
 
   return (
     <>
-      {allExchanges && allExchanges.length > 0 && (
-        <section className="antialiased w-full text-gray-600 md:px-4">
-          <div className="h-full space-y-10">
-            {/*  Table */}
-            <div className="w-full rounded-3xl max-w-full mx-auto bg-primary border border-gray-200 dark:border-primary">
-              <header className="flex flex-col gap-4 sm:flex-row items-center justify-between px-5 py-4">
-                <div className="w-full">
-                  <h2 className="font-semibold text-lg text-secondary">
-                    Exchanges
-                  </h2>
-                  <p className="text-xs text-tertiary max-w-lg">
-                    {
-                      "List of all exchanges, Active with trading volumes in the last 24 hours"
-                    }
-                    <br />
-                    {"(Ordered by Trust score rank)"}
-                  </p>
-                </div>
-                <Search setSearch={setSearch} />
-              </header>
+      <section className="antialiased w-full text-gray-600 md:px-4">
+        <div className="h-full space-y-10">
+          {/*  Table */}
+          <div className="w-full rounded-3xl max-w-full mx-auto bg-primary border border-gray-200 dark:border-primary">
+            <header className="flex flex-col gap-4 sm:flex-row items-center justify-between px-5 py-4">
+              <div className="w-full">
+                <h2 className="font-semibold text-lg text-secondary">
+                  Exchanges
+                </h2>
+                <p className="text-xs text-tertiary max-w-lg">
+                  {
+                    "List of all exchanges, Active with trading volumes in the last 24 hours"
+                  }
+                  <br />
+                  {"(Ordered by Trust score rank)"}
+                </p>
+              </div>
+              <Search setSearch={setSearch} />
+            </header>
 
-              <div className="p-3">
-                <div className="overflow-x-auto">
+            <div className="p-3">
+              <div className="overflow-x-auto">
+                {/* loading skeleton */}
+                <LoadingRowsSkeleton isLoading={isLoading} rowCount={11} />
+
+                {dataIsAvailable && !isLoading && (
                   <table className="table-auto w-full">
                     <thead className="text-xs font-semibold uppercase text-gray-400 mb-5 ">
                       <tr className="">
@@ -197,20 +192,20 @@ const ExchangesTable = () => {
                       ))}
                     </tbody>
                   </table>
-                </div>
+                )}
               </div>
             </div>
-
-            <Pagination
-              currentPage={currentPage}
-              pageSetter={pageSetter}
-              pageEnteries={pageEnteries}
-              totalPages={totalPages}
-              totalEnteries={totalEnteries}
-            />
           </div>
-        </section>
-      )}
+
+          <Pagination
+            currentPage={currentPage}
+            pageSetter={pageSetter}
+            pageEnteries={pageEnteries}
+            totalPages={totalPages}
+            totalEnteries={totalEnteries}
+          />
+        </div>
+      </section>
     </>
   );
 };

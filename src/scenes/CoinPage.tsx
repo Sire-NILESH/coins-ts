@@ -52,7 +52,7 @@ const CoinPage = () => {
 
   return (
     <div className="h-full w-full overflow-scroll">
-      <Header title="Coin page" time="local" hasGoBackBtn={true} />
+      <Header title="Coin page" hasGoBackBtn={true} />
 
       {isError && !coin && <NoDataErr reloadHandler={reloadDataState} />}
 

@@ -18,7 +18,7 @@ const DashboardLayout = () => {
   }, [location.pathname, navigate]);
 
   return (
-    <div className="w-[100vw] max-w-[85rem] flex flex-col md:flex-row gap-2 lg:gap-10 justify-center sm:px-6 lg:px-6 xl:px-0">
+    <div className="w-[100vw] max-w-[85rem] flex flex-col md:flex-row gap-2 lg:gap-5 xl:gap-10 justify-center sm:px-6 lg:px-6 xl:px-0">
       <DataLayer />
       <DataErrorModal />
 

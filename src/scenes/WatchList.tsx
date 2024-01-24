@@ -6,6 +6,7 @@ import Header from "../components/ui/Header";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
 import Pagination from "../components/ui/Pagination";
 import usePagination from "../hooks/usePagination";
+import useReloadWatchlist from "../hooks/useReloadWatchlist";
 import useWatchlistData from "../hooks/useWatchlistData";
 
 const WatchList = () => {
@@ -15,6 +16,8 @@ const WatchList = () => {
     watchlistedCoinsData,
     watchlistIsError,
   } = useWatchlistData();
+
+  const reloadWatchlist = useReloadWatchlist();
 
   const {
     pageData,
@@ -43,11 +46,11 @@ const WatchList = () => {
   return (
     <div className="h-full w-full">
       <div className="pb-1 overflow-hidden">
-        <Header title="Watchlist Coins" time="state" />
+        <Header title="Watchlist Coins" />
       </div>
 
       {watchlistIsError && !watchlistIsLoading ? (
-        <NoDataErr reloadHandler={() => {}} />
+        <NoDataErr reloadHandler={reloadWatchlist} />
       ) : (
         <main className="w-full">
           <p className="mt-5 md:mt-0 ml-5 text-xs text-secondary max-w-lg">
