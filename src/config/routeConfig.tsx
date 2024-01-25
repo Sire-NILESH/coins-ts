@@ -49,15 +49,21 @@ const routeLinking = {
   },
   register: {
     id: "register",
-    path: "/register",
+    path: "/auth/register",
     name: "Register",
     pathName: "register",
   },
   login: {
     id: "login",
-    path: "/login",
+    path: "/auth/login",
     name: "Login",
     pathName: "login",
+  },
+  checkAuthStatus: {
+    id: "checkAuthStatus",
+    path: "/auth/check-auth-status",
+    name: "Check User",
+    pathName: "check-auth-status",
   },
   notFound: {
     id: "notFound",

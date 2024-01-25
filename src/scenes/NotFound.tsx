@@ -1,7 +1,10 @@
 import { useNavigate } from "react-router-dom";
+import Button from "../components/ui/Button";
+import routeConfig from "../config/routeConfig";
 
 const NotFound = () => {
   const navigate = useNavigate();
+
   return (
     <div className="h-screen justify-center">
       <center className="mt-24 m-auto">
@@ -94,22 +97,33 @@ const NotFound = () => {
             strokeWidth="8"
           />
         </svg>
-        <div className=" tracking-widest mt-4">
-          <span className="text-primary text-6xl block">
+        <div className="tracking-widest mt-4">
+          <span className="text-primary text-5xl lg:text-6xl block">
             <span>4 0 4</span>
           </span>
-          <span className="text-tertiary text-xl">
+          <span className="inline-block mt-6 text-tertiary text-base lg:text-xl">
             Sorry, We couldn't find what you are looking for!
           </span>
         </div>
       </center>
-      <center className="mt-6">
-        <button
-          onClick={() => navigate(-1)}
-          className="text-gray-200 dark:text-primary hover:bg-blue-500  text-xl bg-blue-600 p-3 rounded-md hover:shadow-md"
+      <center className="mt-6 flex flex-col items-center space-y-5">
+        <Button
+          onClick={() => {
+            navigate(-1);
+          }}
+          className="min-w-32 !bg-blue-600 p-3 hover:shadow-md"
         >
-          Go back{" "}
-        </button>
+          <p className="text-white text-base">Go back</p>
+        </Button>
+
+        <Button
+          onClick={() => {
+            navigate(routeConfig.routeLinking.home.path);
+          }}
+          className="min-w-32 !bg-blue-600 p-3 hover:shadow-md"
+        >
+          <p className="text-white text-base">Home</p>
+        </Button>
       </center>
     </div>
   );

@@ -14,6 +14,7 @@ import CoinPage from "../scenes/CoinPage";
 import Login from "../scenes/Login";
 import Register from "../scenes/Register";
 import NotFound from "../scenes/NotFound";
+import CheckingAuthPage from "../scenes/CheckingAuthPage";
 
 const AppRoutes = () => {
   return (
@@ -41,8 +42,12 @@ const AppRoutes = () => {
           </Route>
 
           {/* Public routes */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route
+            path="/auth/check-auth-status"
+            element={<CheckingAuthPage />}
+          />
+          <Route path="/auth/login" element={<Login />} />
+          <Route path="/auth/register" element={<Register />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Route>

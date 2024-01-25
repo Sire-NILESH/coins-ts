@@ -14,7 +14,7 @@ const AuthProtectedLayout = () => {
         <Outlet />
       ) : (
         <Navigate
-          to={routeConfig.routeLinking.login.path}
+          to={routeConfig.routeLinking.checkAuthStatus.path}
           state={{ from: location }}
           replace
         />
