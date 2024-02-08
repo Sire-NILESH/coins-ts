@@ -7,6 +7,8 @@ module.exports = {
     extend: {
       colors: {
         bgLightMode: "#edf3ff",
+        primaryTheme: "var(--color-primary)",
+        primaryThemeHover: "var(--color-primaryHover)",
       },
       fontFamily: {
         poppins: ["Poppins"],

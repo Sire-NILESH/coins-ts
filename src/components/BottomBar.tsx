@@ -29,7 +29,7 @@ const BottomBar = () => {
   const path = useLocation();
 
   return (
-    <div className="w-[100vw] sm:w-[95vw] fixed bottom-4 z-50 px-2 sm:px-0 lg:hidden">
+    <div className="fixed bottom-4 left-0 right-0 z-50 px-2 lg:hidden">
       <div className="flex h-20 justify-around bg-blue-900 shadow-lg rounded-xl dark:border-gray-700">
         {routeConfig.bottombarRoutes.map((route) => {
           return (

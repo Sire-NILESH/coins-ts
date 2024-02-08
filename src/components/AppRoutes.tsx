@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import InitAuthCheck from "./InitAuthCheck";
 import AppLayout from "./AppLayout";
-import HomePage from "../scenes/HomePage";
 import AuthProtectedLayout from "./AuthProtectedLayout";
 import DashboardLayout from "./DashboardLayout";
 import Overview from "../scenes/Overview";
@@ -15,6 +14,7 @@ import Login from "../scenes/Login";
 import Register from "../scenes/Register";
 import NotFound from "../scenes/NotFound";
 import CheckingAuthPage from "../scenes/CheckingAuthPage";
+import Marketing from "../scenes/Marketing";
 
 const AppRoutes = () => {
   return (
@@ -23,7 +23,7 @@ const AppRoutes = () => {
       <Route element={<InitAuthCheck />}>
         <Route element={<AppLayout />}>
           {/* Public routes */}
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<Marketing />} />
 
           {/* Auth protected routes */}
           <Route element={<AuthProtectedLayout />}>
@@ -42,12 +42,12 @@ const AppRoutes = () => {
           </Route>
 
           {/* Public routes */}
-          <Route
-            path="/auth/check-auth-status"
-            element={<CheckingAuthPage />}
-          />
-          <Route path="/auth/login" element={<Login />} />
-          <Route path="/auth/register" element={<Register />} />
+          <Route path="/auth/">
+            <Route path="check-auth-status" element={<CheckingAuthPage />} />
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+          </Route>
+
           <Route path="*" element={<NotFound />} />
         </Route>
       </Route>

@@ -12,6 +12,7 @@ import {
 import { CiViewBoard } from "react-icons/ci";
 import {
   FaGithub,
+  FaGoogle,
   FaReact,
   FaTelegramPlane,
   FaUserCircle,
@@ -63,6 +64,7 @@ const appIcons = {
   login: <FiLogIn className="h-5 w-5" />,
   logout: <BiLogOut className="h-5 w-5" />,
   github: <FaGithub className="w-5 h-5" />,
+  google: <FaGoogle className="text-primary w-5 h-5" />,
   react: <FaReact className="text-blue-200 h-8 w-8 2xl:h-10 2xl:w-10" />,
   error: ({ className }: Props) => (
     <RiErrorWarningLine className={"h-10 w-10 text-red-500 " + className} />

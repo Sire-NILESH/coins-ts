@@ -134,7 +134,7 @@ const DataTimeAndReload: React.FC<IProps> = () => {
   const isReloadType = reloadData.reloadFn !== null;
 
   return (
-    <div className={"flex items-center justify-center space-x-2 xl:space-x-8"}>
+    <div className={"flex items-center justify-center space-x-2 xl:space-x-4"}>
       <button
         disabled={overallLoading}
         onClick={() => {

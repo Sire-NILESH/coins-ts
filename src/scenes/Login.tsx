@@ -18,6 +18,7 @@ import { modalActions } from "../redux/modalSlice";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import handleAuthErr from "../uitls/handleAuthErr";
 import { loginAuthSchema } from "../uitls/validationSchemas";
+import routeConfig from "../config/routeConfig";
 
 // zodResolver
 type TLogin = z.infer<typeof loginAuthSchema>;
@@ -131,7 +132,7 @@ const Login = () => {
             <LinkBtn
               className="mt-2 -ml-3"
               btnName="Create new account"
-              to="/register"
+              to={routeConfig.routeLinking.register.path}
             />
           </form>
         </AuthCardBody>

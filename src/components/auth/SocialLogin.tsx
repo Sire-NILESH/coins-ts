@@ -1,7 +1,7 @@
-import { FaGithub } from "react-icons/fa";
 import { authSelectors, loginWithGoogle } from "../../redux/authSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { useNavigate } from "react-router-dom";
+import appIcons from "../../config/appIcons";
 
 const SocialLogin = () => {
   const dispatch = useAppDispatch();
@@ -26,7 +26,8 @@ const SocialLogin = () => {
         }`}
       >
         <div className="w-max mx-auto flex items-center justify-center space-x-4">
-          <img src="images/google.svg" className="w-5" alt="" />
+          {/* <img src="images/google.svg" className="w-5 h-5" alt="" /> */}
+          {appIcons.google}
           <span className="block w-max text-sm font-semibold tracking-wide text-cyan-700 dark:text-white">
             With Google
           </span>
@@ -38,7 +39,7 @@ const SocialLogin = () => {
         className="hover:cursor-not-allowed w-full h-11 rounded-full bg-gray-900 px-6 transition hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-600 dark:bg-gray-700 dark:border dark:border-gray-600 dark:hover:bg-gray-800 dark:hover:border-gray-700"
       >
         <div className="w-max mx-auto flex items-center justify-center space-x-4 text-white">
-          <FaGithub className="w-5 h-5" />
+          {appIcons.github}
           <span className="block w-max text-sm font-semibold tracking-wide text-white">
             With Github
           </span>

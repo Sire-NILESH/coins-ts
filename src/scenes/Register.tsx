@@ -19,6 +19,7 @@ import { useAppDispatch, useAppSelector } from "../redux/store";
 import handleAuthErr from "../uitls/handleAuthErr";
 import { registerAuthFormSchema } from "../uitls/validationSchemas";
 import { registerAccount } from "./../redux/authSlice";
+import routeConfig from "../config/routeConfig";
 
 // zodResolver
 type TRegisterForm = z.infer<typeof registerAuthFormSchema>;
@@ -168,7 +169,7 @@ const Register = () => {
             <LinkBtn
               className="mt-2 -ml-3"
               btnName="Already have an account ?"
-              to="/login"
+              to={routeConfig.routeLinking.login.path}
             />
           </form>
         </AuthCardBody>

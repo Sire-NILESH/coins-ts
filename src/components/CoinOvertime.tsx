@@ -19,11 +19,7 @@ const CoinOvertime = ({ className, data }: Props) => {
           {appIcons.clock}
           {data.heading}
         </p>
-        {/* <div
-          className={`w-3 justify-self-end rounded-full h-3 ${colorCode(
-            data.checkPerfromaceOver
-          )}`}
-        /> */}
+
         {+data.checkPerfromaceOver.toFixed(3) > 0
           ? appIcons.trendingUp
           : appIcons.trendingDown}
