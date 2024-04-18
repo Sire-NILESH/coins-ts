@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const ActionBtns = () => {
   return (
-    <div className="flex flex-col items-center mb-8 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
+    <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
       <Link to={routeConfig.routeLinking.register.path}>
         <Button className="animate-bounce px-4 py-2 w-40 !bg-blue-700">
           <p className="text-white text-base font-medium">Join now</p>

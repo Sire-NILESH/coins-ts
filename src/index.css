@@ -130,7 +130,7 @@ code {
 .light {
   --color-primary: rgb(29 78 216);
   --color-primaryHover: rgb(37 99 235);
-  --color-bg-primary: rgb(239, 246, 255);
+  --color-bg-primary: #eff6ff;
   --color-bg-secondary: rgb(219, 234, 254);
   --color-bg-accent: rgb(243 232 255); /*purple-100*/
   --color-text-primary: rgb(51 65 85);

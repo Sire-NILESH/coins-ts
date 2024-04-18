@@ -14,7 +14,9 @@ const CallToAction = () => {
             crypto market.
           </p>
 
-          <ActionBtns />
+          <div className="flex justify-center">
+            <ActionBtns />
+          </div>
         </div>
       </div>
     </section>

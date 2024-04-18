@@ -3,31 +3,45 @@ import ActionBtns from "./ActionBtns";
 const Hero = () => {
   return (
     <section className="bg-primary dark:bg-slate-900">
-      <div className="py-8 px-4 mx-auto max-w-screen-xl text-center mt-10 lg:mt-0 lg:py-24 lg:px-12">
-        <span className="inline-flex justify-between items-center py-1 px-1 pr-4 mb-7 text-sm text-primary bg-secondary rounded-full divide-x-2 divide-gray-300 dark:divide-gray-700">
-          <span className="text-xs rounded-full px-4 py-1.5 ">New</span>{" "}
-          <span className="pl-4 text-sm font-medium">
-            All new CrypTrack is out!
-          </span>
-        </span>
+      <div className="py-8 px-4 mx-auto max-w-screen-xl mt-10 lg:mt-0 lg:py-24 lg:px-12">
+        <div className="grid grid-cols-8 gap-6">
+          <div className="col-span-8 lg:col-span-5 text-center lg:text-left">
+            <span className="inline-flex justify-between items-center py-1 px-1 pr-4 mb-7 text-sm text-primary bg-secondary rounded-full divide-x-2 divide-gray-300 dark:divide-gray-700">
+              <span className="text-xs rounded-full px-4 py-1.5">New</span>{" "}
+              <span className="pl-4 text-sm font-medium">
+                All new CrypTrack is out!
+              </span>
+            </span>
 
-        <h1 className="mb-4 text-3xl font-extrabold tracking-tight leading-none text-primary md:text-5xl lg:text-6xl dark:text-white">
-          <span className="hidden md:inline">
-            {"We provide the world’s largest crypto tracking services."}
-          </span>
-          <span className="md:hidden">
-            {"World’s largest crypto tracking services."}
-          </span>
-        </h1>
-        <p className="mb-8 text-base font-normal text-secondary lg:text-xl sm:px-16 xl:px-48">
-          Offering the most extensive crypto tracking services available,
-          providing real-time insights and analytics with the world's largest
-          digital asset market.
-        </p>
+            <h1 className="mb-4 text-3xl font-extrabold tracking-tight leading-none text-primary md:text-5xl lg:text-6xl dark:text-white">
+              <span className="hidden md:inline">
+                {"World’s largest crypto tracking service"}
+              </span>
+              <span className="md:hidden">
+                {"World’s largest crypto tracking service"}
+              </span>
+            </h1>
+            <p className="mb-8 text-base font-normal text-secondary lg:text-xl ">
+              Offering the most extensive crypto tracking services available,
+              providing real-time insights and analytics with the world's
+              largest digital asset market.
+            </p>
 
-        <ActionBtns />
+            <div className="flex justify-center lg:justify-start">
+              <ActionBtns />
+            </div>
+          </div>
 
-        <div className="lg:mt-24 px-4 mx-auto text-center md:max-w-screen-md lg:max-w-screen-lg lg:px-36">
+          <div className="col-span-8 lg:col-span-3 place-self-center">
+            <img
+              src="/images/hero-1.jpg"
+              className="min-w-full rounded-lg shadow"
+              alt="crypto illustration"
+            />
+          </div>
+        </div>
+
+        <div className="mt-20 lg:mt-24 px-4 mx-auto text-center md:max-w-screen-md lg:max-w-screen-lg lg:px-36">
           <span className="font-semibold text-gray-400 uppercase">
             FEATURED IN
           </span>
