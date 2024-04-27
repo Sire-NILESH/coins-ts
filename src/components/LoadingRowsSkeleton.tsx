@@ -12,7 +12,7 @@ const LoadingRowsSkeleton = ({
             return (
               <div
                 key={i}
-                className="bg-secondary animate-pulse h-12 rounded-md my-2"
+                className="bg-secondary dark:bg-white/10 animate-pulse h-12 rounded-md my-2"
               />
             );
           })

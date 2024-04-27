@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { authSelectors } from "../redux/authSlice";
 import { doc, onSnapshot } from "firebase/firestore";
 import { useAppDispatch, useAppSelector } from "../redux/store";
-import { db } from "../firebase";
+import { db } from "../uitls/firebase";
 import { watchlistSliceActions } from "../redux/watchlistSlice";
 
 const useLoadDBWatchlist = () => {
@@ -35,7 +35,7 @@ const useLoadDBWatchlist = () => {
         };
       }
     } catch (error) {
-      console.log(error);
+      // console.error(error);
     }
   }, [dispatch, user]);
 };

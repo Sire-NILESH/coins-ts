@@ -13,12 +13,12 @@ const Brand = ({ isOnColouredBg }: Props) => {
       </div>
       <p
         className={`font-bold text-lg 2xl:text-3xl ${
-          isOnColouredBg ? "text-white" : "text-primary"
+          isOnColouredBg ? "text-white" : "text-foreground"
         }`}
       >
         Cryp
         <span
-          className={` dark:text-blue-500 ${
+          className={`dark:text-blue-500 ${
             isOnColouredBg ? "text-blue-500" : "text-blue-600"
           }`}
         >

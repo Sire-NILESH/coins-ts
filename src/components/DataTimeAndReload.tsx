@@ -25,12 +25,19 @@ import {
   selectWatchlistCoinsTimestamp,
 } from "../redux/watchlistSlice";
 import useReloadWatchlist from "../hooks/useReloadWatchlist";
+import { formatDistance } from "date-fns";
 
 interface IProps
   extends React.DetailedHTMLProps<
     React.HTMLAttributes<HTMLDivElement>,
     HTMLDivElement
   > {}
+
+function getRelativeDate(current: number, past: number) {
+  const relativeDate = formatDistance(current, past);
+
+  return relativeDate;
+}
 
 const DataTimeAndReload: React.FC<IProps> = () => {
   const { pathname } = useLocation();
@@ -54,39 +61,54 @@ const DataTimeAndReload: React.FC<IProps> = () => {
     function (pathname: string) {
       const routes = routeConfig.routeLinking;
       let reload: {
-        time: Date;
+        time: number;
         reloadFn: null | (() => void);
-      } = { time: new Date(overallDatatime), reloadFn: reloadOverallData };
+      } = {
+        time: overallDatatime,
+        reloadFn: reloadOverallData,
+      };
 
       switch (pathname) {
         case routes.overview.path:
           reload = {
-            time: new Date(overallDatatime),
+            time: overallDatatime,
             reloadFn: reloadOverallData,
           };
           break;
 
         case routes.trending.path:
           reload = {
-            time: new Date(trendingCoinsTime),
+            time: trendingCoinsTime,
             reloadFn: reloadTrendingCoins,
           };
           break;
 
         case routes.exchanges.path:
-          reload = { time: new Date(exchangesTime), reloadFn: reloadExchanges };
+          reload = {
+            time: exchangesTime,
+            reloadFn: reloadExchanges,
+          };
           break;
 
         case routes.topCoins.path:
-          reload = { time: new Date(topCoinsTime), reloadFn: reloadTopCoins };
+          reload = {
+            time: topCoinsTime,
+            reloadFn: reloadTopCoins,
+          };
           break;
 
         case routes.watchlist.path:
-          reload = { time: new Date(watchlistTime), reloadFn: reloadWatchlist };
+          reload = {
+            time: watchlistTime,
+            reloadFn: reloadWatchlist,
+          };
           break;
 
         default:
-          reload = { time: new Date(Date.now()), reloadFn: null };
+          reload = {
+            time: Date.now(),
+            reloadFn: null,
+          };
           break;
       }
 
@@ -154,14 +176,8 @@ const DataTimeAndReload: React.FC<IProps> = () => {
             }`}
           />
         ) : null}
-        <p className="hidden xl:block text-sm xl:text-base font-normal text-tertiary">
-          {"As of "}
-        </p>
-        <p className="hidden sm:block text-sm xl:text-base font-normal text-tertiary">
-          {`${reloadData.time.toDateString()}, `}
-        </p>
-        <p className="hidden sm:block text-sm xl:text-base font-semibold text-secondary">
-          {reloadData.time.toLocaleTimeString()}
+        <p className="hidden md:block text-sm xl:text-base font-normal text-card-foreground/70">
+          {getRelativeDate(Date.now(), reloadData.time) + " ago"}
         </p>
       </button>
 

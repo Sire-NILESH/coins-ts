@@ -22,12 +22,12 @@ const footerLinks = [
 
 const Footer = () => {
   return (
-    <footer className="bg-primary rounded-lg dark:bg-slate-900 border-gray-200 dark:border-gray-700 border-t">
+    <footer className="border-border border-t">
       <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
         <div className="space-y-2 sm:flex sm:items-center sm:justify-between">
           <Brand />
 
-          <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-secondary sm:mb-0">
+          <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-foreground sm:mb-0">
             {footerLinks.map((link, i) => (
               <li>
                 <Link
@@ -42,8 +42,8 @@ const Footer = () => {
           </ul>
         </div>
 
-        <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-        <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
+        <hr className="my-6 border-border sm:mx-auto lg:my-8" />
+        <span className="block text-sm text-foreground/70 sm:text-center">
           © 2023{" "}
           <Link to="/" className="hover:underline">
             CrypTrack™

@@ -35,7 +35,7 @@ import {
   IoHomeOutline,
   IoLogoBitbucket,
 } from "react-icons/io5";
-import { MdForum, MdRefresh, MdTrendingUp } from "react-icons/md";
+import { MdClose, MdForum, MdRefresh, MdTrendingUp } from "react-icons/md";
 import { RiErrorWarningLine } from "react-icons/ri";
 import { TbError404 } from "react-icons/tb";
 import { PiBinocularsLight } from "react-icons/pi";
@@ -85,18 +85,19 @@ const appIcons = {
   triangleDown: <RxTriangleDown className="text-red-600" />,
   trendingDown: <IoIosTrendingDown className="w-5 h-5 text-red-500" />,
   trendingUp: <IoIosTrendingUp className="w-5 h-5 text-green-600" />,
+  close: <MdClose className="w-5 h-5 text-white" />,
   Refresh: ({ className }: Props) => (
-    <MdRefresh className={"text-secondary " + className} />
+    <MdRefresh className={"text-foreground " + className} />
   ),
   Search: ({ className }: Props) => (
-    <IoIosSearch className={"text-secondary " + className} />
+    <IoIosSearch className={"text-white " + className} />
   ),
   user_lg: (
     <FaUserCircle className="w-20 h-20 mx-2 rounded-full border border-primary mt-1 text-primary" />
   ),
 
   User: ({ className }: Props) => (
-    <FaUserCircle className={"text-secondary " + className} />
+    <FaUserCircle className={"text-foreground " + className} />
   ),
 
   // social icons

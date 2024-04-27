@@ -15,8 +15,8 @@ import CoinReportWrapper from "./CoinReportWrapper";
 
 const ReportRow = ({ coin }: { coin: Coin }) => {
   return (
-    <div className="flex gap-2 items-center">
-      <span className="text-xs font-bold text-tertiary px-2 py-1 inline rounded-full border border-primary dark:border-gray-700">
+    <div className="flex gap-2 items-center text-card-foreground/70">
+      <span className="text-xs font-bold px-2 py-1 inline rounded-full border border-border">
         {coin.market_cap_rank}
       </span>
       <CoinImage image={coin.image} name={coin.name} />
@@ -27,7 +27,7 @@ const ReportRow = ({ coin }: { coin: Coin }) => {
           ? appIcons.triangleUp
           : appIcons.triangleDown}
 
-        <span className="text-xs font-bold text-tertiary px-2 py-1">{`${formatCurrency(
+        <span className="text-xs font-bold px-2 py-1">{`${formatCurrency(
           coin.market_cap_change_percentage_24h,
           3
         )}%`}</span>

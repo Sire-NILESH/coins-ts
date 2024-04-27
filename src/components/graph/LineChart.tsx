@@ -59,7 +59,7 @@ const LineChart: React.FC<IProps> = ({ coin }) => {
   }
 
   return (
-    <div className="h-full w-full">
+    <div className="w-full">
       {chartData ? (
         <div className="flex flex-col items-center">
           <Line
@@ -91,22 +91,23 @@ const LineChart: React.FC<IProps> = ({ coin }) => {
               },
             }}
           />
-          <div className="w-auto mx-auto flex mt-5 items-center space-x-8">
+          <div className="w-auto mt-8 mx-auto flex items-center">
             {chartIntervals.map((day) => (
-              <div
+              <button
                 key={day.value}
+                className="p-4 hover:bg-secondary rounded-md hover:text-primary"
                 onClick={() => {
                   setDays(day.value);
                 }}
               >
                 <p
                   className={`${
-                    day.value === days ? "text-blue-500" : "text-tertiary"
-                  } text-xs font-semibold cursor-pointer hover:text-primary`}
+                    day.value === days ? "text-primary" : ""
+                  } text-xs font-semibold`}
                 >
                   {day.label}
                 </p>
-              </div>
+              </button>
             ))}
           </div>
         </div>

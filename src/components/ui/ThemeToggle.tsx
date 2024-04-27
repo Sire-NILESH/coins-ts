@@ -16,7 +16,8 @@ const ThemeToggle = ({ disableText }: { disableText?: boolean }) => {
             setTheme && setTheme(theme === "dark" ? "light" : "dark")
           }
         >
-          <HiSun className="text-primary mr-1" /> {disableText ? "" : "Light"}
+          <HiSun className="text-foreground mr-1" />{" "}
+          {disableText ? "" : "Light"}
         </button>
       ) : (
         <button
@@ -25,7 +26,8 @@ const ThemeToggle = ({ disableText }: { disableText?: boolean }) => {
             setTheme && setTheme(theme === "light" ? "dark" : "light")
           }
         >
-          <HiMoon className="text-primary mr-1" /> {disableText ? "" : "Dark"}
+          <HiMoon className="text-foreground mr-1" />{" "}
+          {disableText ? "" : "Dark"}
         </button>
       )}
     </div>

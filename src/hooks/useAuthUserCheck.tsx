@@ -1,6 +1,6 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
-import { auth } from "../firebase";
+import { auth } from "../uitls/firebase";
 import { authActions } from "../redux/authSlice";
 import { useAppDispatch } from "../redux/store";
 import { watchlistSliceActions } from "../redux/watchlistSlice";

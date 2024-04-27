@@ -15,20 +15,18 @@ import CoinReportWrapper from "./CoinReportWrapper";
 const ReportRow: React.FC<{ coin: TrendingCoin }> = ({ coin }) => {
   return (
     // {/* ROW */}
-    <div className="flex gap-2 items-center">
+    <div className="flex gap-2 items-center text-card-foreground/70">
       <CoinImage image={coin.small} name={coin.name} />
-      <span className="text-xs font-normal text-tertiary py-1">{`${coin.name}`}</span>
+      <span className="text-xs font-normal py-1">{`${coin.name}`}</span>
 
       <div className="flex items-center ml-auto gap-4">
-        <span className="text-xs font-bold text-tertiary px-2 py-1 inline rounded-full border border-primary dark:border-gray-700">
+        <span className="text-xs font-bold px-2 py-1 inline rounded-full border border-border">
           Score: {coin.score}
         </span>
 
-        <span className="text-xs font-bold text-tertiary px-2 py-1">
+        <span className="text-xs font-bold px-2 py-1">
           {`${coin.price_btc.toFixed(12)}`}
-          <span className="ml-2 text-xs font-normal text-tertiary">
-            BTC
-          </span>{" "}
+          <span className="ml-2 text-xs font-normal">BTC</span>{" "}
         </span>
       </div>
     </div>

@@ -3,7 +3,6 @@ import { getTopCoins } from "../uitls/api";
 import { Coin } from "../../typing";
 import { RootState } from "./store";
 import axios from "axios";
-import { allCoins } from "../data/all-coins/all-coin-markets";
 
 interface InitialState {
   isLoading: boolean;
@@ -23,10 +22,7 @@ const initialState: InitialState = {
 export const fetchTopCoins = createAsyncThunk(
   "fetch/topCurrencies",
   async () => {
-    // const response = await axios.get(getTopCoins());
-    const response: { data: Coin[] } = await new Promise((resolve) => {
-      setTimeout(() => resolve({ data: allCoins }), 80);
-    });
+    const response = await axios.get(getTopCoins());
     return response.data;
   }
 );
@@ -40,7 +36,7 @@ const topCoinsSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchTopCoins.pending, (state, action) => {
+    builder.addCase(fetchTopCoins.pending, (state) => {
       state.isLoading = true;
       state.isError = false;
     });
@@ -49,7 +45,7 @@ const topCoinsSlice = createSlice({
       state.data = action.payload as Coin[];
       state.timestamp = Date.now();
     });
-    builder.addCase(fetchTopCoins.rejected, (state, action) => {
+    builder.addCase(fetchTopCoins.rejected, (state) => {
       state.isLoading = false;
       state.isError = true;
     });

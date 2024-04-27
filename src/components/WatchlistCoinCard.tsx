@@ -15,7 +15,7 @@ const CardDivider = <Divider vertical className="hidden md:block h-20" />;
 // w-80
 const WatchlistCoinCard = ({ coin }: Props) => {
   return (
-    <div className="mx-auto w-full max-w-[20rem] sm:w-80 md:max-w-full md:w-full flex flex-col md:flex-row items-center justify-around bg-primary rounded-2xl py-2">
+    <div className="mx-auto w-full max-w-[20rem] sm:w-80 md:max-w-full md:w-full flex flex-col md:flex-row items-center justify-around bg-card text-card-foreground rounded-2xl py-2">
       {/* COIN NAME,IMG AND BASIC STATS */}
       <Link
         className="max-w-[20rem] w-full"
@@ -40,9 +40,9 @@ const WatchlistCoinCard = ({ coin }: Props) => {
       {CardDivider}
 
       {/* SPARKLINES */}
-      <div className="py-4 px-4 max-w-[20rem] w-full h-28 border-y-[1px] dark:border-stone-700 md:border-0">
+      <div className="py-4 px-4 max-w-[20rem] w-full h-28 border-y-[1px] border-border md:border-0">
         <AppSparklines data={coin.sparkline_in_7d.price} />
-        <p className="text-xs text-center text-secondary flex items-center gap-2 justify-center">
+        <p className="text-xs text-center text-card-foreground/60 flex items-center gap-2 justify-center">
           {appIcons.calendar}
           {"In past 7 days"}
         </p>

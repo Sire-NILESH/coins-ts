@@ -24,7 +24,7 @@ const DashboardLayout = () => {
 
       <SideBar />
 
-      <main className="w-[100%] xl:w-[80vw] h-[100vh] sm:h-[95vh] overflow-y-scroll shadow sm:rounded-3xl bg-primary dark:bg-slate-900 py-4 xl:py-10 px-4 3xl:px-12">
+      <main className="w-[100%] xl:w-[80vw] h-[100vh] sm:h-[95vh] overflow-y-scroll shadow sm:rounded-3xl bg-card text-card-foreground py-4 xl:py-10 px-4 3xl:px-12">
         <Outlet />
       </main>
 

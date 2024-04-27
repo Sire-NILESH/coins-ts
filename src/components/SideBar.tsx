@@ -21,8 +21,8 @@ const SideBarLinkItem: React.FC<ILinkItemProps> = ({
       to={to}
       className={`sidebar-item text-white line-clamp-1 ${
         selected === id
-          ? "bg-blue-50 !text-blue-900"
-          : "bg-transparent hover:bg-blue-300/60"
+          ? "bg-blue-50 !text-brandshade"
+          : "bg-transparent hover:bg-white/20"
       }`}
     >
       {children}
@@ -37,7 +37,7 @@ const SideBar = function () {
   const { logoutHandler } = useLogout();
 
   return (
-    <div className="rounded-3xl bg-blue-900 px-4 hidden lg:flex font-poppins flex-grow-0 flex-col w-44 2xl:w-64 h-[95vh] py-8 text-textLighter text-center">
+    <div className="rounded-3xl bg-brandshade px-4 hidden lg:flex font-poppins flex-grow-0 flex-col w-44 2xl:w-64 h-[95vh] py-8 text-textLighter text-center">
       {/* BRANDING */}
       <div className="mt-4">
         <Brand isOnColouredBg />
@@ -77,16 +77,13 @@ const SideBar = function () {
             );
           })}
 
-          <Divider
-            horizonatal
-            className="mt-5 mx-3 !border-blue-700 dark:border-blue-700"
-          />
+          <Divider horizonatal className="mt-5 mx-3 !border-white/20" />
 
           {/* LOGOUT BTN */}
           <button
             type="button"
             onClick={logoutHandler}
-            className="w-full sidebar-item text-white hover:bg-blue-50 hover:text-blue-900 line-clamp-1"
+            className="w-full sidebar-item text-white hover:bg-blue-50 hover:text-brandshade line-clamp-1"
           >
             {appIcons["logout"]}
             <span className="mx-4 font-medium">{"Logout"}</span>
@@ -95,7 +92,7 @@ const SideBar = function () {
       </div>
 
       <div className="flex flex-col items-center text-white space-y-2">
-        <p className="text-xs text-blue-300">Powered by</p>
+        <p className="text-xs text-white/40">Powered by</p>
         <a
           href={"https://www.coingecko.com/"}
           target="_blank"

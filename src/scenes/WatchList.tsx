@@ -53,13 +53,13 @@ const WatchList = () => {
         <NoDataErr reloadHandler={reloadWatchlist} />
       ) : (
         <main className="w-full">
-          <p className="mt-5 md:mt-0 ml-5 text-xs text-secondary max-w-lg">
+          <p className="mt-5 md:mt-0 ml-5 text-xs text-muted-foreground max-w-lg">
             {
               "Your very own list of watchlisted coins. (Ordered by Market cap). "
             }
           </p>
 
-          <div className="my-6 h-screen overflow-auto space-y-7 bg-secondary py-3 md:p-4 rounded-2xl border dark:border-primary">
+          <div className="my-6 h-screen overflow-auto space-y-7 bg-secondary py-7 md:p-4 rounded-2xl border border-border">
             {pageData.length > 0 ? (
               pageData.map((coin) => {
                 return <WatchlistCoinCard key={coin.id} coin={coin} />;

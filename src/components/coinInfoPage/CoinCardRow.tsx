@@ -11,11 +11,7 @@ type IPropsRow = {
 const CoinCardRow = (props: IPropsRow) => {
   return (
     <div className="flex justify-between">
-      <span
-        className={`${
-          props.xs ? "text-xs" : "text-sm"
-        } font-normal text-secondary mr-10`}
-      >
+      <span className={`${props.xs ? "text-xs" : "text-sm"} font-normal mr-10`}>
         {props.title}
       </span>
       <span

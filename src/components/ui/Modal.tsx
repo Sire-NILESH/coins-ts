@@ -34,17 +34,17 @@ const Modal = ({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md min-h-[14rem] flex flex-col justify-between transform overflow-hidden rounded-2xl bg-primary p-6 text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="w-full max-w-md min-h-[14rem] flex flex-col justify-between transform overflow-hidden rounded-2xl bg-popover dark:bg-secondary p-6 text-left align-middle shadow-xl transition-all">
                 <div className="">
                   <Dialog.Title
                     as="h3"
-                    className="!text-xl font-semibold leading-6 text-primary"
+                    className="!text-xl font-semibold leading-6 text-popover-foreground/90"
                   >
                     {modalContent.title}
                   </Dialog.Title>
 
                   <div className="mt-2">
-                    <p className="text-base text-secondary">
+                    <p className="text-base text-popover-foreground/70">
                       {modalContent.description}
                     </p>
                   </div>
@@ -52,7 +52,7 @@ const Modal = ({
 
                 <div className="mt-6 ml-auto">
                   <Button onClick={onCloseModalHandler}>
-                    <p className="text-primary text-base font-semibold py-2 px-5">
+                    <p className="text-popover-foreground/90 text-base font-semibold py-2 px-5">
                       Okay
                     </p>
                   </Button>

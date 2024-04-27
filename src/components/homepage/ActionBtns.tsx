@@ -16,7 +16,7 @@ const ActionBtns = () => {
           type="button"
           className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-primary rounded-full hover:bg-secondary group"
         >
-          Your Dashboard
+          My Dashboard
           <svg
             className="ml-2 -mr-1 w-5 h-5 group-hover:translate-x-1 transition-transform ease-in-out duration-300"
             fill="currentColor"

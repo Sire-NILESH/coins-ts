@@ -15,18 +15,16 @@ import NoDataSkeleton from "../NoDataSkeleton";
 
 const ReportRow: React.FC<{ coin: Exchange }> = ({ coin }) => {
   return (
-    <div className="flex gap-2 items-center">
-      <span className="text-xs font-bold text-tertiary px-2 py-1 inline rounded-full border border-primary dark:border-gray-700">
+    <div className="flex gap-2 items-center text-card-foreground/70">
+      <span className="text-xs font-bold px-2 py-1 inline rounded-full border dark:border-gray-700">
         {coin.trust_score_rank}
       </span>
       <CoinImage image={coin.image} name={coin.name} />
-      <span className="text-xs font-normal text-tertiary px-2 py-1">{`${coin.name}`}</span>
+      <span className="text-xs font-normal px-2 py-1">{`${coin.name}`}</span>
       <div className="flex items-center ml-auto">
-        <span className="text-xs font-bold text-tertiary px-2 py-1">
+        <span className="text-xs font-bold px-2 py-1">
           {`${formatCurrency(coin.trade_volume_24h_btc, 3)}`}
-          <span className="ml-2 text-xs font-normal text-tertiary">
-            BTC
-          </span>{" "}
+          <span className="ml-2 text-xs font-normal">BTC</span>{" "}
         </span>
       </div>
     </div>

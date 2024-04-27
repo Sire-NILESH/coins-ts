@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import { authSelectors } from "../redux/authSlice";
 import { doc, setDoc } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../uitls/firebase";
 import { selectDBWatchlistCoins } from "../redux/watchlistSlice";
 import { useMemo } from "react";
 import { modalActions } from "../redux/modalSlice";
@@ -54,7 +54,6 @@ const useDBWatchlistActions = () => {
 
   const removeFromWatchlist = async (coinId: string) => {
     if (user && isCoinWatchlisted(coinId)) {
-      console.log("help");
       const coinRef = doc(db, "watchlist", user.uid);
       try {
         await setDoc(

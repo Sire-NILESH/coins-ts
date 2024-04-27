@@ -8,7 +8,7 @@ interface IProps {
 const CoinImage: React.FC<IProps> = (props) => {
   return (
     <img
-      className="h-6 rounded-full"
+      className="h-6 rounded-full bg-white"
       src={`${props.image}`}
       alt={`${props.name}`}
     />

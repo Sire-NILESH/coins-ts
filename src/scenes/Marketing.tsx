@@ -8,8 +8,8 @@ import CallToAction from "../components/homepage/CallToAction";
 
 const Marketing = () => {
   return (
-    <div className="bg-secondary min-h-screen h-full w-full">
-      <div className="bg-primary dark:bg-slate-900 container mx-auto">
+    <div className="bg-card text-card-foreground min-h-screen h-full w-full">
+      <div className="container mx-auto">
         <HomeHeader />
         <Hero />
         <Features />

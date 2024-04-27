@@ -8,7 +8,6 @@ interface IProps {
 }
 
 const SparkLine: React.FC<IProps> = (props) => {
-  console.log(props);
   return (
     <Sparklines
       data={[...props.sparkLineData.price]}

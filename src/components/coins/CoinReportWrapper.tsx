@@ -20,7 +20,7 @@ const CoinReportWrapper = ({
         <div className="space-x-2 flex py-1 items-center">
           {icon}
 
-          <p className="text-lg inline font-semibold text-secondary">
+          <p className="text-lg inline font-semibold text-card-foreground/80">
             {title}
             <span className="text-xs ml-4 font-light text-tertiary/80">
               {subtitle}

@@ -8,7 +8,7 @@ type Props = {
 
 const CoinDescriptionAndSocials = ({ coin }: Props) => {
   return (
-    <div className="block w-full md:w-[95%] space-y-2 mb-6 py-6 px-2 lg:px-4 mx-auto rounded-2xl">
+    <div className="block w-full space-y-2 mb-6 py-6 px-2 lg:px-4 mx-auto rounded-2xl">
       <div className="flex items-center">
         <div className="w-8 min-w-10 flex-shrink-0 mr-2 sm:mr-3">
           <img
@@ -20,14 +20,14 @@ const CoinDescriptionAndSocials = ({ coin }: Props) => {
           />
         </div>
         <div className="flex space-x-3 items-center">
-          <p className="font-medium text-primary text-2xl">{coin.name}</p>
-          <p className="font-medium uppercase text-2xl text-tertiary">
+          <p className="font-medium text-2xl">{coin.name}</p>
+          <p className="font-medium uppercase text-2xl text-primary">
             {" "}
             {coin.symbol}
           </p>
         </div>
       </div>
-      <p className="font-normal text-gray-700 dark:text-gray-400 text-sm">
+      <p className="font-normal text-card-foreground/70 text-sm">
         {ReactHtmlParser(coin?.description.en.split(". ")[0])}.{" "}
         {ReactHtmlParser(coin?.description.en.split(". ")[1])}.
         {ReactHtmlParser(coin?.description.en.split(". ")[2])}.

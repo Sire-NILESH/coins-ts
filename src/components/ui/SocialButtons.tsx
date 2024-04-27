@@ -42,7 +42,7 @@ const SocialLink = ({
 const SocialButtons: React.FC<IProps> = (props) => {
   return (
     <div>
-      <div className="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
+      <div className="flex mt-5 space-x-6 sm:justify-center">
         {props.homePage ? (
           <SocialLink url={props.homePage} name="Home page">
             {appIcons.social_home}

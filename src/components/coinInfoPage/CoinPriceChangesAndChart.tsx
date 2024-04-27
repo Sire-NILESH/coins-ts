@@ -10,18 +10,17 @@ type Props = {
 
 const CoinPriceChangesAndChart = ({ coin }: Props) => {
   return (
-    <div className="flex flex-col-reverse items-center xl:space-x-10 xl:flex-row xl:justify-center xl:items-stretch mb-10 w-[100%] px-1">
-      <div className="h-full w-full max-w-3xl xl:w-[30%] card-shadow-outline rounded-3xl bg-primary p-6">
-        <header className="font-bold text-secondary py-1">
-          <p className="uppercase text-sm tracking-widest text-blue-500">
+    <div className="flex flex-col-reverse items-center xl:space-x-10 xl:flex-row xl:justify-center xl:items-stretch mb-10 w-[100%] px-1 text-card-foreground/70">
+      <div className="flex-1 w-full max-w-3xl xl:w-[30%] border border-border rounded-3xl dark:bg-secondary p-6">
+        <header className="font-bold py-1">
+          <p className="uppercase text-sm tracking-widest text-primary">
             Price Changes{" "}
           </p>
         </header>
-        <span className="[word-spacing:1px] font-normal text-sm text-tertiary">
-          <span className="text-xs">
-            Over time price changes in percentage.
-          </span>{" "}
-        </span>
+        <p className="[word-spacing:1px] font-normal text-xs text-tertiary">
+          Over time price changes in percentage.
+        </p>
+
         <div className="mt-5 flex flex-wrap justify-between gap-3">
           <div className="space-y-3 w-full md:w-[40%] xl:w-full">
             {coin.market_data.max_supply && (
@@ -94,7 +93,18 @@ const CoinPriceChangesAndChart = ({ coin }: Props) => {
         <CoinPageWatchlistBtn coinId={coin.id} />
       </div>
 
-      <div className="w-full max-w-3xl xl:w-[60%] card-shadow-outline dark:bg-gray-800 p-4 rounded-3xl mb-4 xl:mb-0">
+      <div className="flex-2 flex-shrink-0 w-full max-w-3xl xl:w-[60%] border border-border dark:bg-secondary p-6 rounded-3xl mb-4 xl:mb-0">
+        <div className="mb-5">
+          <header className="font-bold py-1">
+            <p className="uppercase text-sm tracking-widest text-primary">
+              Timeline Charts{" "}
+            </p>
+          </header>
+          <p className="[word-spacing:1px] font-normal text-xs text-tertiary">
+            Track the prices overtime using charts.
+          </p>
+        </div>
+
         <LineChart coin={coin} />
       </div>
     </div>

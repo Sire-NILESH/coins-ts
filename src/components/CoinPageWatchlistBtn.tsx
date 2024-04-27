@@ -16,7 +16,7 @@ const CoinPageWatchlistBtn = ({ coinId }: Props) => {
   }
 
   return (
-    <div className="mt-3 md:mt-5 lg:mt-0 flex flex-col items-center">
+    <div className="flex flex-col items-center">
       <Button
         onClick={onClickHandler}
         className={`mt-6 lg:mt-16 h-10 w-full max-w-md ${

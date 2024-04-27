@@ -26,16 +26,6 @@ ChartJS.register(
   Tooltip
 );
 
-// ChartJS.register(
-//    CategoryScale,
-//    LinearScale,
-//    PointElement,
-//    LineElement,
-//    Title,
-//    Tooltip,
-//    Legend
-//  );
-
 const options = (size: "sm" | "lg"): Object => {
   return {
     responsive: true,
@@ -64,12 +54,11 @@ const colorCode = {
 
 export function formatAMPM(date: Date): string {
   let hours = date.getHours();
-  // let minutes = date.getMinutes();
+
   let ampm = hours >= 12 ? "pm" : "am";
   hours = hours % 12;
   hours = hours ? hours : 12; // the hour '0' should be '12'
-  // minutes = minutes < 10 ? "0" + minutes : minutes;
-  // const strTime = hours + ":" + minutes + " " + ampm;
+
   const strTime = hours + " " + ampm;
   return strTime;
 }
@@ -80,7 +69,7 @@ const getDayChartLabels = () => {
 
   chartData.prices
     .filter((_data, i) => i % 12 === 0)
-    .map((data, i) => {
+    .forEach((data, i) => {
       xAxisData.push(formatAMPM(new Date(data[0])));
       yAxisData.push(data[1]);
     });
@@ -104,25 +93,7 @@ const getYearChartLabels = () => {
   return { xAxisData, yAxisData };
 };
 
-// export const data = {
-//   labels,
-//   datasets: [
-//     {
-//       label: "Bitcoin",
-//       data: chartData.prices.map((data) => {
-//         return data[1].toLocaleString("en-US", {
-//           style: "currency",
-//           currency: "USD",
-//         });
-//       }),
-//       borderColor: "rgb(255, 99, 132)",
-//       backgroundColor: "rgba(255, 99, 132, 0.5)",
-//     },
-//   ],
-// };
-
 export default function ChartMd(props: IProps): JSX.Element {
-  // let xAxisData, yAxisData;
   let axesdata;
   if (props.type === "day") {
     axesdata = getDayChartLabels();

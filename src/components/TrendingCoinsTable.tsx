@@ -25,18 +25,13 @@ const TableRow: React.FC<{
                 alt={coin.name}
               />
             </div>
-            <div className="flex space-x-3 items-center">
-              <p className="font-medium text-primary">{coin.name}</p>
-              <p className="font-medium uppercase  text-tertiary">
-                {" "}
-                {coin.symbol}
-              </p>
-            </div>
+
+            <p className="font-medium">{coin.name}</p>
           </div>
         </Link>
       </td>
       <td className="p-2 whitespace-nowrap">
-        <div className="text-left font-bold text-tertiary">{coin.symbol}</div>
+        <div className="text-left font-bold">{coin.symbol}</div>
       </td>
       <td className="p-2 whitespace-nowrap">
         <div className="text-center">{coin.market_cap_rank}</div>
@@ -47,7 +42,7 @@ const TableRow: React.FC<{
         </div>
       </td>
       <td className="p-2 whitespace-nowrap">
-        <div className="text-base text-center text-tertiary">{coin.score}</div>
+        <div className="text-base text-center">{coin.score}</div>
       </td>
     </tr>
   );
@@ -74,13 +69,15 @@ const TrendingCoinsTable: React.FC = () => {
 
   return (
     <>
-      <section className="antialiased w-full text-tertiary md:px-4">
-        <div className="h-full space-y-10">
-          {/* <!-- Table --> */}
-          <div className="w-full rounded-3xl max-w-full mx-auto bg-primary border border-gray-200 dark:border-primary">
+      <section className="antialiased w-full md:px-4">
+        <div className="h-full space-y-10 text-card-foreground/70">
+          {/*  Table  */}
+          <div className="w-full rounded-3xl max-w-full mx-auto bg-card dark:bg-secondary border border-border">
             <header className="px-5 py-4">
-              <h2 className="font-semibold text-lg text-secondary">Trending</h2>
-              <p className="text-xs text-tertiary max-w-lg">
+              <h2 className="text-card-foreground font-semibold text-lg">
+                Trending
+              </h2>
+              <p className="text-xs text-muted-foreground max-w-lg">
                 {
                   "Top trending coins on CoinGecko as searched by users in the last 24 hours."
                 }
@@ -96,25 +93,25 @@ const TrendingCoinsTable: React.FC = () => {
 
                 {dataIsAvailable && !isLoading && (
                   <table className="table-auto w-full">
-                    <thead className="text-xs font-semibold uppercase text-quaternary mb-5 ">
+                    <thead className="text-xs font-semibold uppercase text-muted-foreground/70 mb-5">
                       <tr className="">
-                        <th className="px-4 py-4 whitespace-nowrap rounded-l-3xl bg-secondary">
+                        <th className="px-4 py-4 whitespace-nowrap rounded-l-3xl bg-secondary dark:bg-white/10">
                           <div className="font-semibold text-left">Name</div>
                         </th>
-                        <th className="p-2 py-4 whitespace-nowrap bg-secondary">
+                        <th className="p-2 py-4 whitespace-nowrap bg-secondary dark:bg-white/10">
                           <div className="font-semibold text-left">Symbol</div>
                         </th>
-                        <th className="p-2 py-4 whitespace-nowrap bg-secondary">
+                        <th className="p-2 py-4 whitespace-nowrap bg-secondary dark:bg-white/10">
                           <div className="font-semibold text-center">
                             Market Cap Rank
                           </div>
                         </th>
-                        <th className="p-2 py-4 whitespace-nowrap bg-secondary">
+                        <th className="p-2 py-4 whitespace-nowrap bg-secondary dark:bg-white/10">
                           <div className="font-semibold text-center">
                             Price BTC
                           </div>
                         </th>
-                        <th className="p-2 py-4 whitespace-nowrap rounded-r-3xl bg-secondary">
+                        <th className="p-2 py-4 whitespace-nowrap rounded-r-3xl bg-secondary dark:bg-white/10">
                           <div className="font-semibold text-center">Score</div>
                         </th>
                       </tr>

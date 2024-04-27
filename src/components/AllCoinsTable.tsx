@@ -37,14 +37,14 @@ const TableRow = ({
         <button
           id="watchlist-star"
           data-coin-id={data.id}
-          className="hover:bg-white dark:hover:bg-gray-900/40 h-10 w-10 m-auto rounded-full flex items-center justify-center text-center font-bold text-tertiary"
+          className="hover:bg-white dark:hover:bg-gray-900/40 h-10 w-10 m-auto rounded-full flex items-center justify-center text-center font-bold"
         >
           {isCoinWatchlisted ? appIcons.starFill : appIcons.starOutline}
         </button>
       </td>
       <td className="p-2 whitespace-nowrap">
-        <div className="text-left font-bold text-tertiary">
-          <p className="font-medium uppercase  text-tertiary">
+        <div className="text-left font-bold">
+          <p className="font-medium uppercase ">
             {" "}
             &nbsp; {data.market_cap_rank}
           </p>
@@ -63,11 +63,8 @@ const TableRow = ({
               />
             </div>
             <div className="flex space-x-3 items-center">
-              <p className="font-medium text-primary">{data.name}</p>
-              <p className="font-medium uppercase  text-tertiary">
-                {" "}
-                {data.symbol}
-              </p>
+              <p className="font-medium">{data.name}</p>
+              <p className="font-semibold uppercase"> {data.symbol}</p>
             </div>
           </div>
         </Link>
@@ -94,12 +91,12 @@ const TableRow = ({
       </td>
 
       <td className="p-2 whitespace-nowrap">
-        <div className=" text-left text-tertiary">
+        <div className=" text-left">
           {`$${formatCurrency(data.total_volume, 1)}`}
         </div>
       </td>
       <td className="p-2 whitespace-nowrap">
-        <div className=" text-left text-tertiary">
+        <div className=" text-left">
           {`$${formatCurrency(data.market_cap, 1)}`}
         </div>
       </td>
@@ -180,15 +177,15 @@ const AllCoinsTable = () => {
   return (
     <div onClick={handleStarClick} className="">
       <section className="mt-5 antialiased md:px-4">
-        <div className="h-full space-y-10">
+        <div className="h-full space-y-10 text-card-foreground/70">
           {/*  Table  */}
-          <div className="w-full rounded-3xl max-w-full mx-auto bg-primary border dark:border-primary">
+          <div className="w-full rounded-3xl max-w-full mx-auto bg-card dark:bg-secondary border border-border">
             <header className="flex flex-col gap-4 sm:flex-row items-center justify-between px-5 py-4">
               <div className="w-full">
-                <h2 className="font-semibold text-lg text-secondary">
+                <h2 className="text-card-foreground font-semibold text-lg">
                   Top 250 Coins
                 </h2>
-                <p className="text-xs text-tertiary max-w-lg">
+                <p className="text-xs max-w-lg">
                   {
                     "A top 250 list of all the cryptocurrencies in the last 24 hours"
                   }
@@ -209,34 +206,34 @@ const AllCoinsTable = () => {
                     onClick={handleStarClick}
                     className="table-auto w-full"
                   >
-                    <thead className="text-xs font-semibold uppercase text-gray-400 mb-5 ">
+                    <thead className="text-xs font-semibold uppercase text-muted-foreground/70 mb-5">
                       <tr className="">
-                        <th className="px-4 py-4 whitespace-nowrap rounded-l-3xl bg-secondary">
+                        <th className="px-4 py-4 whitespace-nowrap rounded-l-3xl bg-secondary dark:bg-white/10">
                           <div className="font-semibold text-left">Star</div>
                         </th>
-                        <th className="p-2 py-4 whitespace-nowrap bg-secondary">
+                        <th className="p-2 py-4 whitespace-nowrap bg-secondary dark:bg-white/10">
                           <div className="font-semibold text-left">Rank</div>
                         </th>
-                        <th className="p-2 py-4 whitespace-nowrap bg-secondary">
+                        <th className="p-2 py-4 whitespace-nowrap bg-secondary dark:bg-white/10">
                           <div className="font-semibold text-left">Name</div>
                         </th>
-                        <th className="p-2 py-4 whitespace-nowrap bg-secondary">
+                        <th className="p-2 py-4 whitespace-nowrap bg-secondary dark:bg-white/10">
                           <div className="font-semibold text-left">Price</div>
                         </th>
-                        <th className="p-2 py-4 whitespace-nowrap bg-secondary">
+                        <th className="p-2 py-4 whitespace-nowrap bg-secondary dark:bg-white/10">
                           <div className="font-semibold text-left">24H</div>
                         </th>
-                        <th className="p-2 py-4 whitespace-nowrap bg-secondary">
+                        <th className="p-2 py-4 whitespace-nowrap bg-secondary dark:bg-white/10">
                           <div className="font-semibold text-left">
                             Volume (24H)
                           </div>
                         </th>
-                        <th className="p-2 py-4 whitespace-nowrap bg-secondary">
+                        <th className="p-2 py-4 whitespace-nowrap bg-secondary dark:bg-white/10">
                           <div className="font-semibold text-left">
                             Market cap
                           </div>
                         </th>
-                        <th className="p-2 py-4 whitespace-nowrap rounded-r-3xl bg-secondary">
+                        <th className="p-2 py-4 whitespace-nowrap rounded-r-3xl bg-secondary dark:bg-white/10">
                           <div className="font-semibold text-left">Week</div>
                         </th>
                       </tr>

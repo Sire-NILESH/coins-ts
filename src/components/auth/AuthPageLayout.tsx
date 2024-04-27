@@ -6,7 +6,7 @@ type Ref = HTMLDivElement;
 
 const AuthPageLayout = forwardRef<Ref, Props>(({ children }, ref) => {
   return (
-    <div className="m-auto xl:w-container px-12 sm:px-0 mx-auto" ref={ref}>
+    <div className="m-auto xl:w-container px-10 sm:px-0 mx-auto" ref={ref}>
       {children}
     </div>
   );

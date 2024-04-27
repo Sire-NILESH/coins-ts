@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import useIsOverallDataError from "../hooks/useIsOverallDataError";
 import { modalActions } from "../redux/modalSlice";
-import useWatchlistData from "../hooks/useWatchlistData";
 import { selectWatchlistCoinsIsError } from "../redux/watchlistSlice";
 
 const DataErrorModal = () => {
@@ -38,7 +37,7 @@ const DataErrorModal = () => {
             trendingCoinsErr ? " 'trending coins'" : ""
           } ${
             watchlistIsError ? "'watchlist'" : ""
-          } data. Too many frequent requests were received which crossed the API limit. Please try again later by pressing refresh button after some time.`,
+          } data. Too many frequent requests were received which crossed the API limit. Please try again by pressing refresh button after some time.`,
         },
         onCloseModalHandler: onModalClose,
       })

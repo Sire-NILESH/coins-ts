@@ -19,11 +19,9 @@ const CoinIntro = ({ className, coin }: Props) => {
         <div className="flex justify-between w-full">
           <div className="flex items-center">
             <CoinImage image={coin.image} name={coin.name} />
-            <p className="ml-2 text-secondary text-sm font-semibold">
-              {coin.name}
-            </p>
+            <p className="ml-2 text-sm font-semibold">{coin.name}</p>
           </div>
-          <span className="border border-primary dark:border-stone-600 text-tertiary flex items-center justify-center rounded-full h-6 w-6 mr-1">
+          <span className="border border-border flex items-center justify-center rounded-full h-6 w-6 mr-1">
             {coin.rank}
           </span>{" "}
         </div>

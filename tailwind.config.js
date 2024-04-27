@@ -6,36 +6,47 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        bgLightMode: "#edf3ff",
-        primaryTheme: "var(--color-primary)",
-        primaryThemeHover: "var(--color-primaryHover)",
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        brandshade: {
+          DEFAULT: "hsl(var(--brandshade))",
+          foreground: "hsl(var(--brandshade-foreground))",
+        },
       },
       fontFamily: {
         poppins: ["Poppins"],
         inter: ["Inter"],
-      },
-      backgroundColor: {
-        primary: "var(--color-bg-primary)",
-        secondary: "var(--color-bg-secondary)",
-        accent: "rgb(var(--color-bg-accent) / 50)",
-        button: "var(--color-bg-button)",
-        btnHover: "var(--color-bg-button-hover)",
-      },
-      textColor: {
-        accent: "var(--color-text-accent)",
-        primary: "var(--color-text-primary)",
-        secondary: "var(--color-text-secondary)",
-        tertiary: "var(--color-text-tertiary)",
-        quaternary: "var(--color-text-quaternary)",
-        textLighter: "var(--color-text-textLighter)",
-        textLightest: "var(--color-text-textLightest)",
-        btnText: "var(--color-bg-secondary)",
-      },
-      borderColor: {
-        primary: "var(--color-borderColor)",
-        // secondary: "var(--color-bg-secondary)",
-        // input: "var(--color-bg-input)",
-        // accent: "var(--color-text-accent)",
       },
     },
   },

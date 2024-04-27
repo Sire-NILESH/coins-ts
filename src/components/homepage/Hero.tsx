@@ -2,8 +2,8 @@ import ActionBtns from "./ActionBtns";
 
 const Hero = () => {
   return (
-    <section className="bg-primary dark:bg-slate-900">
-      <div className="py-8 px-4 mx-auto max-w-screen-xl mt-10 lg:mt-0 lg:py-24 lg:px-12">
+    <section className="">
+      <div className="py-8 px-4 mx-auto max-w-screen-xl mt-10 lg:mt-0 lg:py-16 lg:px-12">
         <div className="grid grid-cols-8 gap-6">
           <div className="col-span-8 lg:col-span-5 text-center lg:text-left">
             <span className="inline-flex justify-between items-center py-1 px-1 pr-4 mb-7 text-sm text-primary bg-secondary rounded-full divide-x-2 divide-gray-300 dark:divide-gray-700">
@@ -13,7 +13,7 @@ const Hero = () => {
               </span>
             </span>
 
-            <h1 className="mb-4 text-3xl font-extrabold tracking-tight leading-none text-primary md:text-5xl lg:text-6xl dark:text-white">
+            <h1 className="mb-4 text-3xl font-extrabold tracking-tight text-foreground/90 leading-none md:text-5xl lg:text-6xl">
               <span className="hidden md:inline">
                 {"World’s largest crypto tracking service"}
               </span>
@@ -21,7 +21,7 @@ const Hero = () => {
                 {"World’s largest crypto tracking service"}
               </span>
             </h1>
-            <p className="mb-8 text-base font-normal text-secondary lg:text-xl ">
+            <p className="mb-8 text-base font-normal text-foreground/70 lg:text-xl ">
               Offering the most extensive crypto tracking services available,
               providing real-time insights and analytics with the world's
               largest digital asset market.
@@ -35,7 +35,7 @@ const Hero = () => {
           <div className="col-span-8 lg:col-span-3 place-self-center">
             <img
               src="/images/hero-1.jpg"
-              className="min-w-full rounded-lg shadow"
+              className="min-w-full rounded-lg"
               alt="crypto illustration"
             />
           </div>

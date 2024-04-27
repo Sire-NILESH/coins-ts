@@ -12,7 +12,7 @@ const Divider = forwardRef<Ref, Props>(
     return (
       <div
         ref={ref}
-        className={`border-primary dark:border-gray-700 ${
+        className={`border-border ${
           horizonatal ? "border-b-[1px]" : vertical ? "border-r-[1px]" : ""
         } ${className ? className : ""}`}
         {...restProps}

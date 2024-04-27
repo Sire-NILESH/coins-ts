@@ -10,7 +10,7 @@ const AuthPageHeader = ({ headerSubtitle }: Props) => {
       <div className="mt-10">
         <Brand />
       </div>
-      <p className="font-normal text-sm text-tertiary text-center">
+      <p className="font-normal text-sm text-foreground/70 text-center">
         {headerSubtitle}
       </p>
     </header>

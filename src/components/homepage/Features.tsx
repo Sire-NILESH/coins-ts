@@ -56,13 +56,13 @@ const features = [
 
 const Features = () => {
   return (
-    <section className="bg-primary dark:bg-slate-900">
-      <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-24 lg:px-6">
-        <div className="max-w-screen-md rounded-2xl">
-          <h2 className="mb-4 text-2xl md:text-4xl tracking-tight font-medium text-primary">
+    <section className="">
+      <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+        <div className="max-w-screen-md">
+          <h2 className="text-center lg:text-left mb-4 text-2xl md:text-4xl tracking-tight font-semibold text-foreground/90">
             Designed for Crypto enthusiasts like you
           </h2>
-          <p className="text-secondary text-base">
+          <p className="text-center lg:text-left text-card-foreground/70 text-base">
             Here at CrypTrack we focus on markets where technology, innovation,
             and capital can unlock long-term value and drive economic growth.
           </p>
@@ -70,11 +70,9 @@ const Features = () => {
 
         <div className="mt-8 lg:mt-16 space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
           {features.map((feature, i) => (
-            <div key={i} className="rounded-xl p-4 border dark:border-gray-700">
-              <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-blue-700">
-                {
-                  <feature.icon className="w-5 h-5 text-white lg:w-6 lg:h-6 dark:text-primary-300" />
-                }
+            <div key={i} className="rounded-3xl p-4 border border-border">
+              <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary">
+                {<feature.icon className="w-5 h-5 text-white lg:w-6 lg:h-6" />}
               </div>
               <h3 className="mb-2 text-xl font-medium dark:text-white">
                 {feature.title}

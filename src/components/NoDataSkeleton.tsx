@@ -15,7 +15,7 @@ const NoDataSkeleton = ({ className, isLoading, reloadHandler }: Props) => {
     >
       <div className="space-y-1">
         {<appIcons.error className="h-6 w-6 mx-auto" />}
-        <p className="text-secondary text-sm">Uh Oh, No data to show</p>
+        <p className="text-sm">Uh Oh, No data to show</p>
       </div>
 
       {reloadHandler ? (
@@ -24,7 +24,7 @@ const NoDataSkeleton = ({ className, isLoading, reloadHandler }: Props) => {
           className="w-36 bg-btnHover flex items-center justify-center space-x-2 p-3"
         >
           <appIcons.Refresh className="h-4 w-4" />
-          <p className="text-center text-secondary text-sm">Try again</p>
+          <p className="text-center text-sm">Try again</p>
         </Button>
       ) : null}
     </div>

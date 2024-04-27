@@ -13,7 +13,7 @@ const BottomBarLinkItem: React.FC<ILinkItemProps> = ({
   return (
     <Link
       id={id}
-      className={`flex-1 flex m-1 flex-col items-center justify-center rounded-2xl text-primary transition-colors duration-200 ease-in-out text-white ${
+      className={`flex-1 flex m-1 flex-col items-center justify-center rounded-2xl transition-colors duration-200 ease-in-out text-white ${
         selected === id
           ? "bg-blue-50 !text-blue-900"
           : "bg-transparent hover:bg-blue-300/60"
@@ -30,7 +30,7 @@ const BottomBar = () => {
 
   return (
     <div className="fixed bottom-4 left-0 right-0 z-50 px-2 lg:hidden">
-      <div className="flex h-20 justify-around bg-blue-900 shadow-lg rounded-xl dark:border-gray-700">
+      <div className="flex h-20 justify-around bg-brandshade shadow-lg rounded-xl dark:border-gray-700">
         {routeConfig.bottombarRoutes.map((route) => {
           return (
             <BottomBarLinkItem

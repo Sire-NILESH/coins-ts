@@ -1,5 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { auth, googleProvider } from "../firebase";
+import { auth, googleProvider } from "../uitls/firebase";
 import {
   User,
   createUserWithEmailAndPassword,

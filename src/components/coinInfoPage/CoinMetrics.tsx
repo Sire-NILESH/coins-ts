@@ -11,25 +11,25 @@ const CoinMetrics = ({ coin }: Props) => {
   return (
     <div className="py-8 px-2 flex flex-wrap gap-8 justify-between">
       {/* PAST WEEK */}
-      <div className="w-[18rem] flex-1 flex-shrink-1 card-shadow-outline rounded-3xl bg-primary px-6 pt-6">
+      <div className="min-w-[18rem] flex-1 border border-border rounded-3xl px-6 pt-6">
         <header className=" font-bold text-secondary py-1">
-          <p className="uppercase text-sm tracking-widest text-blue-500">
+          <p className="uppercase text-sm tracking-widest text-primary">
             Past week{" "}
           </p>
         </header>
-        <span className="[word-spacing:1px] font-normal text-sm text-tertiary">
+        <span className="[word-spacing:1px] font-normal text-sm">
           <span className=" font-normal">
             A look into last week's price performance
           </span>{" "}
         </span>
         {/* SPARKLINES */}
-        <div className="pt-10 w-full md:h-28">
+        <div className="w-full mt-4">
           <Sparklines data={coin.market_data.sparkline_7d.price} margin={6}>
             <SparklinesLine
               style={{
                 strokeWidth: 1,
                 stroke: "green",
-                fill: "green",
+                fill: "transparent",
               }}
             />
             <SparklinesSpots
@@ -45,9 +45,9 @@ const CoinMetrics = ({ coin }: Props) => {
       </div>
 
       {/* SUPPLY */}
-      <div className="w-full md:w-[18rem] flex-1 card-shadow-outline rounded-3xl bg-primary p-6">
-        <header className="font-bold text-secondary py-1">
-          <p className="uppercase text-sm tracking-widest text-blue-500">
+      <div className="w-full md:w-[20rem] flex-1 border border-border rounded-3xl p-6">
+        <header className="font-bold py-1">
+          <p className="uppercase text-sm tracking-widest text-primary">
             supply{" "}
           </p>
           <span className="[word-spacing:1px] font-normal text-sm text-tertiary">
@@ -80,31 +80,34 @@ const CoinMetrics = ({ coin }: Props) => {
       </div>
 
       {/* MARKET CAP */}
-      <div className="min-w-[20rem] flex-1 rounded-3xl card-shadow-outline bg-primary p-6">
-        <header className="mb-3 font-bold text-secondary py-1">
-          <p className="uppercase text-sm tracking-widest text-blue-500">
+      <div className="min-w-[20rem] flex-1 rounded-3xl border border-border p-6">
+        <header className="mb-3 font-bold py-1">
+          <p className="uppercase text-sm tracking-widest text-primary">
             Market cap{" "}
           </p>
-          <span className="[word-spacing:2px] font-normal text-sm text-tertiary">
-            <span className=" font-normal">
+          <span className="[word-spacing:2px] font-normal text-sm">
+            <span className="font-normal">
               Fully diluted market capitalisation stands at{" "}
             </span>{" "}
             {coin.market_data?.fully_diluted_valuation["usd"] ? (
-              <span className="font-semibold">{`$${Number(
-                coin.market_data.fully_diluted_valuation["usd"].toFixed(2)
-              ).toLocaleString()}`}</span>
+              <span className="font-semibold">
+                {"$" +
+                  formatCurrency(
+                    coin.market_data.fully_diluted_valuation["usd"]
+                  )}
+              </span>
             ) : null}
           </span>
         </header>
         <div className="space-y-1">
-          <p className="mb-1 text-xs [word-spacing:1.2px] text-secondary">
+          <p className="mb-1 text-xs [word-spacing:1.2px] text-card-foreground/70">
             Ranks at spot{" "}
             <span className="text-green-600 font-semibold">
               {coin.market_cap_rank}
             </span>
           </p>
 
-          <p className=" text-xs [word-spacing:1.2px] text-secondary">
+          <p className=" text-xs [word-spacing:1.2px] text-card-foreground/70">
             Past 24HR change{" "}
             <span
               className={`${
@@ -117,7 +120,7 @@ const CoinMetrics = ({ coin }: Props) => {
             </span>
           </p>
 
-          <p className="text-xs [word-spacing:1.2px] text-secondary">
+          <p className="text-xs [word-spacing:1.2px] text-card-foreground/70">
             Since yesterday,{" "}
             <span
               className={`${
@@ -126,11 +129,10 @@ const CoinMetrics = ({ coin }: Props) => {
                   : "text-red-600"
               } font-semibold`}
             >
-              {Number(
-                Number(
-                  coin.market_data.market_cap_change_percentage_24h.toFixed(4)
-                )
-              ).toLocaleString()}
+              {formatCurrency(
+                coin.market_data.market_cap_change_percentage_24h,
+                4
+              )}
               %
             </span>
           </p>

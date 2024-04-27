@@ -2,8 +2,8 @@ import React from "react";
 
 const Testimonials = () => {
   return (
-    <section className="bg-primary dark:bg-slate-900">
-      <div className="max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-24 lg:px-6">
+    <section className="">
+      <div className="max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-16 lg:px-6">
         <figure className="max-w-screen-md mx-auto">
           <svg
             className="h-12 mx-auto mb-3 text-gray-400 dark:text-gray-600"
@@ -17,7 +17,7 @@ const Testimonials = () => {
             />
           </svg>
           <blockquote>
-            <p className="text-2xl font-medium text-primary">
+            <p className="text-lg md:text-2xl font-medium">
               "CrypTrack has completely revolutionized the way I navigate the
               cryptocurrency market. It provides a seamless and user-friendly
               experience for monitoring my favorite coins, analyzing trends.
@@ -30,11 +30,9 @@ const Testimonials = () => {
               src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gouch.png"
               alt="profile"
             />
-            <div className="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">
-              <div className="pr-3 font-medium text-primary ">
-                Micheal Gough
-              </div>
-              <div className="pl-3 text-sm font-light text-gray-500 dark:text-gray-400">
+            <div className="flex items-center divide-x-2 divide-border">
+              <div className="pr-3 font-medium">Micheal Gough</div>
+              <div className="pl-3 text-sm font-light text-card-foreground/70">
                 CEO at Google
               </div>
             </div>
