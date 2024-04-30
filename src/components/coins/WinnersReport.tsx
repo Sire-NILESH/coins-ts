@@ -16,7 +16,7 @@ import CoinReportWrapper from "./CoinReportWrapper";
 const ReportRow = ({ coin }: { coin: Coin }) => {
   return (
     <div className="flex gap-2 items-center text-card-foreground/70">
-      <span className="text-xs font-bold px-2 py-1 inline rounded-full border border-border">
+      <span className="text-xs font-bold px-2 py-1 inline rounded-full border">
         {coin.market_cap_rank}
       </span>
       <CoinImage image={coin.image} name={coin.name} />

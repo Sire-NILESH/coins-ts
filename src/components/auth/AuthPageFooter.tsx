@@ -4,7 +4,7 @@ import ThemeToggle from "../ui/ThemeToggle";
 
 const AuthPageFooter = () => {
   return (
-    <div className="border-t border-border mt-12 text-foreground/60">
+    <div className="border-t mt-12 text-foreground/60">
       <div className="space-x-4 text-center">
         <span>&copy; Sire</span>
         <Link

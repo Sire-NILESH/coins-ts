@@ -59,7 +59,7 @@ const WatchList = () => {
             }
           </p>
 
-          <div className="my-6 h-screen overflow-auto space-y-7 bg-secondary py-7 md:p-4 rounded-2xl border border-border">
+          <div className="my-6 h-screen overflow-auto space-y-7 bg-secondary py-7 md:p-4 rounded-2xl border">
             {pageData.length > 0 ? (
               pageData.map((coin) => {
                 return <WatchlistCoinCard key={coin.id} coin={coin} />;

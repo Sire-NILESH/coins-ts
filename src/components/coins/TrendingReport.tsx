@@ -20,7 +20,7 @@ const ReportRow: React.FC<{ coin: TrendingCoin }> = ({ coin }) => {
       <span className="text-xs font-normal py-1">{`${coin.name}`}</span>
 
       <div className="flex items-center ml-auto gap-4">
-        <span className="text-xs font-bold px-2 py-1 inline rounded-full border border-border">
+        <span className="text-xs font-bold px-2 py-1 inline rounded-full border">
           Score: {coin.score}
         </span>
 

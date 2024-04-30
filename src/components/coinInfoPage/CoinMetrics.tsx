@@ -11,7 +11,7 @@ const CoinMetrics = ({ coin }: Props) => {
   return (
     <div className="py-8 px-2 flex flex-wrap gap-8 justify-between">
       {/* PAST WEEK */}
-      <div className="min-w-[18rem] flex-1 border border-border rounded-3xl px-6 pt-6">
+      <div className="min-w-[18rem] flex-1 border rounded-3xl px-6 pt-6">
         <header className=" font-bold text-secondary py-1">
           <p className="uppercase text-sm tracking-widest text-primary">
             Past week{" "}
@@ -45,7 +45,7 @@ const CoinMetrics = ({ coin }: Props) => {
       </div>
 
       {/* SUPPLY */}
-      <div className="w-full md:w-[20rem] flex-1 border border-border rounded-3xl p-6">
+      <div className="w-full md:w-[20rem] flex-1 border rounded-3xl p-6">
         <header className="font-bold py-1">
           <p className="uppercase text-sm tracking-widest text-primary">
             supply{" "}
@@ -80,7 +80,7 @@ const CoinMetrics = ({ coin }: Props) => {
       </div>
 
       {/* MARKET CAP */}
-      <div className="min-w-[20rem] flex-1 rounded-3xl border border-border p-6">
+      <div className="min-w-[20rem] flex-1 rounded-3xl border p-6">
         <header className="mb-3 font-bold py-1">
           <p className="uppercase text-sm tracking-widest text-primary">
             Market cap{" "}

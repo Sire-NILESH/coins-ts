@@ -70,7 +70,7 @@ const Features = () => {
 
         <div className="mt-8 lg:mt-16 space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
           {features.map((feature, i) => (
-            <div key={i} className="rounded-3xl p-4 border border-border">
+            <div key={i} className="rounded-3xl p-4 border">
               <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary">
                 {<feature.icon className="w-5 h-5 text-white lg:w-6 lg:h-6" />}
               </div>

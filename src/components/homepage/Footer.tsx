@@ -22,7 +22,7 @@ const footerLinks = [
 
 const Footer = () => {
   return (
-    <footer className="border-border border-t">
+    <footer className="border-t">
       <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
         <div className="space-y-2 sm:flex sm:items-center sm:justify-between">
           <Brand />
@@ -42,7 +42,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        <hr className="my-6 border-border sm:mx-auto lg:my-8" />
+        <hr className="my-6 sm:mx-auto lg:my-8" />
         <span className="block text-sm text-foreground/70 sm:text-center">
           © 2023{" "}
           <Link to="/" className="hover:underline">

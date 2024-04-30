@@ -16,7 +16,7 @@ const ListItem: React.FC<{
         props.selected
           ? "bg-blue-700 !text-white border-blue-700"
           : "border-blue-200 dark:border-blue-900"
-      } flex  border items-center justify-center gap-2 max-w-[7rem] rounded-full cursor-pointer px-3 py-2 text-card-foreground/80 hover:bg-blue-600 hover:border-blue-600 hover:text-white dark:hover:border-blue-600 transition-all duration-300 ease-in-out`}
+      } flex border items-center justify-center gap-2 max-w-[7rem] rounded-full cursor-pointer px-3 py-2 text-card-foreground/80 hover:bg-brandshade hover:border-brandshade hover:text-white dark:hover:border-brandshade transition-all duration-300 ease-in-out`}
     >
       {props.title}
     </Link>

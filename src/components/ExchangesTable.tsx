@@ -116,7 +116,7 @@ const ExchangesTable = () => {
       <section className="antialiased w-full text-gray-600 md:px-4">
         <div className="h-full space-y-10 text-card-foreground/70">
           {/*  Table */}
-          <div className="w-full rounded-3xl max-w-full mx-auto bg-card dark:bg-secondary border border-border">
+          <div className="w-full rounded-3xl max-w-full mx-auto bg-card dark:bg-secondary border">
             <header className="flex flex-col gap-4 sm:flex-row items-center justify-between px-5 py-4">
               <div className="w-full">
                 <h2 className="text-card-foreground font-semibold text-lg">

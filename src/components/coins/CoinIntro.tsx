@@ -21,7 +21,7 @@ const CoinIntro = ({ className, coin }: Props) => {
             <CoinImage image={coin.image} name={coin.name} />
             <p className="ml-2 text-sm font-semibold">{coin.name}</p>
           </div>
-          <span className="border border-border flex items-center justify-center rounded-full h-6 w-6 mr-1">
+          <span className="border flex items-center justify-center rounded-full h-6 w-6 mr-1">
             {coin.rank}
           </span>{" "}
         </div>

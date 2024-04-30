@@ -30,7 +30,7 @@ interface IProps {
 const CoinInfoCard: React.FC<IProps> = (props) => {
   return (
     <Link to={props.onClickNavigateTo} className="place-self-center">
-      <figure className="bg-card text-card-foreground/70 sm:bg-transparent rounded-2xl border border-border sm:border-transparent sm:dark:border-transparent w-[20rem] px-4 flex gap-1 flex-col py-4 hover:cursor-pointer">
+      <figure className="bg-card text-card-foreground/70 sm:bg-transparent rounded-2xl border sm:border-transparent sm:dark:border-transparent w-[20rem] px-4 flex gap-1 flex-col py-4 hover:cursor-pointer">
         {/* TITLE */}
         <div className="flex items-center justify-between">
           <div className="flex items-center font-semibold text-base gap-1 ">
@@ -49,7 +49,7 @@ const CoinInfoCard: React.FC<IProps> = (props) => {
         </div>
 
         {/* GRAPH/SPARKLINE */}
-        <div className="flex-[2] my-2 p-2 border-y border-border sm:border sm:rounded-3xl">
+        <div className="flex-[2] my-2 p-2 border-y sm:border sm:rounded-3xl">
           <div className="py-4 w-full">
             <AppSparklines data={props.data.sparkline_in_7d.price} />
             <p className="mt-4 text-xs text-center flex items-center gap-2 justify-center">
