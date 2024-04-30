@@ -1,4 +1,5 @@
-import ReactHtmlParser from "react-html-parser";
+// import ReactHtmlParser from "react-html-parser";
+import HtmlReactParser from "html-react-parser";
 import { CoinInfo } from "../../../typing";
 import SocialButtons from "../ui/SocialButtons";
 
@@ -9,7 +10,7 @@ type Props = {
 const getHTMLParsedString = (str: string, numOfLines: number) => {
   const stringLines = str.split(". ", numOfLines).join(". ");
 
-  const parsedString = ReactHtmlParser(stringLines).join(". ");
+  const parsedString = HtmlReactParser(stringLines);
 
   return parsedString.length > 0
     ? parsedString
@@ -32,7 +33,6 @@ const CoinDescriptionAndSocials = ({ coin }: Props) => {
         <div className="flex space-x-3 items-center">
           <p className="font-medium text-2xl">{coin.name}</p>
           <p className="font-medium uppercase text-2xl text-primary">
-            {" "}
             {coin.symbol}
           </p>
         </div>
