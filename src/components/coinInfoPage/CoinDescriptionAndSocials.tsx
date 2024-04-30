@@ -6,6 +6,16 @@ type Props = {
   coin: CoinInfo;
 };
 
+const getHTMLParsedString = (str: string, numOfLines: number) => {
+  const stringLines = str.split(". ", numOfLines).join(". ");
+
+  const parsedString = ReactHtmlParser(stringLines).join(". ");
+
+  return parsedString.length > 0
+    ? parsedString
+    : "No description available for this coin.";
+};
+
 const CoinDescriptionAndSocials = ({ coin }: Props) => {
   return (
     <div className="block w-full space-y-2 mb-6 py-6 px-2 lg:px-4 mx-auto rounded-2xl">
@@ -28,10 +38,7 @@ const CoinDescriptionAndSocials = ({ coin }: Props) => {
         </div>
       </div>
       <p className="font-normal text-card-foreground/70 text-sm">
-        {ReactHtmlParser(coin?.description.en.split(". ")[0])}.{" "}
-        {ReactHtmlParser(coin?.description.en.split(". ")[1])}.
-        {ReactHtmlParser(coin?.description.en.split(". ")[2])}.
-        {ReactHtmlParser(coin?.description.en.split(". ")[3])}.
+        {getHTMLParsedString(coin?.description.en, 4)}
       </p>
 
       <SocialButtons
