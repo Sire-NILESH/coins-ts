@@ -99,7 +99,7 @@ const SideBar = function () {
           rel="noopener noreferrer"
           className="flex items-center space-x-2"
         >
-          <img src="/images/coinGecko.png" className="w-6" alt="" />
+          <img src="/images/coingecko_logo.svg" className="w-6" alt="" />
           <p className="text-sm">CoinGecko API</p>
         </a>
       </div>
