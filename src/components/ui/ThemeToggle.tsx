@@ -8,27 +8,29 @@ const ThemeToggle = ({ disableText }: { disableText?: boolean }) => {
   return (
     <div className="h-full w-full">
       {theme === "dark" ? (
-        <button
-          className={`flex items-center justify-center cursor-pointer px-4 py-3 h-full w-full rounded-full ${
-            disableText ? "hover:bg-gray-400 dark:hover:bg-gray-700" : ""
+        <div
+          className={`flex items-center justify-center ${
+            disableText ? "hover:bg-secondary size-12" : "px-4 py-3 size-full"
           }`}
           onClick={() =>
             setTheme && setTheme(theme === "dark" ? "light" : "dark")
           }
         >
-          <HiSun className="text-foreground mr-1" />{" "}
-          {disableText ? "" : "Light"}
-        </button>
+          <HiSun className="text-foreground" />{" "}
+          {disableText ? "" : <span className="ml-2">Light</span>}
+        </div>
       ) : (
-        <button
-          className="flex items-center justify-center cursor-pointer px-4 py-3 h-full w-full"
+        <div
+          className={`flex items-center justify-center ${
+            disableText ? "hover:bg-secondary size-12" : "px-4 py-3 size-full"
+          }`}
           onClick={() =>
             setTheme && setTheme(theme === "light" ? "dark" : "light")
           }
         >
-          <HiMoon className="text-foreground mr-1" />{" "}
-          {disableText ? "" : "Dark"}
-        </button>
+          <HiMoon className="text-foreground" />{" "}
+          {disableText ? "" : <span className="ml-2">Dark</span>}
+        </div>
       )}
     </div>
   );

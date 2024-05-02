@@ -86,7 +86,7 @@ const LineChart: React.FC<IProps> = ({ coin }) => {
             options={{
               elements: {
                 point: {
-                  radius: 1,
+                  radius: 0.8,
                 },
               },
             }}

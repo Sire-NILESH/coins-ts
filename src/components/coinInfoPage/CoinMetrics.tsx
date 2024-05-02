@@ -23,7 +23,7 @@ const CoinMetrics = ({ coin }: Props) => {
           </span>{" "}
         </span>
         {/* SPARKLINES */}
-        <div className="w-full mt-4">
+        <div className="w-full my-4">
           <Sparklines data={coin.market_data.sparkline_7d.price} margin={6}>
             <SparklinesLine
               style={{

@@ -13,16 +13,18 @@ const HomeHeader = () => {
   return (
     <header>
       <nav className="px-4 lg:px-6 py-5">
-        <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+        <div className="flex justify-between items-center mx-auto max-w-screen-xl">
           <Brand />
 
           <div className="flex items-center space-x-4">
-            <ThemeToggle disableText />
+            <div className="rounded-full overflow-hidden">
+              <ThemeToggle disableText />
+            </div>
 
             {user ? (
               <Avatar
                 avatarSize="md"
-                className="mt-1 !text-blue-50 !border-blue-50"
+                className="mt-1 !border-blue-50"
                 src={user?.photoURL ? user.photoURL : ""}
                 alt={user?.displayName ? user.displayName : "user"}
               />

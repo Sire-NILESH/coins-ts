@@ -15,6 +15,8 @@ const useAuthUserCheck = () => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         dispatch(authActions.setInitialAuthUser(currentUser));
+      } else {
+        dispatch(authActions.setInitialAuthUser(null));
       }
       dispatch(watchlistSliceActions.resetWatchlistState());
       dispatch(authActions.setInitialAuthLoading(false));

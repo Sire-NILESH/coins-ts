@@ -23,8 +23,8 @@ const Hero = () => {
             </h1>
             <p className="mb-8 text-base font-normal text-foreground/70 lg:text-xl ">
               Offering the most extensive crypto tracking services available,
-              providing real-time insights and analytics with the world's
-              largest digital asset market.
+              providing insights and analytics with the world's largest digital
+              asset market.
             </p>
 
             <div className="flex justify-center lg:justify-start">

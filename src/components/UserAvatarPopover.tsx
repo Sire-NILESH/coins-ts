@@ -25,7 +25,7 @@ const UserAvatarPopover = () => {
             >
               <Avatar
                 avatarSize="md"
-                className={`mt-1 ${open ? "!text-blue-900" : "!text-blue-100"}`}
+                className={"mt-1"}
                 src={user?.photoURL ? user.photoURL : ""}
                 alt={user?.displayName ? user.displayName : "user"}
               />
@@ -52,7 +52,7 @@ const UserAvatarPopover = () => {
 
                       <Avatar
                         avatarSize="lg"
-                        className={"mt-1 !text-blue-900 !border-blue-900"}
+                        className={"mt-1 !border-blue-900"}
                         src={user?.photoURL ? user.photoURL : ""}
                         alt={user?.displayName ? user.displayName : "user"}
                       />
