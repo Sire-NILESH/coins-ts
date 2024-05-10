@@ -38,8 +38,9 @@ export const chartIntervals = [
     label: "Y",
     value: "365",
   },
-  {
-    label: "ALL",
-    value: "max",
-  },
+  // now removed from the free plan
+  // {
+  //   label: "ALL",
+  //   value: "max",
+  // },
 ];

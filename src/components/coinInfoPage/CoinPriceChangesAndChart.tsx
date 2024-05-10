@@ -11,7 +11,7 @@ type Props = {
 const CoinPriceChangesAndChart = ({ coin }: Props) => {
   return (
     <div className="flex flex-col-reverse items-center xl:space-x-10 xl:flex-row xl:justify-center xl:items-stretch mb-10 w-[100%] px-1 text-card-foreground/70">
-      <div className="flex-1 w-full max-w-3xl xl:w-[30%] border rounded-3xl dark:bg-secondary p-6">
+      <div className="flex-1 w-full max-w-3xl xl:w-[30%] border rounded-3xl p-6">
         <header className="font-bold py-1">
           <p className="uppercase text-sm tracking-widest text-primary">
             Price Changes{" "}
@@ -93,7 +93,7 @@ const CoinPriceChangesAndChart = ({ coin }: Props) => {
         <CoinPageWatchlistBtn coinId={coin.id} />
       </div>
 
-      <div className="flex-2 flex-shrink-0 w-full max-w-3xl xl:w-[60%] border dark:bg-secondary p-6 rounded-3xl mb-4 xl:mb-0">
+      <div className="flex-2 flex-shrink-0 w-full max-w-3xl xl:w-[60%] border p-6 rounded-3xl mb-4 xl:mb-0">
         <div className="mb-5">
           <header className="font-bold py-1">
             <p className="uppercase text-sm tracking-widest text-primary">

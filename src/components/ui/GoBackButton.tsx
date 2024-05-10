@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import appIcons from "../../config/appIcons";
 import Button from "./Button";
+import { MdClose } from "react-icons/md";
 
 const GoBackButton = () => {
   const navigate = useNavigate();
@@ -13,7 +13,8 @@ const GoBackButton = () => {
       className="flex items-center justify-center h-10 w-10"
       onClick={goBackHandler}
     >
-      {appIcons.arrowLeft}
+      {/* {appIcons.close} */}
+      <MdClose className="w-5 h-5" />
     </Button>
   );
 };
