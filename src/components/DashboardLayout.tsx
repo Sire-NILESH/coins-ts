@@ -12,7 +12,11 @@ const DashboardLayout = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (location.pathname === "/dashboard") {
+    const currentPathname = location.pathname.endsWith("/")
+      ? location.pathname.slice(0, -1)
+      : location.pathname;
+
+    if (currentPathname === "/dashboard") {
       navigate(routeConfig.routeLinking.overview.path);
     }
   }, [location.pathname, navigate]);

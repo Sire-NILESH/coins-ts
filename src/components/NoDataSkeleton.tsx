@@ -3,11 +3,10 @@ import appIcons from "../config/appIcons";
 import Button from "./ui/Button";
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
-  isLoading: boolean;
   reloadHandler?: () => void;
 };
 
-const NoDataSkeleton = ({ className, isLoading, reloadHandler }: Props) => {
+const NoDataSkeleton = ({ className, reloadHandler }: Props) => {
   return (
     <div
       className={`

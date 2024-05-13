@@ -61,7 +61,7 @@ const ExchangesReport = () => {
           .map((coin) => <ReportRow key={coin.id} coin={coin} />)}
 
       {!allExchanges && error && !loading ? (
-        <NoDataSkeleton isLoading={loading} className="min-h-[476px]" />
+        <NoDataSkeleton className="min-h-[476px]" />
       ) : null}
     </CoinReportWrapper>
   );

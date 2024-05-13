@@ -66,7 +66,7 @@ const WinnersReport = () => {
           .map((coin) => <ReportRow key={coin.id} coin={coin} />)}
 
       {!topCoins && error && !loading ? (
-        <NoDataSkeleton isLoading={loading} className="min-h-[176px]" />
+        <NoDataSkeleton className="min-h-[176px]" />
       ) : null}
     </CoinReportWrapper>
   );

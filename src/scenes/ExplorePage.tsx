@@ -9,8 +9,12 @@ const ExplorePage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (location.pathname === "/dashboard/tables") {
-      navigate(routeConfig.routeLinking.topCoins.path);
+    const currentPathname = location.pathname.endsWith("/")
+      ? location.pathname.slice(0, -1)
+      : location.pathname;
+
+    if (currentPathname === "/dashboard/explore") {
+      navigate(routeConfig.routeLinking.topCoins.pathName);
     }
   }, [location.pathname, navigate]);
 

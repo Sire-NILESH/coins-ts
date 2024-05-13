@@ -20,7 +20,6 @@ const TopCoinsInfoAtGlance = () => {
   if (error && !topCoins && !loading) {
     return (
       <NoDataSkeleton
-        isLoading={loading}
         className="min-h-[551px]"
         reloadHandler={reloadTopCoins}
       />

@@ -63,7 +63,7 @@ const TrendingReport = () => {
           .map((coin) => <ReportRow key={coin.item.id} coin={coin.item} />)}
 
       {!trendingCoins && error && !loading ? (
-        <NoDataSkeleton isLoading={loading} className="min-h-[176px]" />
+        <NoDataSkeleton className="min-h-[176px]" />
       ) : null}
     </CoinReportWrapper>
   );
