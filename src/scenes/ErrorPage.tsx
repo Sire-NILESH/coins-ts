@@ -3,7 +3,7 @@ import appIcons from "../config/appIcons";
 const ErrorPage = () => {
   return (
     <div className="bg-background min-h-screen">
-      <div className="min-h-screen mx-auto container flex flex-col items-center justify-center">
+      <div className="min-h-screen mx-auto container flex flex-col items-center justify-center px-4">
         <appIcons.error />
         <h2 className="text-foreground/80 text-3xl text-center">
           Error occured

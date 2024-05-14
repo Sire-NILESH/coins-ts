@@ -29,12 +29,8 @@ const Footer = () => {
 
           <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-foreground sm:mb-0">
             {footerLinks.map((link, i) => (
-              <li>
-                <Link
-                  key={i}
-                  to={link.to}
-                  className="hover:underline me-4 md:me-6"
-                >
+              <li key={i}>
+                <Link to={link.to} className="hover:underline me-4 md:me-6">
                   {link.name}
                 </Link>
               </li>

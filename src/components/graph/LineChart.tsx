@@ -35,10 +35,15 @@ const LineChart: React.FC<IProps> = ({ coin }) => {
   const [chartData, setChartData] = useState<number[][]>();
   const [days, setDays] = useState("1");
   const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const labelData = useMemo(
     () =>
       chartData?.map((coin) => {
+        if (coin.length === 0) {
+          return "";
+        }
+
         const date = new Date(coin[0]);
         const time = days === "1" ? format(date, "p") : undefined; //time in am/pm format
         return days === "1" ? time : date.toLocaleDateString();
@@ -50,12 +55,14 @@ const LineChart: React.FC<IProps> = ({ coin }) => {
     const fetchHistoricData = async () => {
       try {
         setIsLoading(true);
+        setIsError(false);
         const { data } = await axios.get(
           getHistoricalChart(coin.id, days, "usd")
         );
         setChartData(data.prices);
       } catch (error) {
         setChartData([[]]);
+        setIsError(true);
       } finally {
         setIsLoading(false);
       }
@@ -79,11 +86,11 @@ const LineChart: React.FC<IProps> = ({ coin }) => {
         <div className="flex flex-col items-center">
           <Line
             data={{
-              labels: labelData,
+              labels: !isError ? labelData : [],
 
               datasets: [
                 {
-                  data: chartData.map((coin) => coin[1]),
+                  data: !isError ? chartData.map((coin) => coin[1]) : [],
                   label: `Price ( Past ${days} Days ) in USD`,
                   borderColor: "#0284c7",
                   borderWidth: 2,
@@ -124,7 +131,7 @@ const LineChart: React.FC<IProps> = ({ coin }) => {
                   },
                   ticks: {
                     // Include a dollar sign in the ticks
-                    callback: function (value, index, ticks) {
+                    callback: function (value) {
                       return "$" + formatCurrency(+value);
                     },
                     color: theme === "light" ? "#4b5563" : "#9ca3af",
@@ -139,6 +146,8 @@ const LineChart: React.FC<IProps> = ({ coin }) => {
               },
             }}
           />
+
+          {/* Button tabs */}
           <div className="w-auto mt-8 mx-auto flex items-center">
             {chartIntervals.map((day) => (
               <button
