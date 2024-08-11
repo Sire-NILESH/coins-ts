@@ -17,11 +17,11 @@ import { authActions, authSelectors, login } from "../redux/authSlice";
 import { modalActions } from "../redux/modalSlice";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import handleAuthErr from "../uitls/handleAuthErr";
-import { loginAuthSchema } from "../uitls/validationSchemas";
+import { LoginAuthSchema } from "../uitls/validationSchemas";
 import routeConfig from "../config/routeConfig";
 
 // zodResolver
-type TLogin = z.infer<typeof loginAuthSchema>;
+type TLogin = z.infer<typeof LoginAuthSchema>;
 
 const Login = () => {
   const {
@@ -35,7 +35,7 @@ const Login = () => {
       email: "",
       password: "",
     },
-    resolver: zodResolver(loginAuthSchema),
+    resolver: zodResolver(LoginAuthSchema),
   });
 
   const authError = useAppSelector(authSelectors.authError);

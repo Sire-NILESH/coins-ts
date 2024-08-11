@@ -11,8 +11,8 @@ import {
 import { RootState } from "./store";
 import { z } from "zod";
 import {
-  loginAuthSchema,
-  registerAuthSchema,
+  LoginAuthSchema,
+  RegisterAuthSchema,
 } from "../uitls/validationSchemas";
 
 type AuthStates = {
@@ -22,8 +22,8 @@ type AuthStates = {
   error: any | null;
 };
 
-type LoginArgs = z.infer<typeof loginAuthSchema>;
-type RegisterArgs = z.infer<typeof registerAuthSchema>;
+type LoginArgs = z.infer<typeof LoginAuthSchema>;
+type RegisterArgs = z.infer<typeof RegisterAuthSchema>;
 
 const initialState: AuthStates = {
   initialLoading: false,

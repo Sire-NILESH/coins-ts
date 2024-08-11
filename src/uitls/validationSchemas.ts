@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const baseAuthArgsSchema = z.object({
+const BaseAuthArgsSchema = z.object({
   email: z
     .string({
       required_error: "Email is required",
@@ -19,9 +19,9 @@ const baseAuthArgsSchema = z.object({
     .max(20, "Password must be atmost 20 characters long"),
 });
 
-export const loginAuthSchema = baseAuthArgsSchema;
+export const LoginAuthSchema = BaseAuthArgsSchema;
 
-export const registerAuthSchema = baseAuthArgsSchema.extend({
+export const RegisterAuthSchema = BaseAuthArgsSchema.extend({
   userName: z
     .string({
       required_error: "Username is required",
@@ -31,16 +31,14 @@ export const registerAuthSchema = baseAuthArgsSchema.extend({
     .max(12, "User name must be atmost 12 characters long"),
 });
 
-export const registerAuthFormSchema = registerAuthSchema
-  .extend({
-    confirmPassword: z
-      .string({
-        required_error: "Confirm your password",
-        invalid_type_error: "Password must be a string",
-      })
-      .min(1, "Confirm your password"),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords don't match",
-    path: ["confirmPassword"],
-  });
+export const RegisterAuthFormSchema = RegisterAuthSchema.extend({
+  confirmPassword: z
+    .string({
+      required_error: "Confirm your password",
+      invalid_type_error: "Password must be a string",
+    })
+    .min(1, "Confirm your password"),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords don't match",
+  path: ["confirmPassword"],
+});

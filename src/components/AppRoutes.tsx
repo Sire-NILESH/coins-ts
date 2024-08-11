@@ -1,20 +1,31 @@
+import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
+
+import withSuspense from "./withSuspense";
 import InitAuthCheck from "./InitAuthCheck";
 import AppLayout from "./AppLayout";
-import AuthProtectedLayout from "./AuthProtectedLayout";
-import DashboardLayout from "./DashboardLayout";
-import Overview from "../scenes/Overview";
-import WatchList from "../scenes/WatchList";
-import ExplorePage from "../scenes/ExplorePage";
-import AllCoinsTable from "./AllCoinsTable";
-import TrendingCoinsTable from "./TrendingCoinsTable";
-import ExchangesTable from "./ExchangesTable";
-import CoinPage from "../scenes/CoinPage";
-import Login from "../scenes/Login";
-import Register from "../scenes/Register";
-import NotFound from "../scenes/NotFound";
-import CheckingAuthPage from "../scenes/CheckingAuthPage";
-import Marketing from "../scenes/Marketing";
+
+const AuthProtectedLayout = withSuspense(
+  lazy(() => import("./AuthProtectedLayout"))
+);
+const DashboardLayout = withSuspense(lazy(() => import("./DashboardLayout")));
+const AllCoinsTable = withSuspense(lazy(() => import("./AllCoinsTable")));
+const TrendingCoinsTable = withSuspense(
+  lazy(() => import("./TrendingCoinsTable"))
+);
+const ExchangesTable = withSuspense(lazy(() => import("./ExchangesTable")));
+
+const Marketing = withSuspense(lazy(() => import("../scenes/Marketing")));
+const CheckingAuthPage = withSuspense(
+  lazy(() => import("../scenes/CheckingAuthPage"))
+);
+const Overview = withSuspense(lazy(() => import("../scenes/Overview")));
+const WatchList = withSuspense(lazy(() => import("../scenes/WatchList")));
+const ExplorePage = withSuspense(lazy(() => import("../scenes/ExplorePage")));
+const CoinPage = withSuspense(lazy(() => import("../scenes/CoinPage")));
+const Login = withSuspense(lazy(() => import("../scenes/Login")));
+const Register = withSuspense(lazy(() => import("../scenes/Register")));
+const NotFound = withSuspense(lazy(() => import("../scenes/NotFound")));
 
 const AppRoutes = () => {
   return (

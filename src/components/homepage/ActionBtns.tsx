@@ -6,7 +6,7 @@ const ActionBtns = () => {
   return (
     <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
       <Link to={routeConfig.routeLinking.register.path}>
-        <Button className="animate-bounce px-4 py-2 w-40 !bg-blue-700">
+        <Button className="animate-bounce px-4 py-2 w-40 !bg-blue-700 border-none">
           <p className="text-white text-base font-medium">Join now</p>
         </Button>
       </Link>

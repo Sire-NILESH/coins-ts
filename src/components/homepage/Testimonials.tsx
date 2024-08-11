@@ -26,14 +26,14 @@ const Testimonials = () => {
           </blockquote>
           <figcaption className="flex items-center justify-center mt-6 space-x-3">
             <img
-              className="w-6 h-6 rounded-full"
-              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gouch.png"
+              className="w-8 h-8 rounded-full"
+              src="/images/user/ceo.jpg"
               alt="profile"
             />
             <div className="flex items-center divide-x-2 divide-border">
-              <div className="pr-3 font-medium">Micheal Gough</div>
+              <div className="pr-3 font-medium">John Doe</div>
               <div className="pl-3 text-sm font-light text-card-foreground/70">
-                CEO at Google
+                CEO at Acme
               </div>
             </div>
           </figcaption>

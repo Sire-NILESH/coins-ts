@@ -17,12 +17,12 @@ import { authActions, authSelectors } from "../redux/authSlice";
 import { modalActions } from "../redux/modalSlice";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import handleAuthErr from "../uitls/handleAuthErr";
-import { registerAuthFormSchema } from "../uitls/validationSchemas";
+import { RegisterAuthFormSchema } from "../uitls/validationSchemas";
 import { registerAccount } from "./../redux/authSlice";
 import routeConfig from "../config/routeConfig";
 
 // zodResolver
-type TRegisterForm = z.infer<typeof registerAuthFormSchema>;
+type TRegisterForm = z.infer<typeof RegisterAuthFormSchema>;
 
 const Register = () => {
   const {
@@ -38,7 +38,7 @@ const Register = () => {
       password: "",
       confirmPassword: "",
     },
-    resolver: zodResolver(registerAuthFormSchema),
+    resolver: zodResolver(RegisterAuthFormSchema),
   });
 
   const authError = useAppSelector(authSelectors.authError);
